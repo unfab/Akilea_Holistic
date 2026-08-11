@@ -161,7 +161,7 @@ export default function BookingWidget() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             
             {/* Left Col: Services */}
-            <div>
+            <div className="lg:sticky lg:top-28">
               <h3 className="text-xs uppercase font-bold tracking-widest text-[var(--color-primary)] mb-6">1. Izberite storitev</h3>
               <div className="space-y-4">
                 {services.map((svc) => (
