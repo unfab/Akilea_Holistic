@@ -6,17 +6,45 @@ export default function PosvetPage() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "", honeypot: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.honeypot) return; // bot check
     
     setStatus("submitting");
     
-    // Simuliramo pošiljanje emaila
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", phone: "", message: "", honeypot: "" });
-    }, 1500);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "4759ab0c-9911-4ee2-82c9-029bab9ab1b1",
+          subject: "Novo povpraševanje za posvet - Akilea Holistic",
+          from_name: "Akilea Holistic - Spletna stran",
+          Ime_Priimek: formData.name,
+          Email: formData.email,
+          Telefon: formData.phone || "Ni vpisana",
+          Sporocilo: formData.message,
+        }),
+      });
+      
+      const result = await res.json();
+      
+      if (result.success) {
+        setStatus("success");
+        setFormData({ name: "", email: "", phone: "", message: "", honeypot: "" });
+      } else {
+        console.error("Web3Forms error:", result);
+        alert("Napaka pri pošiljanju. Prosimo, poskusite kasneje.");
+        setStatus("idle");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Napaka na omrežju. Prosimo, preverite povezavo in poskusite znova.");
+      setStatus("idle");
+    }
   };
 
   return (

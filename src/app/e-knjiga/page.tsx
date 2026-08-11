@@ -6,14 +6,39 @@ export default function EKnjigaPage() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setStatus("submitting");
-    setTimeout(() => {
-      setStatus("success");
-      setEmail("");
-    }, 1200);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "4759ab0c-9911-4ee2-82c9-029bab9ab1b1",
+          subject: "Nova prijava na čakalno vrsto za E-knjigo - Akilea Holistic",
+          from_name: "Akilea Holistic - Spletna stran",
+          Email: email,
+        }),
+      });
+      
+      const result = await res.json();
+      
+      if (result.success) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        console.error("Web3Forms error:", result);
+        alert("Napaka pri prijavi. Prosimo, poskusite kasneje.");
+        setStatus("idle");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Napaka na omrežju. Prosimo, preverite povezavo in poskusite znova.");
+      setStatus("idle");
+    }
   };
 
   return (

@@ -108,16 +108,48 @@ export default function BookingWidget() {
         setIsSubmitting(false);
       }
     } else {
-      // Simulate API call for local payment
-      setTimeout(() => {
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: "4759ab0c-9911-4ee2-82c9-029bab9ab1b1",
+            subject: `Nova rezervacija: ${svc.name}`,
+            from_name: "Akilea Holistic - Sistem rezervacij",
+            Ime_Priimek: formData.name,
+            Email: formData.email || "Ni vpisan",
+            Telefon: formData.phone || "Ni vpisana",
+            Storitev: svc.name,
+            Cena: `${svc.price}€`,
+            Datum: selectedDate,
+            Ura: selectedTime,
+            Nacin_Placila: "Plačilo na lokaciji",
+          }),
+        });
+        
+        const result = await res.json();
+        
+        if (result.success) {
+          setIsSubmitting(false);
+          setIsSuccess(true);
+          // Reset form
+          setSelectedService(null);
+          setSelectedDate(null);
+          setSelectedTime(null);
+          setFormData({ name: "", email: "", phone: "", honeypot: "" });
+        } else {
+          console.error("Web3Forms error:", result);
+          alert("Napaka pri pošiljanju rezervacije. Prosimo, poskusite kasneje.");
+          setIsSubmitting(false);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Napaka na omrežju. Prosimo, preverite povezavo in poskusite znova.");
         setIsSubmitting(false);
-        setIsSuccess(true);
-        // Reset form
-        setSelectedService(null);
-        setSelectedDate(null);
-        setSelectedTime(null);
-        setFormData({ name: "", email: "", phone: "", honeypot: "" });
-      }, 1500);
+      }
     }
   };
 
