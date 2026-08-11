@@ -39,9 +39,9 @@ export default function Marquee() {
       <div className="marquee-content">
         {[...testimonials, ...testimonials].map((item, index) => (
           <div key={index} className="marquee-item">
-            <div className="text-[var(--color-accent-green)] text-xl">★★★★★</div>
-            <p className="font-serif italic text-2xl lg:text-3xl">"{item.text}"</p>
-            <span className="text-sm uppercase tracking-widest opacity-70 ml-4 font-semibold">
+            <div className="text-[var(--color-accent-green)] text-2xl">★★★★★</div>
+            <p className="font-serif italic text-4xl lg:text-5xl">"{item.text}"</p>
+            <span className="text-base lg:text-lg uppercase tracking-widest opacity-70 ml-4 font-semibold">
               - {item.author}
             </span>
           </div>

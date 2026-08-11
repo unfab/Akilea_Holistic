@@ -16,14 +16,11 @@ export default function StoritvePage() {
       stripeLink: "#",
       description: (
         <>
-          <p className="mb-4">Telo si vse zapomni, vsako čustvo, vsako misel, le prisluhniti mu moramo. In ko to storimo, se začnejo dogajati čudeži.</p>
-          <p className="mb-4">Intuitivna masaža, ki jo izvajam, omogoča prav to, da z združitvijo tradicionalne masažne tehnike z globokim čutenjem in intuitivnim zaznavanjem, prepoznam področja napetosti, blokad in neravnovesij v telesu ter predam sporočila teles(a) o mislih in čustvih, ki se na teh področjih nahajajo. Z nežnimi gibi in uporabo kristalov ter ventuz se energija v telesu spet sprosti, kar pripomore k globokemu občutku miru in sprostitve.</p>
-          <p className="font-medium text-[var(--color-primary)] pt-2">Intuitivna masaža ponuja:</p>
-          <ul className="list-disc pl-5 space-y-2 mt-2">
-            <li>vpogled na ujeta, potlačena čustva, ki vam povzročajo bolečino</li>
-            <li>vpogled v stanje čaker in pretok energije po meridianih</li>
-            <li>intuitivna sporočila, ki vam v danem trenutku najbolj služijo</li>
-            <li>sprostitev telesa, občutek miru in opolnomočenje za nadaljnje korake</li>
+          <p className="mb-4">Intuitivna masaža združuje tradicionalno masažno tehniko z globokim čutenjem. Prepoznamo področja napetosti in blokad ter s pomočjo kristalov sprostimo ujeta čustva.</p>
+          <ul className="list-disc pl-5 space-y-1 mt-2">
+            <li>Sprostitev ujetih čustev</li>
+            <li>Stanje čaker in pretok energije</li>
+            <li>Globok občutek miru in opolnomočenje</li>
           </ul>
         </>
       ),
@@ -37,12 +34,10 @@ export default function StoritvePage() {
       stripeLink: "#",
       description: (
         <>
-          <p className="mb-4">Hrbet nosi težo naših odgovornosti, stresa in neizraženih čustev. Masaža hrbta se osredotoča na sprostitev globokih mišičnih napetosti in obnovo pretoka energije vzdolž hrbtenice.</p>
-          <p className="font-medium text-[var(--color-primary)] pt-2">Primerno za:</p>
-          <ul className="list-disc pl-5 space-y-2 mt-2">
-            <li>odpravljanje kroničnih bolečin v hrbtu in vratu</li>
-            <li>lajšanje stresa in sprostitev zakrčenih mišic</li>
-            <li>hitro obnovo energije in vzpostavitev miru</li>
+          <p className="mb-4">Fokus na sprostitev globokih mišičnih napetosti in obnovo pretoka energije vzdolž hrbtenice.</p>
+          <ul className="list-disc pl-5 space-y-1 mt-2">
+            <li>Odpravljanje bolečin v hrbtu</li>
+            <li>Lajšanje stresa</li>
           </ul>
         </>
       ),
@@ -56,12 +51,10 @@ export default function StoritvePage() {
       stripeLink: "#",
       description: (
         <>
-          <p className="mb-4">Trebuh je center naših čustev in vitalne energije. Pogosto prav tu zadržujemo strahove in nepredelana čustva. Masaža trebuha nežno stimulira prebavni sistem in sprošča čustvene blokade.</p>
-          <p className="font-medium text-[var(--color-primary)] pt-2">Koristi:</p>
-          <ul className="list-disc pl-5 space-y-2 mt-2">
-            <li>izboljšanje prebave in presnove</li>
-            <li>sproščanje potlačenih čustev in strahov</li>
-            <li>krepitev imunskega sistema in vitalnosti</li>
+          <p className="mb-4">Trebuh je center naših čustev. Masaža nežno stimulira prebavni sistem in sprošča blokade.</p>
+          <ul className="list-disc pl-5 space-y-1 mt-2">
+            <li>Izboljšanje prebave</li>
+            <li>Sproščanje strahov</li>
           </ul>
         </>
       ),

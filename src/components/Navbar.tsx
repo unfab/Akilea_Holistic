@@ -6,6 +6,8 @@ import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState("SL");
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -54,14 +56,40 @@ export default function Navbar() {
           >
             E-knjiga
           </Link>
+
+          {/* Language Selector */}
+          <div className="relative ml-2">
+            <button 
+              onClick={() => setLangOpen(!langOpen)}
+              className="flex items-center gap-1 hover:text-[var(--color-accent)] transition-colors"
+            >
+              {currentLang}
+              <svg className={`w-3 h-3 transition-transform ${langOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            
+            {langOpen && (
+              <div className="absolute top-full right-0 mt-2 w-32 bg-white border border-[var(--color-border)] shadow-lg rounded py-2 flex flex-col z-50">
+                <button onClick={() => { setCurrentLang("SL"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Slovenščina</button>
+                <button onClick={() => { setCurrentLang("EN"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Angleščina</button>
+                <button onClick={() => { setCurrentLang("HR"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Hrvaščina</button>
+                <button onClick={() => { setCurrentLang("IT"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Italijanščina</button>
+                <button onClick={() => { setCurrentLang("SR"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Srbščina</button>
+              </div>
+            )}
+          </div>
         </nav>
 
-        <Link
-          href="/storitve"
-          className="btn-primary px-6 py-2.5 text-[10px] uppercase tracking-widest font-semibold cursor-pointer hidden sm:block"
-        >
-          Rezerviraj termin
-        </Link>
+        <div className="hidden sm:flex items-center gap-6">
+          <a href="tel:+38640863594" className="text-xs font-bold text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors">
+            040 863 594
+          </a>
+          <Link
+            href="/storitve"
+            className="btn-primary px-6 py-2.5 text-[10px] uppercase tracking-widest font-semibold cursor-pointer"
+          >
+            Rezerviraj termin
+          </Link>
+        </div>
 
         {/* Mobile menu button */}
         <button
@@ -134,6 +162,17 @@ export default function Navbar() {
           >
             E-knjiga
           </Link>
+          
+          <div className="border-t border-[var(--color-border)] pt-4 mt-2">
+            <p className="text-[10px] uppercase tracking-widest text-[var(--color-muted)] font-bold mb-2">Jezik</p>
+            <div className="flex flex-wrap gap-4">
+              <button onClick={() => { setCurrentLang("SL"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'SL' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>SLO</button>
+              <button onClick={() => { setCurrentLang("EN"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'EN' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>ENG</button>
+              <button onClick={() => { setCurrentLang("HR"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'HR' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>HRV</button>
+              <button onClick={() => { setCurrentLang("IT"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'IT' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>ITA</button>
+              <button onClick={() => { setCurrentLang("SR"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'SR' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>SRB</button>
+            </div>
+          </div>
           <Link
             href="/storitve"
             className="block text-xs uppercase tracking-widest font-bold text-[var(--color-accent-green)] pt-2 border-t border-[var(--color-border)] mt-2"

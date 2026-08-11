@@ -3,8 +3,8 @@
 :root {
   --color-bg: #FAF8F5; /* Warm Linen */
   --color-surface: #F2ECE6; /* Soft Taupe Surface */
-  --color-primary: #9A72A8; /* Brand Purple */
-  --color-accent: #B392BE; /* Updated lighter Brand Purple */
+  --color-primary: #915296; /* Vibrant Brand Purple from logo */
+  --color-accent: #AE79B3; /* Lighter Accent Purple */
   --color-accent-green: #8BB038; /* Logo Olive Green */
   --color-accent-alt: #F5EFF7; /* Soft Lavender Tint */
   --color-text: #333333; /* Deep Text Color */
@@ -82,7 +82,7 @@ body {
 
 .marquee-content {
   display: flex;
-  animation: scroll-left 240s linear infinite; /* Considerably slower */
+  animation: scroll-left 400s linear infinite; /* Very slow smooth scroll */
 }
 
 .marquee-item {

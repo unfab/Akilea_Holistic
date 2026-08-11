@@ -11,12 +11,20 @@ export default function BlogIndexPage() {
   
   const posts = [
     {
-      id: "kako-poslusati-telo",
-      title: "Kako poslušati svoje telo in prepoznati njegove znake",
-      excerpt: "Telo nam nenehno pošilja signale, a jih v hitrem tempu življenja pogosto spregledamo. Naučite se osnovnih tehnik, s katerimi se lahko ponovno povežete s seboj in razumete, kaj vam sporočajo bolečine ali utrujenost.",
+      id: "dam-tebi",
+      title: "Dam tebi, a tudi sebi.",
+      excerpt: "»Kdor hoče, najde pot, kdor pa ne, najde izgovore« .. brrr, ne vem za vas, ampak mene je ta stavek v preteklosti tolikokrat prav znerviral...",
+      category: "Čustva",
+      date: "Jan 30",
+      image: "https://static.wixstatic.com/media/11062b_dd8a0854f84e495a8e5d10f2b8c5f4ec~mv2.jpg/v1/fill/w_800,h_600,al_c,q_85/11062b_dd8a0854f84e495a8e5d10f2b8c5f4ec~mv2.jpg"
+    },
+    {
+      id: "ne-verjemi",
+      title: "NE VERJEMI VSEMU, KAR SLIŠIŠ",
+      excerpt: "Preprosta enačba DECEMBER = HITENJE+ STRES+IZČRPANOST. Zapisana v kolektvni zavesti. Zapisana v vsaki celici našega telesa...",
       category: "Zdravje",
-      date: "10. Avgust 2026",
-      image: "https://static.wixstatic.com/media/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg/v1/fit/w_3648,h_5472,al_c,q_90/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg"
+      date: "Dec 11, 2025",
+      image: "https://static.wixstatic.com/media/dfaf38_3dde454674654e2f8cd0cecf1837fd2e~mv2.jpeg/v1/fill/w_800,h_600,al_c,q_85/dfaf38_3dde454674654e2f8cd0cecf1837fd2e~mv2.jpeg"
     }
   ];
 
@@ -39,26 +47,35 @@ export default function BlogIndexPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {posts.map(post => (
-            <div key={post.id} className="bg-white rounded-lg overflow-hidden shadow-sm border border-[var(--color-border)] flex flex-col hover:shadow-md transition-shadow">
-              <div className="aspect-[4/3] relative">
-                <Image src={post.image} alt={post.title} fill className="object-cover" unoptimized />
+            <article key={post.id} className="bg-white rounded-lg shadow-sm border border-[var(--color-border)] flex flex-col h-full hover:shadow-md transition-shadow overflow-hidden group">
+              <div className="aspect-[16/9] overflow-hidden relative">
+                <Image 
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  unoptimized
+                />
               </div>
-              <div className="p-6 md:p-8 flex flex-col flex-1">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent-green)] font-semibold">{post.category}</span>
-                  <span className="text-[10px] uppercase tracking-widest text-[var(--color-muted)]">{post.date}</span>
+              <div className="p-8 flex flex-col flex-grow">
+                <header className="mb-4 pb-4 border-b border-[var(--color-border)]">
+                  <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-2">{post.title}</h3>
+                  <div className="flex items-center gap-3 text-[10px] text-[var(--color-muted)] tracking-widest uppercase">
+                    <span>Mirjana Groznik</span>
+                    <span>&bull;</span>
+                    <span>{post.date}</span>
+                  </div>
+                </header>
+                <div className="text-[var(--color-muted)] font-light leading-relaxed text-sm flex-grow mb-6">
+                  <p>{post.excerpt}</p>
                 </div>
-                <h3 className="text-xl font-serif text-[var(--color-primary)] mb-3">{post.title}</h3>
-                <p className="text-[var(--color-muted)] font-light text-sm mb-6 flex-1 line-clamp-3">
-                  {post.excerpt}
-                </p>
-                <Link href={`/blog/${post.id}`} className="text-[10px] uppercase tracking-widest font-bold text-[var(--color-primary)] border-b border-[var(--color-primary)] pb-1 hover:text-[var(--color-accent)] self-start transition-colors">
-                  Preberi celoten članek
+                <Link href={`/blog/${post.id}`} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#6a882a] hover:text-[var(--color-primary)] transition-colors mt-auto">
+                  Preberi celoten članek &rarr;
                 </Link>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

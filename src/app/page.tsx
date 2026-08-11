@@ -19,9 +19,13 @@ export default function Home() {
               </div>
 
               <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white font-normal leading-[1.15] tracking-tight">
-                Povrnite notranji mir in zaživite brez napetosti.
+                Naturopatija in intuitivna masaža Koper
               </h1>
 
+              <p className="text-white/90 text-xl sm:text-2xl font-serif font-light leading-snug mb-2">
+                Povrnite notranji mir in zaživite brez napetosti.
+              </p>
+              
               <p className="text-white/80 text-base sm:text-lg font-light leading-relaxed max-w-xl">
                 Združujemo strokovne naturopatske obravnave, Reiki energijsko podporo in avtorsko
                 intuitivno masažo — <span className="text-white font-medium border-b border-white pb-0.5">tako da lahko</span> varno sprostite ujeta čustva, se rešite bolečin in si svoj termin izberete neposredno na spletu.
@@ -111,10 +115,10 @@ export default function Home() {
             <h2 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6">Članki in razmišljanja</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Blog 1 Excerpt */}
-            <article className="bg-white rounded-lg shadow-sm border border-[var(--color-border)] flex flex-col h-full hover:shadow-md transition-shadow overflow-hidden group">
-              <div className="aspect-[16/9] overflow-hidden relative">
+          <div className="flex flex-col items-center">
+            {/* Featured Blog Excerpt */}
+            <article className="bg-white rounded-lg shadow-sm border border-[var(--color-border)] flex flex-col md:flex-row w-full max-w-4xl hover:shadow-md transition-shadow overflow-hidden group mb-10">
+              <div className="w-full md:w-1/2 aspect-[16/9] md:aspect-auto overflow-hidden relative">
                 <Image 
                   src="https://static.wixstatic.com/media/11062b_dd8a0854f84e495a8e5d10f2b8c5f4ec~mv2.jpg/v1/fill/w_800,h_600,al_c,q_85/11062b_dd8a0854f84e495a8e5d10f2b8c5f4ec~mv2.jpg"
                   alt="Blog cover"
@@ -123,7 +127,7 @@ export default function Home() {
                   unoptimized
                 />
               </div>
-              <div className="p-8 flex flex-col flex-grow">
+              <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
                 <header className="mb-4 pb-4 border-b border-[var(--color-border)]">
                   <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-2">Dam tebi, a tudi sebi.</h3>
                   <div className="flex items-center gap-3 text-[10px] text-[var(--color-muted)] tracking-widest uppercase">
@@ -132,7 +136,7 @@ export default function Home() {
                     <span>Jan 30</span>
                   </div>
                 </header>
-                <div className="text-[var(--color-muted)] font-light leading-relaxed text-sm flex-grow mb-6">
+                <div className="text-[var(--color-muted)] font-light leading-relaxed text-sm mb-6">
                   <p>»Kdor hoče, najde pot, kdor pa ne, najde izgovore« .. brrr, ne vem za vas, ampak mene je ta stavek v preteklosti tolikokrat prav znerviral...</p>
                 </div>
                 <Link href="/blog/dam-tebi" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#6a882a] hover:text-[var(--color-primary)] transition-colors mt-auto">
@@ -141,34 +145,9 @@ export default function Home() {
               </div>
             </article>
 
-            {/* Blog 2 Excerpt */}
-            <article className="bg-white rounded-lg shadow-sm border border-[var(--color-border)] flex flex-col h-full hover:shadow-md transition-shadow overflow-hidden group">
-              <div className="aspect-[16/9] overflow-hidden relative">
-                <Image 
-                  src="https://static.wixstatic.com/media/dfaf38_3dde454674654e2f8cd0cecf1837fd2e~mv2.jpeg/v1/fill/w_800,h_600,al_c,q_85/dfaf38_3dde454674654e2f8cd0cecf1837fd2e~mv2.jpeg"
-                  alt="Blog cover"
-                  fill
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  unoptimized
-                />
-              </div>
-              <div className="p-8 flex flex-col flex-grow">
-                <header className="mb-4 pb-4 border-b border-[var(--color-border)]">
-                  <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-2">NE VERJEMI VSEMU, KAR SLIŠIŠ</h3>
-                  <div className="flex items-center gap-3 text-[10px] text-[var(--color-muted)] tracking-widest uppercase">
-                    <span>Mirjana Groznik</span>
-                    <span>&bull;</span>
-                    <span>Dec 11, 2025</span>
-                  </div>
-                </header>
-                <div className="text-[var(--color-muted)] font-light leading-relaxed text-sm flex-grow mb-6">
-                  <p>Preprosta enačba DECEMBER = HITENJE+ STRES+IZČRPANOST. Zapisana v kolektvni zavesti. Zapisana v vsaki celici našega telesa...</p>
-                </div>
-                <Link href="/blog/ne-verjemi" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#6a882a] hover:text-[var(--color-primary)] transition-colors mt-auto">
-                  Preberi celoten članek &rarr;
-                </Link>
-              </div>
-            </article>
+            <Link href="/blog" className="btn-secondary px-8 py-3 text-xs uppercase tracking-widest font-bold inline-block hover:bg-[var(--color-primary)] hover:text-white transition-colors">
+              Preberi ostale članke
+            </Link>
           </div>
         </div>
       </section>
@@ -224,19 +203,22 @@ export default function Home() {
             <div className="bg-[var(--color-surface)] rounded-lg p-8 flex flex-col items-center text-center hover:shadow-md transition-shadow">
               <h3 className="text-xl font-serif text-[var(--color-primary)] mb-2">Čajanka o čustvih</h3>
               <p className="text-sm text-[#6a882a] font-bold mb-4">Termin: 15. September 2026</p>
-              <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-1">Pridružite se nam ob toplem čaju in iskrenem pogovoru o sproščanju potlačenih čustev.</p>
-              <Link href="/delavnice" className="btn-primary px-6 py-2 text-[10px] uppercase tracking-widest font-bold w-full">Prijavi se</Link>
+              <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-1">Pridružite se nam ob toplem čaju in iskrenem pogovoru.</p>
+              <Link href="/delavnice/cajanka-o-custvih" className="text-xs uppercase tracking-widest font-bold text-[var(--color-primary)] mb-4 hover:text-[var(--color-accent)] transition-colors underline">Preberi več</Link>
+              <Link href="/delavnice/cajanka-o-custvih" className="btn-primary px-6 py-2 text-[10px] uppercase tracking-widest font-bold w-full">Prijavi se</Link>
             </div>
             <div className="bg-[var(--color-surface)] rounded-lg p-8 flex flex-col items-center text-center opacity-80 hover:opacity-100 hover:shadow-md transition-all">
               <h3 className="text-xl font-serif text-[var(--color-primary)] mb-2">Delavnica za ženske</h3>
               <p className="text-sm text-[var(--color-muted)] font-bold mb-4">Termin še ni določen</p>
-              <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-1">Spoznajte tehnike samomasaže in povezovanja z lastnim telesom. Primerno za vse starosti.</p>
+              <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-1">Spoznajte tehnike samomasaže in povezovanja s telesom.</p>
+              <Link href="/delavnice/delavnica-za-zenske" className="text-xs uppercase tracking-widest font-bold text-[var(--color-primary)] mb-4 hover:text-[var(--color-accent)] transition-colors underline">Preberi več</Link>
               <Link href="/predavanja" className="btn-secondary px-6 py-2 text-[10px] uppercase tracking-widest font-bold w-full">Pošljite povpraševanje</Link>
             </div>
             <div className="bg-[var(--color-surface)] rounded-lg p-8 flex flex-col items-center text-center opacity-80 hover:opacity-100 hover:shadow-md transition-all">
               <h3 className="text-xl font-serif text-[var(--color-primary)] mb-2">Skupinska meditacija</h3>
               <p className="text-sm text-[var(--color-muted)] font-bold mb-4">Termin še ni določen</p>
-              <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-1">Vodena meditacija za vzpostavljanje notranjega miru in odpravljanje nakopičenega stresa.</p>
+              <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-1">Vodena meditacija za vzpostavljanje notranjega miru.</p>
+              <Link href="/delavnice/skupinska-meditacija" className="text-xs uppercase tracking-widest font-bold text-[var(--color-primary)] mb-4 hover:text-[var(--color-accent)] transition-colors underline">Preberi več</Link>
               <Link href="/predavanja" className="btn-secondary px-6 py-2 text-[10px] uppercase tracking-widest font-bold w-full">Pošljite povpraševanje</Link>
             </div>
           </div>

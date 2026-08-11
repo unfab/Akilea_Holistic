@@ -42,11 +42,16 @@ export default function Footer() {
         
         {/* Contact & Location */}
         <div>
-          <h4 className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-bold mb-6">Kontakt & Lokacija</h4>
+          <h4 className="text-[10px] uppercase tracking-widest text-[#D4E89C] font-bold mb-6">Kontakt & Lokacija</h4>
           <ul className="space-y-2 text-sm font-light">
             <li>Šmarska cesta 5B</li>
             <li>6000 Koper, Slovenija</li>
             <li className="pt-2">
+              <a href="tel:+38640863594" className="hover:text-white transition-colors font-medium">
+                040 863 594
+              </a>
+            </li>
+            <li>
               <a href="mailto:mirjana@akilea.si" className="border-b border-white/30 hover:border-white transition-colors pb-0.5">
                 mirjana@akilea.si
               </a>
@@ -56,7 +61,7 @@ export default function Footer() {
         
         {/* Links */}
         <div>
-          <h4 className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-bold mb-6">Povezave</h4>
+          <h4 className="text-[10px] uppercase tracking-widest text-[#D4E89C] font-bold mb-6">Povezave</h4>
           <ul className="space-y-3 text-sm font-light">
             <li><a href="#" className="hover:text-white transition-colors">Facebook Skupnost</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
@@ -71,8 +76,8 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} AKILEA, MIRJANA GROZNIK S.P. VSE PRAVICE PRIDRŽANE.
         </div>
         <div className="flex gap-6">
-          <Link href="#" className="hover:text-white transition-colors">Politika zasebnosti</Link>
-          <Link href="#" className="hover:text-white transition-colors">Pogoji poslovanja</Link>
+          <Link href="/pravilnik-o-zasebnosti" className="hover:text-white transition-colors">Politika zasebnosti</Link>
+          <Link href="/pogoji-poslovanja" className="hover:text-white transition-colors">Pogoji poslovanja</Link>
         </div>
       </div>
     </footer>
