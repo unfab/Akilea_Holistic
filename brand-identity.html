@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akilea — Brand Identity System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #9A72A8;
+    --purple-light: #B392BE;
+    --green: #98A366;
+    --bg: #FAFAF7;
+    --bg-elevated: #FFFFFF;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-disabled: #A0A09A;
+    --border: #E2E2DC;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  .toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    background: var(--bg-elevated);
+    border-right: 1px solid var(--border);
+    padding: 32px 20px;
+    overflow-y: auto;
+    z-index: 100;
+  }
+  .toc-logo {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--purple);
+    margin-bottom: 8px;
+  }
+  .toc-sub {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-disabled);
+    margin-bottom: 28px;
+  }
+  .toc a {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 5px 0;
+    border-left: 2px solid transparent;
+    padding-left: 10px;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .toc a:hover { color: var(--text-primary); border-left-color: var(--purple); }
+  .toc-section { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--text-disabled); margin: 20px 0 6px; padding-left: 10px; }
+
+  /* MAIN */
+  .main { margin-left: 220px; max-width: 920px; padding: 60px 56px 120px; }
+
+  /* SECTIONS */
+  .doc-section { margin-bottom: 72px; padding-top: 8px; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  h1.section-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--purple);
+    margin-bottom: 20px;
+  }
+  h2.section-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--purple);
+    margin-bottom: 16px;
+  }
+  .prose { font-family: var(--font-body); font-size: 16px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 16px; font-weight: 300; }
+  .prose strong { color: var(--text-primary); font-weight: 500; }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 48px 0; }
+
+  /* PILLARS */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+  .pillar {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .pillar h4 { font-size: 14px; font-weight: 600; color: var(--purple); margin-bottom: 6px; }
+  .pillar p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; font-weight: 300; }
+
+  /* TRAITS */
+  .traits { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .trait {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+  }
+  .trait.primary { background: var(--purple); color: white; border-color: var(--purple); }
+  .trait.secondary { background: var(--green); color: white; border-color: var(--green); }
+
+  /* COLOR SYSTEM */
+  .color-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+  .color-card {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .color-swatch { height: 80px; }
+  .color-info { padding: 14px 16px; background: var(--bg-elevated); }
+  .color-name { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+  .color-hex { font-family: monospace; font-size: 12px; color: var(--text-disabled); }
+
+  /* COVER */
+  .cover {
+    min-height: 280px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 56px 48px;
+    margin-bottom: 64px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .cover-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 12px;
+  }
+  .cover-title {
+    font-family: var(--font-display);
+    font-size: 48px; font-weight: 600; line-height: 1.05;
+    color: var(--purple); margin-bottom: 12px;
+  }
+  .cover-sub { font-size: 14px; color: var(--text-secondary); font-weight: 300; }
+</style>
+</head>
+<body>
+
+<nav class="toc">
+  <div class="toc-logo">Akilea</div>
+  <div class="toc-sub">Brand Identity</div>
+
+  <div class="toc-section">Strategija</div>
+  <a href="#positioning">Pozicioniranje</a>
+  <a href="#personality">Osebnost</a>
+
+  <div class="toc-section">Vizualna Identiteta</div>
+  <a href="#colors">Barve</a>
+  <a href="#typography">Tipografija</a>
+</nav>
+
+<main class="main">
+
+  <div class="cover">
+    <div class="cover-eyebrow">Akilea Center Zdravja — 2026</div>
+    <div class="cover-title">Akilea<br>Brand Identity</div>
+    <div class="cover-sub">Intuitivna masaža in celostna podpora telesu</div>
+  </div>
+
+  <section class="doc-section" id="positioning">
+    <div class="section-label">01 — Brand Strategija</div>
+    <h1 class="section-title">Pozicioniranje</h1>
+    <p class="prose">Akilea je prostor miru, kjer se telo in um ponovno povežeta. V svetu, polnem stresa in hitrega tempa, nudimo varno zavetje za globoko sprostitev in celostno obravnavo.</p>
+    
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Varno okolje</h4>
+        <p>Ustvarjamo prostor, kjer si stranke lahko dovolijo čutiti in sprostiti napetosti brez obsojanja.</p>
+      </div>
+      <div class="pillar">
+        <h4>Celostni pristop</h4>
+        <p>Ne obravnavamo le simptomov, temveč iščemo vzroke v telesu in čustvih skozi intuitivno masažo.</p>
+      </div>
+      <div class="pillar">
+        <h4>Opolnomočenje</h4>
+        <p>Strankam ne nudimo le trenutne sprostitve, temveč orodja (delavnice, predavanja) za dolgoročno zdravje.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="doc-section" id="personality">
+    <div class="section-label">02 — Osebnost</div>
+    <h2 class="section-title">Karakter znamke</h2>
+    <p class="prose">Naša komunikacija je mirna, strokovna in topla. Izogibamo se klišejskim besedam in obljubam; raje ponujamo iskreno podporo in znanje.</p>
+
+    <div class="traits">
+      <span class="trait primary">Mirna</span>
+      <span class="trait secondary">Strokovna</span>
+      <span class="trait">Topla</span>
+      <span class="trait">Intuitivna</span>
+      <span class="trait">Iskrena</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="doc-section" id="colors">
+    <div class="section-label">03 — Vizualna Identiteta</div>
+    <h2 class="section-title">Barvni Sistem</h2>
+    <p class="prose">Naši dve glavni barvi izvirata neposredno iz logotipa: nežna vijolična in pomirjujoča olivno zelena. Izogibamo se ostrim, temnim barvam (kot je črna ali zelo temno siva), da ohranimo občutek lahkotnosti in zračnosti.</p>
+
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: var(--purple);"></div>
+        <div class="color-info">
+          <div class="color-name">Akilea Vijolična</div>
+          <div class="color-hex">#9A72A8</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: var(--green);"></div>
+        <div class="color-info">
+          <div class="color-name">Olivno Zelena</div>
+          <div class="color-hex">#98A366</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: var(--bg);"></div>
+        <div class="color-info">
+          <div class="color-name">Topla Bela (Ozadje)</div>
+          <div class="color-hex">#FAFAF7</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: var(--text-primary);"></div>
+        <div class="color-info">
+          <div class="color-name">Temno Siva (Tekst)</div>
+          <div class="color-hex">#333333</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="doc-section" id="typography">
+    <div class="section-label">04 — Tipografija</div>
+    <h2 class="section-title">Sistem pisav</h2>
+    <p class="prose">Uporabljamo kombinacijo elegantne serifne pisave za naslove in čiste sans-serifne pisave za berljivost dolgih besedil.</p>
+
+    <div style="margin-top: 24px;">
+      <div style="font-family: var(--font-display); font-size: 42px; color: var(--purple); margin-bottom: 8px;">Fraunces</div>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 24px;">Primarna pisava (Naslovi, logotip)</p>
+
+      <div style="font-family: var(--font-body); font-size: 32px; font-weight: 300; color: var(--text-primary); margin-bottom: 8px;">Inter</div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Sekundarna pisava (Odstavki, gumbi, UI elementi)</p>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
