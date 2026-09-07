@@ -36,7 +36,7 @@ export default function Footer() {
             />
           </Link>
           <p className="text-sm font-light leading-relaxed max-w-sm">
-            Z notranjim mirom do zdravja. Center za celostno podporo telesu in avtorsko intuitivno masažo.
+            Z ravnovesjem do zdravja. Center za celostno podporo telesu in avtorsko intuitivno masažo.
           </p>
         </div>
         

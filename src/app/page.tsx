@@ -14,21 +14,17 @@ export default function Home() {
           <div className="lg:col-span-7 bg-[var(--color-primary)] text-white p-8 lg:p-14 flex flex-col justify-center shadow-xl relative z-10">
             <div className="space-y-8">
               <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-widest font-bold text-[var(--color-primary)]">
+                <span className="bg-white px-3 py-1.5 rounded-sm">Intuitivna svetovalka</span>
                 <span className="bg-white px-3 py-1.5 rounded-sm">Diplomirana Naturopatinja</span>
                 <span className="bg-white px-3 py-1.5 rounded-sm">Reiki Mojstrica</span>
               </div>
 
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white font-normal leading-[1.15] tracking-tight">
-                Naturopatija in intuitivna masaža Koper
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white font-normal leading-[1.2] tracking-tight">
+                Dobrodošli v holističnem centru AKILEA – prostoru, kjer telo spregovori, duša zadiha in um najde svoj mir.
               </h1>
 
-              <p className="text-white/90 text-xl sm:text-2xl font-serif font-light leading-snug mb-2">
-                Povrnite notranji mir in zaživite brez napetosti.
-              </p>
-              
-              <p className="text-white/80 text-base sm:text-lg font-light leading-relaxed max-w-xl">
-                Združujemo strokovne naturopatske obravnave, Reiki energijsko podporo in avtorsko
-                intuitivno masažo — <span className="text-white font-medium border-b border-white pb-0.5">tako da lahko</span> varno sprostite ujeta čustva, se rešite bolečin in si svoj termin izberete neposredno na spletu.
+              <p className="text-white/90 text-base sm:text-lg font-light leading-relaxed max-w-xl">
+                Tukaj se stikajo starodavna znanja, intuitivna sporočila telesa in nežna moč dotika. Verjamem, da ima vsak od nas vse odgovore v sebi – včasih pa potrebujemo le varen prostor in pravo podporo, da jih zaslišimo. Naj bodo intuitivne masaže, delavnice ali preprosti nasveti za vsakdan vaša podpora na poti globokih transformacij.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -46,15 +42,14 @@ export default function Home() {
           <div className="lg:col-span-5 relative mt-6 lg:mt-0 flex flex-col">
             <div className="w-full h-full relative min-h-[400px]">
               <Image
-                src="https://static.wixstatic.com/media/dfaf38_ce69c16e84bd46348775a8a848b306f2~mv2.jpg/v1/fill/w_800,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/dfaf38_ce69c16e84bd46348775a8a848b306f2~mv2.jpg"
-                alt="Mirjana pri delu - Intuitivna Masaža"
+                src="/images/storitve/mirjana-masaza-hero.jpg"
+                alt="Mirjana pri izvajanju intuitivne masaže - Holistični center Akilea"
                 fill
-                className="absolute inset-0 w-full h-full object-cover object-center grayscale-[15%]"
-                unoptimized
+                className="absolute inset-0 w-full h-full object-cover object-center"
               />
               <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm p-4 text-center">
                 <p className="font-serif text-[var(--color-primary)] text-lg italic">
-                  "Telo vedno pozna pot nazaj k sebi."
+                  "Ko telo spregovori, se dogajajo čudeži. Prisluhni mu."
                 </p>
               </div>
             </div>
@@ -182,8 +177,8 @@ export default function Home() {
           </div>
           <div className="bg-white rounded-lg shadow-sm border border-[var(--color-border)] p-8 lg:p-12 text-center max-w-3xl mx-auto">
             <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-4">Korporativni wellness & Izobraževanja</h3>
-            <p className="text-[var(--color-muted)] font-light mb-8">
-              Pripravljamo strokovna predavanja na temo obvladovanja stresa in izboljšanja počutja zaposlenih na delovnem mestu.
+            <p className="text-[var(--color-muted)] font-light mb-8 max-w-xl mx-auto">
+              Pripravljam strokovna predavanja na temo vpliva stresa na telo in izboljšanja počutja zaposlenih na delovnem mestu.
             </p>
             <Link href="/predavanja" className="btn-primary px-8 py-3 text-xs uppercase tracking-widest font-bold inline-block">
               Pošljite povpraševanje
@@ -201,9 +196,12 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-[var(--color-surface)] rounded-lg p-8 flex flex-col items-center text-center hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-serif text-[var(--color-primary)] mb-2">Čajanka o čustvih</h3>
-              <p className="text-sm text-[#6a882a] font-bold mb-4">Termin: 15. September 2026</p>
-              <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-1">Pridružite se nam ob toplem čaju in iskrenem pogovoru.</p>
+              <h3 className="text-xl font-serif text-[var(--color-primary)] mb-1">Čajanka s sporočilom</h3>
+              <p className="text-sm font-serif italic text-[var(--color-primary)] mb-2">»Kako biti balon med kaktusi?«</p>
+              <p className="text-sm text-[#6a882a] font-bold mb-4">Četrtek, 15. oktober 2026 ob 19:00</p>
+              <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-1">
+                Varen prostor ob toplem čaju, kjer nobena tema ni tabu. Z dobrodelno noto za Inštitut Lunina vila.
+              </p>
               <Link href="/delavnice/cajanka-o-custvih" className="text-xs uppercase tracking-widest font-bold text-[var(--color-primary)] mb-4 hover:text-[var(--color-accent)] transition-colors underline">Preberi več</Link>
               <Link href="/delavnice/cajanka-o-custvih" className="btn-primary px-6 py-2 text-[10px] uppercase tracking-widest font-bold w-full">Prijavi se</Link>
             </div>

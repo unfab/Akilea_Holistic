@@ -22,17 +22,26 @@ export default function DelavnicePage() {
           {/* Active Event */}
           <div className="bg-white rounded-lg shadow-sm border border-[var(--color-border)] p-8 flex flex-col md:flex-row gap-8 items-center">
             <div className="md:w-2/3">
-              <h2 className="text-2xl font-serif text-[var(--color-primary)] mb-2">Čajanka o čustvih</h2>
-              <div className="flex items-center gap-4 mb-4">
-                <span className="bg-[var(--color-accent-alt)] text-[var(--color-primary)] px-3 py-1 rounded text-sm font-medium">Ljubljana</span>
-                <span className="text-[var(--color-accent-green)] font-bold">15. September 2026 ob 17:00</span>
+              <h2 className="text-2xl font-serif text-[var(--color-primary)] mb-1">Čajanka s sporočilom: »Kako biti balon med kaktusi?«</h2>
+              <div className="flex flex-wrap items-center gap-4 mb-4">
+                <span className="bg-[var(--color-accent-alt)] text-[var(--color-primary)] px-3 py-1 rounded text-sm font-medium">Center Akilea, Koper</span>
+                <span className="text-[var(--color-accent-green)] font-bold">Četrtek, 15. oktober 2026 ob 19:00</span>
+                <span className="text-xs bg-[#f4f8eb] text-[#6a882a] px-2.5 py-1 rounded font-semibold">Dobrodelna nota (Lunina vila)</span>
               </div>
               <p className="text-[var(--color-muted)] font-light mb-6">
-                Pridružite se nam ob toplem čaju in iskrenem pogovoru o sproščanju potlačenih čustev. Na dogodku bomo v manjšem krogu delili izkušnje in se naučili preprostih vaj za vsakodnevno sprostitev napetosti.
+                Vabljeni v varen, topel prostor, kjer nobena tema ni tabu in kjer pogovori gredo globlje od »kako si?«. Vsaka udeleženka prejme tudi osebno intuitivno sporočilo.
               </p>
               <div className="flex gap-4">
-                <a href="mailto:info@akilea.si?subject=Prijava%20na%20čajanko%2015.%20september" className="btn-primary px-6 py-3 text-xs uppercase tracking-widest font-bold inline-block">
-                  Prijavi se
+                <Link href="/delavnice/cajanka-o-custvih" className="btn-primary px-6 py-3 text-xs uppercase tracking-widest font-bold inline-block">
+                  Več o dogodku & Prijava
+                </Link>
+                <a 
+                  href="https://forms.gle/hKdJKzi5bi2WGuEh7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary px-6 py-3 text-xs uppercase tracking-widest font-bold inline-block"
+                >
+                  Hitra prijava (obrazec)
                 </a>
               </div>
             </div>

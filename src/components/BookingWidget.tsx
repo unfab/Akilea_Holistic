@@ -21,7 +21,7 @@ export default function BookingWidget() {
   const services = [
     { id: 1, name: "Intuitivna masaža telesa", desc: "Celostna obravnava (105 min)", price: 85 },
     { id: 2, name: "Intuitivna masaža hrbta", desc: "Fokusirana obravnava (60 min)", price: 50 },
-    { id: 3, name: "Intuitivna masaža trebuha", desc: "Sproščanje čustvenega centra (45 min)", price: 50 },
+    { id: 3, name: "Intuitivna masaža trebuha", desc: "Sproščanje čustvenega centra (45 min)", price: 40 },
   ];
 
   const availableTimes = ['09:00', '11:00', '13:30', '16:00', '18:00'];
@@ -183,7 +183,7 @@ export default function BookingWidget() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-12">
           <span className="text-[10px] uppercase tracking-widest text-[#6a882a] font-semibold mb-4 block">Spletna rezervacija</span>
-          <h2 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-4">Pripravljeni na sprostitev?</h2>
+          <h2 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-4">Pripravljeni prisluhniti telesu in sebi?</h2>
           <p className="text-[var(--color-muted)] font-light leading-relaxed max-w-xl mx-auto">
             Izberite želeno obravnavo in termin v realnem času. Brez čakanja na potrditev in brez telefonskih klicev.
           </p>

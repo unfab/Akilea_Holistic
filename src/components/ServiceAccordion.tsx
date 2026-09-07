@@ -55,7 +55,7 @@ export default function ServiceAccordion({ service }: { service: ServiceProps })
               Rezerviraj termin
             </Link>
             <a href={service.stripeLink} target="_blank" rel="noreferrer" className="bg-[var(--color-primary)] text-white px-8 py-3 text-xs uppercase tracking-widest font-bold text-center inline-block hover:bg-black transition-colors rounded">
-              V košarico (Kupi zdaj)
+              V košarico
             </a>
           </div>
         </div>

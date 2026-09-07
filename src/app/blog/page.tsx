@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default function BlogIndexPage() {
-  const categories = ["Vse", "Zdravje", "Čustva", "Prehrana", "Nasveti"];
+  const categories = ["Vse", "Zdravje", "Čustva", "Telo", "Prehrana", "Nasveti"];
   
   const posts = [
     {

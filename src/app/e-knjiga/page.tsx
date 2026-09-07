@@ -57,15 +57,25 @@ export default function EKnjigaPage() {
               </div>
               <h2 className="text-2xl font-serif text-[var(--color-primary)] mb-4">Uspešno ste prijavljeni!</h2>
               <p className="text-[var(--color-muted)] font-light leading-relaxed">
-                Obvestili vas bomo takoj, ko bo e-knjiga na voljo za popolnoma brezplačen prenos. Hvala za vaše zanimanje.
+                Obvestili vas bomo takoj, ko bo e-knjiga izšla. Hvala za vaše zaupanje in zanimanje.
               </p>
             </div>
           ) : (
             <>
-              <h2 className="text-2xl font-serif text-[var(--color-primary)] mb-4">E-knjiga se piše in bo popolnoma brezplačna!</h2>
-              <p className="text-[var(--color-muted)] font-light leading-relaxed mb-8 max-w-xl mx-auto text-[16px]">
-                V e-knjigi bom z vami delila osnove razumevanja telesnih signalov in tehnike za ohranjanje miru v vsakdanjem življenju. Prijavite se spodaj in prvi boste obveščeni ob izidu vašega brezplačnega izvoda.
-              </p>
+              <h2 className="text-2xl sm:text-3xl font-serif text-[var(--color-primary)] mb-4">
+                Konec oktobra 2026 bo izšla moja prva e-knjiga!
+              </h2>
+              <div className="text-[var(--color-muted)] font-light leading-relaxed mb-8 max-w-xl mx-auto text-[15px] sm:text-[16px] space-y-3">
+                <p>
+                  V e-knjigi bom z vami delila povezave med čustvi, vzorci, prepričanji in kako le-ti vplivajo na telo ter usmerjajo naše življenje. Veliko bo praktičnih nasvetov, ki jih boste lahko uporabili v vsakdanjem življenju.
+                </p>
+                <p>
+                  Zanimivo bo, obljubim, predvsem pa uporabno in z veliko željo ponuditi vam drug pogled na telo in vaš notranji svet ter spodbuditi transformacije, na katere vas vaša duša in telo spodbujata.
+                </p>
+                <p className="font-serif italic text-[var(--color-primary)]">
+                  Res se že veselim, da pride v vaše roke in vam služi!
+                </p>
+              </div>
               
               <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col gap-4">
                 <input 
@@ -79,13 +89,13 @@ export default function EKnjigaPage() {
                 <button 
                   type="submit" 
                   disabled={status === "submitting"}
-                  className="btn-primary w-full py-3 text-xs uppercase tracking-widest font-bold disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="btn-primary w-full py-3.5 text-xs uppercase tracking-widest font-bold disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all"
                 >
-                  {status === "submitting" ? "Prijavljam..." : "Obvesti me ob izzidu"}
+                  {status === "submitting" ? "Prijavljam..." : "Obvesti me ob izidu"}
                 </button>
               </form>
-              <p className="text-[10px] text-[var(--color-muted)] mt-4">
-                Vaši podatki so na varnem. S prijavo se strinjate z obvestilom o izidu.
+              <p className="text-[11px] text-[var(--color-muted)] mt-4">
+                Vaši podatki so varni. Prijavite se spodaj in prvi boste obveščeni o uradnem izidu.
               </p>
             </>
           )}
