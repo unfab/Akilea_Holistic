@@ -326,7 +326,8 @@ export default function Home() {
                   src="/images/predavanja/bolecina-v-krizu-pisarna.png"
                   alt={t.threeSquares.square3.title}
                   fill
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  style={{ objectPosition: "center 72%" }}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4 bg-[var(--color-primary)] text-white px-3 py-1 rounded-sm text-[10px] uppercase tracking-widest font-bold">
                   {t.threeSquares.square3.badge}
