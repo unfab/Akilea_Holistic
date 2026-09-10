@@ -63,6 +63,12 @@ export interface TranslationDictionary {
     sectionBadge: string;
     sectionTitle: string;
     sectionDesc: string;
+    ebookBanner: {
+      badge: string;
+      title: string;
+      desc: string;
+      cta: string;
+    };
     square1: {
       badge: string;
       tag: string;
@@ -86,7 +92,11 @@ export interface TranslationDictionary {
       tag: string;
       date: string;
       title: string;
-      desc: string;
+      subtitle: string;
+      formatLabel: string;
+      format: string;
+      targetLabel: string;
+      targetGroup: string;
       cta: string;
       moreInfo: string;
     };

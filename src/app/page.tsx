@@ -192,6 +192,40 @@ export default function Home() {
             </p>
           </div>
 
+          {/* E-BOOK TEASER BANNER (Squeezed between section intro and 3 boxes) */}
+          <Link
+            href="/e-knjiga"
+            className="block max-w-5xl mx-auto mb-14 bg-gradient-to-br from-white via-[#fcfbf9] to-[#f4f7ee] border border-[#e2dcd2] hover:border-[#6a882a] rounded-2xl p-6 sm:p-8 shadow-xs hover:shadow-md transition-all duration-300 group relative overflow-hidden"
+          >
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+              <div className="flex items-start gap-4 sm:gap-5">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#f4f8eb] border border-[#d2e5b8] flex items-center justify-center shrink-0 text-[#6a882a] group-hover:bg-[#6a882a] group-hover:text-white transition-colors duration-300 shadow-xs">
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#f4f8eb] border border-[#d2e5b8] text-[10px] uppercase tracking-widest font-bold text-[#6a882a] mb-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#6a882a] animate-pulse"></span>
+                    {t.threeSquares.ebookBanner.badge}
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-serif text-[var(--color-primary)] group-hover:text-[var(--color-accent)] transition-colors mb-1.5 leading-snug">
+                    {t.threeSquares.ebookBanner.title}
+                  </h3>
+                  <p className="text-[var(--color-muted)] font-light text-xs sm:text-sm leading-relaxed max-w-2xl">
+                    {t.threeSquares.ebookBanner.desc}
+                  </p>
+                </div>
+              </div>
+
+              <div className="shrink-0 w-full md:w-auto self-end md:self-center">
+                <span className="inline-flex items-center justify-center gap-2 w-full md:w-auto px-5 py-3 rounded-lg bg-[var(--color-primary)] text-white text-xs uppercase tracking-widest font-bold group-hover:bg-[#6a882a] transition-all duration-300 shadow-sm">
+                  <span>{t.threeSquares.ebookBanner.cta}</span>
+                </span>
+              </div>
+            </div>
+          </Link>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* KVADRAT 1: BLOGI */}
             <div className="bg-white rounded-2xl border border-[var(--color-border)] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
@@ -289,16 +323,15 @@ export default function Home() {
             <div className="bg-white rounded-2xl border border-[var(--color-border)] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
               <div className="aspect-[16/10] overflow-hidden relative bg-[var(--color-surface)]">
                 <Image
-                  src="https://static.wixstatic.com/media/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg/v1/fit/w_3648,h_5472,al_c,q_90/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg"
-                  alt="Predavanja in izobraževanja"
+                  src="/images/predavanja/bolecina-v-krizu-pisarna.png"
+                  alt={t.threeSquares.square3.title}
                   fill
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  unoptimized
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4 bg-[var(--color-primary)] text-white px-3 py-1 rounded-sm text-[10px] uppercase tracking-widest font-bold">
                   {t.threeSquares.square3.badge}
                 </div>
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-[var(--color-primary)] px-2.5 py-1 rounded-sm text-[10px] uppercase tracking-wider font-semibold">
+                <div className="absolute top-4 right-4 bg-[#6a882a] text-white px-2.5 py-1 rounded-sm text-[10px] uppercase tracking-wider font-semibold">
                   {t.threeSquares.square3.tag}
                 </div>
               </div>
@@ -307,12 +340,23 @@ export default function Home() {
                 <span className="text-[10px] uppercase tracking-widest text-[#6a882a] font-bold mb-2">
                   {t.threeSquares.square3.date}
                 </span>
-                <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-3 leading-snug group-hover:text-[var(--color-accent)] transition-colors">
+                <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-2 leading-snug group-hover:text-[var(--color-accent)] transition-colors">
                   {t.threeSquares.square3.title}
                 </h3>
-                <p className="text-[var(--color-muted)] font-light text-sm leading-relaxed mb-6 flex-grow">
-                  {t.threeSquares.square3.desc}
+                <p className="text-xs font-serif italic text-[var(--color-accent)] mb-4">
+                  {t.threeSquares.square3.subtitle}
                 </p>
+
+                <div className="space-y-2 text-xs text-[var(--color-muted)] font-light mb-6 flex-grow bg-[var(--color-surface)] p-3.5 rounded-lg border border-[var(--color-border)]">
+                  <div>
+                    <span className="font-semibold text-[var(--color-primary)]">{t.threeSquares.square3.formatLabel}:</span>{" "}
+                    <span>{t.threeSquares.square3.format}</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-[var(--color-primary)]">{t.threeSquares.square3.targetLabel}:</span>{" "}
+                    <span>{t.threeSquares.square3.targetGroup}</span>
+                  </div>
+                </div>
 
                 <div className="pt-4 border-t border-[var(--color-border)] flex items-center justify-between mt-auto">
                   <Link

@@ -100,23 +100,36 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile menu button */}
-        <button
-          className="lg:hidden text-[var(--color-primary)] p-2"
-          aria-label="Menu"
-          onClick={toggleMenu}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
+        {/* Mobile controls (Direct Phone CTA + Hamburger button) */}
+        <div className="lg:hidden flex items-center gap-2 sm:gap-3">
+          <a
+            href="tel:+38640863594"
+            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f4f8eb] border border-[#d2e5b8] text-[var(--color-primary)] hover:bg-[#6a882a] hover:text-white transition-all shadow-xs"
+            aria-label="Pokliči 040 863 594"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-        </button>
+            <svg className="w-3.5 h-3.5 text-[#6a882a] group-hover:text-white transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span className="text-xs font-bold whitespace-nowrap">040 863 594</span>
+          </a>
+
+          <button
+            className="text-[var(--color-primary)] p-1.5 -mr-1"
+            aria-label="Menu"
+            onClick={toggleMenu}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -182,13 +195,24 @@ export default function Navbar() {
               <button onClick={() => { handleSelectLang("sr"); toggleMenu(); }} className={`text-xs uppercase font-medium ${language === 'sr' ? 'text-[var(--color-primary)] font-bold' : 'text-[var(--color-muted)]'}`}>🇷🇸 SRB</button>
             </div>
           </div>
-          <Link
-            href="/storitve"
-            className="block text-xs uppercase tracking-widest font-bold text-[var(--color-accent-green)] pt-2 border-t border-[var(--color-border)] mt-2"
-            onClick={toggleMenu}
-          >
-            {t.nav.bookAppointment}
-          </Link>
+          <div className="pt-3 border-t border-[var(--color-border)] mt-2 flex flex-col gap-2">
+            <a
+              href="tel:+38640863594"
+              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-[#d2e5b8] bg-[#f4f8eb] text-xs font-bold text-[var(--color-primary)] hover:bg-[#6a882a] hover:text-white transition-colors"
+            >
+              <svg className="w-4 h-4 text-[#6a882a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>Pokliči: 040 863 594</span>
+            </a>
+            <Link
+              href="/storitve"
+              className="btn-primary block text-center py-2.5 text-xs uppercase tracking-widest font-bold"
+              onClick={toggleMenu}
+            >
+              {t.nav.bookAppointment}
+            </Link>
+          </div>
         </div>
       )}
     </header>
