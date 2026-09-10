@@ -80,7 +80,7 @@ export default function TestimonialsCarousel() {
     setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % pairs.length);
       setFade(true);
-    }, 250);
+    }, 200);
   }, [pairs.length]);
 
   const goToPrev = useCallback(() => {
@@ -88,7 +88,7 @@ export default function TestimonialsCarousel() {
     setTimeout(() => {
       setCurrentSlide((prev) => (prev - 1 + pairs.length) % pairs.length);
       setFade(true);
-    }, 250);
+    }, 200);
   }, [pairs.length]);
 
   const goToSlide = (idx: number) => {
@@ -97,17 +97,17 @@ export default function TestimonialsCarousel() {
     setTimeout(() => {
       setCurrentSlide(idx);
       setFade(true);
-    }, 250);
+    }, 200);
   };
 
-  // Auto rotate every 6 seconds in a loop
+  // Auto rotate after 2 seconds if the user doesn't move them on their own
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
       goToNext();
-    }, 6000);
+    }, 2000);
     return () => clearInterval(timer);
-  }, [isPaused, goToNext]);
+  }, [isPaused, currentSlide, goToNext]);
 
   const currentPair = pairs[currentSlide];
 
@@ -116,6 +116,8 @@ export default function TestimonialsCarousel() {
       className="py-20 lg:py-28 bg-[var(--color-surface)] border-b border-[var(--color-border)] relative overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
       aria-label="Mnenja strank"
     >
       <div className="max-w-6xl mx-auto px-6">
