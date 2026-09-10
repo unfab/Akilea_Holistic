@@ -20,8 +20,8 @@ export default function BookingWidget() {
 
   const services = [
     { id: 1, name: "Intuitivna masaža telesa", desc: "Celostna obravnava (105 min)", price: 85 },
-    { id: 2, name: "Intuitivna masaža hrbta", desc: "Fokusirana obravnava (60 min)", price: 50 },
-    { id: 3, name: "Intuitivna masaža trebuha", desc: "Sproščanje čustvenega centra (45 min)", price: 40 },
+    { id: 2, name: "Intuitivna masaža hrbta", desc: "Fokusirana obravnava (50 min)", price: 50 },
+    { id: 3, name: "Intuitivna masaža trebuha", desc: "Sproščanje čustvenega centra (50 min)", price: 50 },
   ];
 
   const availableTimes = ['09:00', '11:00', '13:30', '16:00', '18:00'];

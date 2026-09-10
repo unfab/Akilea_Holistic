@@ -1,8 +1,8 @@
 import ServiceAccordion from "@/components/ServiceAccordion";
 
 export const metadata = {
-  title: "Storitve | Akilea Center zdravja",
-  description: "Pregled vseh storitev v centru zdravja Akilea.",
+  title: "Storitve | Akilea Holistični center",
+  description: "Pregled vseh storitev v holističnem centru Akilea.",
 };
 
 export default function StoritvePage() {
@@ -13,7 +13,7 @@ export default function StoritvePage() {
       duration: "1 h 45 min",
       price: "85 €",
       image: "/images/storitve/mirjana-masaza-hero.jpg",
-      stripeLink: "#",
+      stripeLink: "https://buy.stripe.com/14AdRag2k9ts9HB46ycQU02",
       description: (
         <div className="space-y-4 text-sm leading-relaxed">
           <p>
@@ -66,10 +66,10 @@ export default function StoritvePage() {
     {
       id: "masaza-trebuha",
       title: "Intuitivna masaža trebuha",
-      duration: "45 min",
-      price: "40 €",
+      duration: "50 min",
+      price: "50 €",
       image: "https://static.wixstatic.com/media/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png/v1/fill/w_863,h_574,al_c,q_90,enc_auto/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png",
-      stripeLink: "#",
+      stripeLink: "https://buy.stripe.com/00w6oI3fyeNM1b59qScQU01",
       description: (
         <div className="space-y-4 text-sm leading-relaxed">
           <p className="italic text-[var(--color-primary)] font-serif text-base">
@@ -95,10 +95,10 @@ export default function StoritvePage() {
     {
       id: "masaza-hrbta",
       title: "Intuitivna masaža hrbta",
-      duration: "1 h",
+      duration: "50 min",
       price: "50 €",
       image: "https://static.wixstatic.com/media/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg/v1/fit/w_3648,h_5472,al_c,q_90/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg",
-      stripeLink: "#",
+      stripeLink: "https://buy.stripe.com/28E00k7vOcFE1b5dH8cQU00",
       description: (
         <div className="space-y-4 text-sm leading-relaxed">
           <p>

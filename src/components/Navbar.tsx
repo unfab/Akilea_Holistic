@@ -24,7 +24,7 @@ export default function Navbar() {
             unoptimized
           />
           <span className="hidden sm:inline-block text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)] border-l border-[var(--color-border)] pl-3">
-            Center zdravja
+            Holistični center
           </span>
         </Link>
 

@@ -129,7 +129,7 @@ export default function CajankaPage() {
             {/* Metaphor Highlight */}
             <div className="bg-[var(--color-primary)] text-white p-6 sm:p-8 rounded-xl text-center shadow-sm">
               <p className="font-serif text-2xl sm:text-3xl italic mb-2">
-                »Ni lahko biti balon med kaktusi. A naj te spomnim – balon lahko poleti visoko in kamorkoli želi 😉«
+                »Ni lahko biti balon med kaktusi. A naj te spomnim – balon lahko poleti visoko in kamorkoli želi.«
               </p>
             </div>
 
@@ -139,14 +139,18 @@ export default function CajankaPage() {
 
             <div className="bg-[#f5eff7] p-5 rounded-lg border border-[var(--color-border)]">
               <p className="font-semibold text-[var(--color-primary)]">
-                ✨ Vsaka udeleženka bo prejela tudi intuitivno sporočilo, ki ji bo lahko v veliko oporo in pomoč.
+                Vsaka udeleženka bo prejela tudi osebno intuitivno sporočilo, ki ji bo lahko v veliko oporo in pomoč.
               </p>
             </div>
 
             {/* Charity Section */}
             <div className="bg-white p-6 rounded-xl border border-[var(--color-border)] shadow-sm space-y-3">
               <div className="flex items-center gap-3">
-                <span className="text-2xl">🕊️</span>
+                <div className="w-10 h-10 rounded-full bg-[#f4f8eb] flex items-center justify-center text-[#6a882a] shrink-0">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
                 <h4 className="text-xl font-serif text-[var(--color-primary)]">
                   Srečanje je brezplačno, a z dobrodelno noto
                 </h4>

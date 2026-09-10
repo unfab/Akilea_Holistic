@@ -16,13 +16,13 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Naturopatija in intuitivna masaža Koper | Akilea",
-  description: "Naturopatija in intuitivna masaža Koper — Povrnite notranji mir in zaživite brez napetosti. Pokličite: 040 863 594.",
+  title: "Holistični center & intuitivna masaža Koper | Akilea",
+  description: "Holistični center in intuitivna masaža Koper — Mirjana Groznik, intuitivna svetovalka. Povrnite notranji mir in zaživite brez napetosti. Pokličite: 040 863 594.",
   alternates: {
     canonical: "https://www.akilea.si",
   },
   openGraph: {
-    title: "Naturopatija in intuitivna masaža Koper | Akilea",
+    title: "Holistični center & intuitivna masaža Koper | Akilea",
     description: "Povrnite notranji mir in zaživite brez napetosti. Pokličite: 040 863 594.",
     url: "https://www.akilea.si",
     siteName: "Akilea",
@@ -60,7 +60,7 @@ export default function RootLayout({
       { "@type": "City", "name": "Koper" },
       { "@type": "AdministrativeArea", "name": "Obalno-kraška regija" }
     ],
-    "description": "Naturopatija in intuitivna masaža Koper — Povrnite notranji mir in zaživite brez napetosti."
+    "description": "Holistični center in intuitivna masaža Koper — Mirjana Groznik, intuitivna svetovalka. Povrnite notranji mir in zaživite brez napetosti."
   };
 
   return (
