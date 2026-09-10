@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function CookieBanner() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -25,11 +27,11 @@ export default function CookieBanner() {
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 pb-safe pointer-events-none">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-2xl border border-[var(--color-border)] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 pointer-events-auto animate-fade-in">
         <div className="flex-1 text-center md:text-left">
-          <h3 className="text-xl font-serif text-[var(--color-primary)] mb-2">Uporabljamo piškotke 🍪</h3>
+          <h3 className="text-xl font-serif text-[var(--color-primary)] mb-2">{t.cookieBanner.title}</h3>
           <p className="text-[var(--color-muted)] font-light text-sm">
-            Za najboljšo uporabniško izkušnjo, analitiko in delovanje rezervacijskega sistema naša spletna stran uporablja piškotke. Z nadaljnjo uporabo se strinjate z našim{" "}
+            {t.cookieBanner.text}{" "}
             <Link href="/pravilnik-o-zasebnosti" className="text-[var(--color-primary)] underline hover:text-[var(--color-accent)]">
-              pravilnikom o zasebnosti
+              {t.cookieBanner.privacyLink}
             </Link>.
           </p>
         </div>
@@ -38,7 +40,7 @@ export default function CookieBanner() {
             onClick={acceptCookies} 
             className="btn-primary px-8 py-3 text-xs uppercase tracking-widest font-bold w-full md:w-auto"
           >
-            Strinjam se
+            {t.cookieBanner.acceptBtn}
           </button>
         </div>
       </div>

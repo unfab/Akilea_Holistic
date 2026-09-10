@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BookingWidget() {
+  const { t } = useLanguage();
   const [selectedService, setSelectedService] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -18,11 +20,14 @@ export default function BookingWidget() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const services = [
-    { id: 1, name: "Intuitivna masaža telesa", desc: "Celostna obravnava (105 min)", price: 85 },
-    { id: 2, name: "Intuitivna masaža hrbta", desc: "Fokusirana obravnava (50 min)", price: 50 },
-    { id: 3, name: "Intuitivna masaža trebuha", desc: "Sproščanje čustvenega centra (50 min)", price: 50 },
-  ];
+  const services = useMemo(() => {
+    return t.servicesPage.items.map((svc, idx) => ({
+      id: idx + 1,
+      name: svc.name,
+      desc: `${svc.shortDesc.slice(0, 55)}... (${svc.duration})`,
+      price: svc.price,
+    }));
+  }, [t]);
 
   const availableTimes = ['09:00', '11:00', '13:30', '16:00', '18:00'];
 
@@ -55,8 +60,6 @@ export default function BookingWidget() {
   const handleNextMonth = () => {
     setCurrentMonthStart(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
   };
-
-  const monthNames = ["Januar", "Februar", "Marec", "April", "Maj", "Junij", "Julij", "Avgust", "September", "Oktober", "November", "December"];
   
   const handleDateSelect = (date: Date) => {
     if (date < today) return;
@@ -162,15 +165,15 @@ export default function BookingWidget() {
         <div className="max-w-2xl mx-auto px-6 text-center">
           <div className="bg-white rounded-xl shadow-lg border border-[var(--color-border)] p-12">
             <div className="text-5xl mb-6">✨</div>
-            <h2 className="text-3xl font-serif text-[var(--color-primary)] mb-4">Hvala za povpraševanje!</h2>
+            <h2 className="text-3xl font-serif text-[var(--color-primary)] mb-4">{t.bookingWidget.successTitle}</h2>
             <p className="text-[var(--color-muted)] font-light mb-8">
-              Vaš termin smo uspešno zabeležili. Kmalu boste prejeli potrditveno e-poštno sporočilo.
+              {t.bookingWidget.successDesc}
             </p>
             <button 
               onClick={() => setIsSuccess(false)}
               className="btn-primary px-8 py-3 text-xs uppercase tracking-widest font-bold"
             >
-              Nova rezervacija
+              {t.bookingWidget.bookAnother}
             </button>
           </div>
         </div>
@@ -182,10 +185,10 @@ export default function BookingWidget() {
     <section className="py-20 bg-[var(--color-bg)] border-b border-[var(--color-border)]" id="rezervacija">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-12">
-          <span className="text-[10px] uppercase tracking-widest text-[#6a882a] font-semibold mb-4 block">Spletna rezervacija</span>
-          <h2 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-4">Pripravljeni prisluhniti telesu in sebi?</h2>
+          <span className="text-[10px] uppercase tracking-widest text-[#6a882a] font-semibold mb-4 block">{t.bookingWidget.sectionBadge}</span>
+          <h2 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-4">{t.bookingWidget.sectionTitle}</h2>
           <p className="text-[var(--color-muted)] font-light leading-relaxed max-w-xl mx-auto">
-            Izberite želeno obravnavo in termin v realnem času. Brez čakanja na potrditev in brez telefonskih klicev.
+            {t.bookingWidget.sectionDesc}
           </p>
         </div>
 
@@ -194,7 +197,7 @@ export default function BookingWidget() {
             
             {/* Left Col: Services */}
             <div className="lg:sticky lg:top-28">
-              <h3 className="text-xs uppercase font-bold tracking-widest text-[var(--color-primary)] mb-6">1. Izberite storitev</h3>
+              <h3 className="text-xs uppercase font-bold tracking-widest text-[var(--color-primary)] mb-6">{t.bookingWidget.step1Title}</h3>
               <div className="space-y-4">
                 {services.map((svc) => (
                   <div 
@@ -223,19 +226,19 @@ export default function BookingWidget() {
 
             {/* Right Col: Calendar */}
             <div className="lg:sticky lg:top-28">
-              <h3 className="text-xs uppercase font-bold tracking-widest text-[var(--color-primary)] mb-6">2. Izberite termin</h3>
+              <h3 className="text-xs uppercase font-bold tracking-widest text-[var(--color-primary)] mb-6">{t.bookingWidget.step2Title}</h3>
               
               <div className="border border-[var(--color-border)] rounded p-6 mb-6">
                 <div className="flex justify-between items-center mb-6">
                   <button type="button" onClick={handlePrevMonth} className="text-[var(--color-muted)] hover:text-[var(--color-primary)] font-bold text-lg px-2">&larr;</button>
                   <span className="text-[11px] font-bold tracking-widest uppercase">
-                    {monthNames[currentMonthStart.getMonth()]} {currentMonthStart.getFullYear()}
+                    {t.bookingWidget.monthNames[currentMonthStart.getMonth()]} {currentMonthStart.getFullYear()}
                   </span>
                   <button type="button" onClick={handleNextMonth} className="text-[var(--color-muted)] hover:text-[var(--color-primary)] font-bold text-lg px-2">&rarr;</button>
                 </div>
                 
                 <div className="grid grid-cols-7 gap-1 text-center mb-4">
-                  {['po', 'to', 'sr', 'če', 'pe', 'so', 'ne'].map(day => (
+                  {t.bookingWidget.dayNames.map(day => (
                     <div key={day} className="text-[9px] font-bold uppercase tracking-wider text-[var(--color-muted)]">{day}</div>
                   ))}
                 </div>
@@ -265,7 +268,7 @@ export default function BookingWidget() {
 
               {selectedDate && (
                 <div className="animate-fade-in mb-8">
-                  <h4 className="text-[10px] font-bold tracking-widest uppercase text-[var(--color-muted)] mb-3">Ure za izbrani datum:</h4>
+                  <h4 className="text-[10px] font-bold tracking-widest uppercase text-[var(--color-muted)] mb-3">{t.bookingWidget.timesTitle}</h4>
                   <div className="grid grid-cols-3 gap-3">
                     {availableTimes.map(time => (
                       <button 
@@ -284,13 +287,13 @@ export default function BookingWidget() {
 
               {selectedDate && selectedTime && (
                 <div className="animate-fade-in mt-8 pt-8 border-t border-[var(--color-border)] mb-8">
-                  <h3 className="text-xs uppercase font-bold tracking-widest text-[var(--color-primary)] mb-4">3. Vaši podatki</h3>
+                  <h3 className="text-xs uppercase font-bold tracking-widest text-[var(--color-primary)] mb-4">{t.bookingWidget.step3Title}</h3>
                   
                   {/* Honeypot field (hidden from users, catches bots) */}
                   <input type="text" name="website_url" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" value={formData.honeypot} onChange={(e) => setFormData({...formData, honeypot: e.target.value})} />
 
                   <div className="mb-4">
-                    <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">Ime in Priimek <span className="text-red-500">*</span></label>
+                    <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">{t.bookingWidget.nameLabel} <span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       required 
@@ -302,10 +305,10 @@ export default function BookingWidget() {
                     />
                   </div>
                   
-                  <p className="text-[11px] text-[var(--color-muted)] mt-6 mb-2">Vnesite e-pošto in/ali telefonsko številko <span className="text-red-500">*</span></p>
+                  <p className="text-[11px] text-[var(--color-muted)] mt-6 mb-2">{t.bookingWidget.contactSub} <span className="text-red-500">*</span></p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">E-pošta</label>
+                      <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">{t.bookingWidget.emailLabel}</label>
                       <input 
                         type="email" 
                         maxLength={60}
@@ -316,7 +319,7 @@ export default function BookingWidget() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">Telefon</label>
+                      <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">{t.bookingWidget.phoneLabel}</label>
                       <input 
                         type="tel" 
                         maxLength={20}
@@ -340,7 +343,7 @@ export default function BookingWidget() {
                       'bg-transparent border-gray-200 text-gray-300 cursor-not-allowed opacity-50 shadow-none' : 
                       'bg-transparent border-[#6a882a] text-[#6a882a] hover:bg-[#6a882a] hover:text-white'}`}
                 >
-                  {isSubmitting && paymentMethod === 'lokacija' ? 'Prosim počakajte...' : 'Rezerviraj (Plačilo na lokaciji)'}
+                  {isSubmitting && paymentMethod === 'lokacija' ? t.bookingWidget.waitingText : t.bookingWidget.payAtLocationBtn}
                 </button>
 
                 <button 
@@ -352,7 +355,7 @@ export default function BookingWidget() {
                       'bg-[#F5EFF7] text-[#B392BE] cursor-not-allowed opacity-50 shadow-none' : 
                       'bg-[#6a882a] text-white hover:bg-[#556d22] hover:shadow-lg hover:-translate-y-1'}`}
                 >
-                  {isSubmitting && paymentMethod === 'stripe' ? 'Preusmerjanje...' : 'Plačaj zdaj s kartico (Stripe)'}
+                  {isSubmitting && paymentMethod === 'stripe' ? t.bookingWidget.redirectingText : t.bookingWidget.payWithCardBtn}
                 </button>
               </div>
             </div>

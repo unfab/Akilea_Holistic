@@ -1,25 +1,33 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { BLOG_POSTS } from "@/data/blogs";
-
-export const metadata = {
-  title: "Blog AKILEA | Holistični center",
-  description: "Preberite članke, razmišljanja in intuitivne vpoglede Mirjane Groznik o zdravju, odnosih in osebnem ravnovesju.",
-};
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BlogIndexPage() {
+  const { t, language } = useLanguage();
+
+  const readMoreText = {
+    sl: "Preberi celoten članek →",
+    en: "Read full article →",
+    hr: "Pročitaj cijeli članak →",
+    it: "Leggi l'articolo completo →",
+    sr: "Прочитај цео чланак →",
+  }[language] || "Preberi celoten članek →";
+
   return (
     <div className="spa-view active bg-[var(--color-bg)] py-20 lg:py-32 min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">
-            Znanje &amp; Razmišljanja
+            {t.blogPage.badge}
           </span>
           <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6 notranslate" translate="no">
-            Blog AKILEA
+            {t.blogPage.title}
           </h1>
           <p className="text-[var(--color-muted)] font-light max-w-xl mx-auto text-base">
-            Osebni zapisi, sporočila telesa in praktični nasveti za več notranjega miru, lahkotnosti ter pristnega stika s seboj.
+            {t.blogPage.desc}
           </p>
         </div>
 
@@ -64,7 +72,7 @@ export default function BlogIndexPage() {
                   href={`/blog/${post.slug}`}
                   className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#6a882a] hover:text-[var(--color-primary)] transition-colors mt-auto"
                 >
-                  Preberi celoten članek &rarr;
+                  {readMoreText}
                 </Link>
               </div>
             </article>

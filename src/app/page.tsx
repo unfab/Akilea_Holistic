@@ -1,9 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import BookingWidget from "@/components/BookingWidget";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Home() {
+  const { t } = useLanguage();
+
   return (
     <div className="spa-view active">
       {/* 1. HERO SECTION */}
@@ -14,16 +19,16 @@ export default function Home() {
             <div className="space-y-8">
               <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-widest font-bold text-[var(--color-primary)]">
                 <span className="bg-white px-3.5 py-1.5 rounded-sm shadow-sm">
-                  Intuitivna svetovalka
+                  {t.hero.badge}
                 </span>
               </div>
 
               <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white font-normal leading-[1.2] tracking-tight">
-                Dobrodošli v holističnem centru <span className="notranslate" translate="no">AKILEA</span> – prostoru, kjer telo spregovori, duša zadiha in um najde svoj mir.
+                {t.hero.title}
               </h1>
 
               <p className="text-white/90 text-base sm:text-lg font-light leading-relaxed max-w-xl">
-                Tukaj se stikajo starodavna znanja, intuitivna sporočila telesa in nežna moč dotika. Verjamem, da ima vsak od nas vse odgovore v sebi – včasih pa potrebujemo le varen prostor in pravo podporo, da jih zaslišimo. Naj bodo intuitivne masaže, delavnice ali preprosti nasveti za vsakdan vaša podpora na poti globokih transformacij.
+                {t.hero.desc}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -31,13 +36,13 @@ export default function Home() {
                   href="/storitve"
                   className="btn-primary px-8 py-4 text-xs uppercase tracking-widest font-bold text-center"
                 >
-                  Izberite prosti termin
+                  {t.hero.ctaServices}
                 </Link>
                 <Link
-                  href="/storitve"
+                  href="#o-meni"
                   className="border border-white/30 hover:border-white text-white px-8 py-4 text-xs uppercase tracking-widest font-bold text-center transition-colors"
                 >
-                  Preberite več o storitvah
+                  {t.hero.ctaAbout}
                 </Link>
               </div>
             </div>
@@ -68,13 +73,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">
-              Naša ponudba
+              {t.massagesSection.badge}
             </span>
             <h2 className="text-3xl lg:text-4xl font-serif text-[var(--color-primary)] mb-3">
-              Avtorske intuitivne masaže
+              {t.massagesSection.title}
             </h2>
             <p className="text-[var(--color-muted)] font-light max-w-xl mx-auto text-base">
-              Edinstven preplet masažnega dotika, energijske podpore in intuitivnih sporočil za celostno sprostitev telesa ter duha.
+              {t.massagesSection.desc}
             </p>
           </div>
 
@@ -84,7 +89,7 @@ export default function Home() {
               <div className="aspect-[4/3] overflow-hidden relative">
                 <Image
                   src="https://static.wixstatic.com/media/a35aecb9d76b4ae39f68a92c19ffe590.jpg/v1/fill/w_333,h_220,fp_0.50_0.50,lg_1,q_80,enc_auto/a35aecb9d76b4ae39f68a92c19ffe590.jpg"
-                  alt="Intuitivna masaža telesa"
+                  alt={t.servicesPage.items[0]?.name || "Intuitivna masaža telesa"}
                   fill
                   className="object-cover img-editorial"
                   unoptimized
@@ -95,16 +100,16 @@ export default function Home() {
               </div>
               <div className="p-8 text-center flex flex-col flex-grow">
                 <h3 className="text-xl font-serif mb-2 text-[var(--color-primary)]">
-                  Intuitivna masaža telesa
+                  {t.servicesPage.items[0]?.name}
                 </h3>
                 <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-grow">
-                  Celostna sprostitev in pretočnost energij po meridianih s sporočili telesa.
+                  {t.servicesPage.items[0]?.shortDesc}
                 </p>
                 <Link
                   href="/storitve#masaza-telesa"
                   className="text-[10px] uppercase tracking-widest font-bold text-[var(--color-primary)] border-b border-[var(--color-primary)] pb-1 hover:text-[var(--color-accent)] transition-colors self-center mt-auto"
                 >
-                  Več o storitvi &rarr;
+                  {t.servicesPage.detailsBtn} &rarr;
                 </Link>
               </div>
             </div>
@@ -114,7 +119,7 @@ export default function Home() {
               <div className="aspect-[4/3] overflow-hidden relative">
                 <Image
                   src="https://static.wixstatic.com/media/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png/v1/fill/w_863,h_574,al_c,q_90,enc_auto/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png"
-                  alt="Intuitivna masaža trebuha"
+                  alt={t.servicesPage.items[2]?.name || "Intuitivna masaža trebuha"}
                   fill
                   className="object-cover img-editorial"
                   unoptimized
@@ -125,16 +130,16 @@ export default function Home() {
               </div>
               <div className="p-8 text-center flex flex-col flex-grow">
                 <h3 className="text-xl font-serif mb-2 text-[var(--color-primary)]">
-                  Intuitivna masaža trebuha
+                  {t.servicesPage.items[2]?.name}
                 </h3>
                 <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-grow">
-                  Sproščanje čustvenega centra in zastalih napetosti za občutek globoke lahkotnosti.
+                  {t.servicesPage.items[2]?.shortDesc}
                 </p>
                 <Link
                   href="/storitve#masaza-trebuha"
                   className="text-[10px] uppercase tracking-widest font-bold text-[var(--color-primary)] border-b border-[var(--color-primary)] pb-1 hover:text-[var(--color-accent)] transition-colors self-center mt-auto"
                 >
-                  Več o storitvi &rarr;
+                  {t.servicesPage.detailsBtn} &rarr;
                 </Link>
               </div>
             </div>
@@ -144,7 +149,7 @@ export default function Home() {
               <div className="aspect-[4/3] overflow-hidden relative">
                 <Image
                   src="https://static.wixstatic.com/media/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg/v1/fit/w_3648,h_5472,al_c,q_90/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg"
-                  alt="Intuitivna masaža hrbta"
+                  alt={t.servicesPage.items[1]?.name || "Intuitivna masaža hrbta"}
                   fill
                   className="object-cover img-editorial"
                   unoptimized
@@ -155,16 +160,16 @@ export default function Home() {
               </div>
               <div className="p-8 text-center flex flex-col flex-grow">
                 <h3 className="text-xl font-serif mb-2 text-[var(--color-primary)]">
-                  Intuitivna masaža hrbta
+                  {t.servicesPage.items[1]?.name}
                 </h3>
                 <p className="text-sm text-[var(--color-muted)] font-light mb-6 flex-grow">
-                  Odpravljanje globokih fizičnih in čustvenih napetosti vzdolž hrbtenice.
+                  {t.servicesPage.items[1]?.shortDesc}
                 </p>
                 <Link
                   href="/storitve#masaza-hrbta"
                   className="text-[10px] uppercase tracking-widest font-bold text-[var(--color-primary)] border-b border-[var(--color-primary)] pb-1 hover:text-[var(--color-accent)] transition-colors self-center mt-auto"
                 >
-                  Več o storitvi &rarr;
+                  {t.servicesPage.detailsBtn} &rarr;
                 </Link>
               </div>
             </div>
@@ -177,13 +182,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">
-              Znanje, dogodki &amp; povezovanje
+              {t.threeSquares.sectionBadge}
             </span>
             <h2 className="text-3xl lg:text-4xl font-serif text-[var(--color-primary)] mb-3">
-              Aktualno v centru <span className="notranslate" translate="no">AKILEA</span>
+              {t.threeSquares.sectionTitle}
             </h2>
             <p className="text-[var(--color-muted)] font-light max-w-2xl mx-auto text-base">
-              V spodnjih sklopih spremljajte najnovejša razmišljanja, napovedane delavnice ter izobraževanja za posameznike in skupine.
+              {t.threeSquares.sectionDesc}
             </p>
           </div>
 
@@ -199,22 +204,22 @@ export default function Home() {
                   unoptimized
                 />
                 <div className="absolute top-4 left-4 bg-[var(--color-primary)] text-white px-3 py-1 rounded-sm text-[10px] uppercase tracking-widest font-bold">
-                  1. Blogi
+                  {t.threeSquares.square1.badge}
                 </div>
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-[var(--color-primary)] px-2.5 py-1 rounded-sm text-[10px] uppercase tracking-wider font-semibold">
-                  Najnovejše
+                  {t.threeSquares.square1.tag}
                 </div>
               </div>
 
               <div className="p-8 flex flex-col flex-grow">
                 <span className="text-[10px] uppercase tracking-widest text-[#6a882a] font-bold mb-2">
-                  Članki in razmišljanja &bull; 30. apr
+                  {t.threeSquares.square1.date}
                 </span>
                 <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-3 leading-snug group-hover:text-[var(--color-accent)] transition-colors">
-                  “Brez ljubezni mi živeti ni…”
+                  {t.threeSquares.square1.title}
                 </h3>
                 <p className="text-[var(--color-muted)] font-light text-sm leading-relaxed mb-6 flex-grow">
-                  Ljubezen – najmočnejša sila v Vesolju. A zakaj se v partnerskih odnosih tako pogosto vklopi strah, obrambni mehanizem in dvom o lastni vrednosti?
+                  {t.threeSquares.square1.desc}
                 </p>
 
                 <div className="pt-4 border-t border-[var(--color-border)] flex items-center justify-between mt-auto">
@@ -222,13 +227,13 @@ export default function Home() {
                     href="/blog/brez-ljubezni-mi-ziveti-ni"
                     className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#6a882a] hover:text-[var(--color-primary)] transition-colors"
                   >
-                    Preberi članek &rarr;
+                    {t.threeSquares.square1.cta}
                   </Link>
                   <Link
                     href="/blog"
                     className="text-[10px] uppercase tracking-widest font-semibold text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                   >
-                    Vsi blogi
+                    {t.threeSquares.square1.allBlogs}
                   </Link>
                 </div>
               </div>
@@ -245,22 +250,22 @@ export default function Home() {
                   unoptimized
                 />
                 <div className="absolute top-4 left-4 bg-[var(--color-primary)] text-white px-3 py-1 rounded-sm text-[10px] uppercase tracking-widest font-bold">
-                  2. Delavnice
+                  {t.threeSquares.square2.badge}
                 </div>
                 <div className="absolute top-4 right-4 bg-[#6a882a] text-white px-2.5 py-1 rounded-sm text-[10px] uppercase tracking-wider font-semibold">
-                  Prihajajoči dogodek
+                  {t.threeSquares.square2.tag}
                 </div>
               </div>
 
               <div className="p-8 flex flex-col flex-grow">
                 <span className="text-[10px] uppercase tracking-widest text-[#6a882a] font-bold mb-2">
-                  Četrtek, 15. oktober 2026 ob 19:00
+                  {t.threeSquares.square2.date}
                 </span>
                 <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-3 leading-snug group-hover:text-[var(--color-accent)] transition-colors">
-                  Čajanka: »Kako biti balon med kaktusi?«
+                  {t.threeSquares.square2.title}
                 </h3>
                 <p className="text-[var(--color-muted)] font-light text-sm leading-relaxed mb-6 flex-grow">
-                  Varen prostor ob toplem čaju, kjer nobena tema ni tabu. Osebno intuitivno sporočilo za vsako udeleženko ter dobrodelna nota za Lunino vilo.
+                  {t.threeSquares.square2.desc}
                 </p>
 
                 <div className="pt-4 border-t border-[var(--color-border)] flex items-center justify-between mt-auto">
@@ -268,13 +273,13 @@ export default function Home() {
                     href="/delavnice/cajanka-o-custvih"
                     className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#6a882a] hover:text-[var(--color-primary)] transition-colors"
                   >
-                    Podrobnosti &amp; Prijava &rarr;
+                    {t.threeSquares.square2.cta}
                   </Link>
                   <Link
                     href="/delavnice"
                     className="text-[10px] uppercase tracking-widest font-semibold text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                   >
-                    Vse delavnice
+                    {t.threeSquares.square2.allWorkshops}
                   </Link>
                 </div>
               </div>
@@ -291,22 +296,22 @@ export default function Home() {
                   unoptimized
                 />
                 <div className="absolute top-4 left-4 bg-[var(--color-primary)] text-white px-3 py-1 rounded-sm text-[10px] uppercase tracking-widest font-bold">
-                  3. Predavanja
+                  {t.threeSquares.square3.badge}
                 </div>
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-[var(--color-primary)] px-2.5 py-1 rounded-sm text-[10px] uppercase tracking-wider font-semibold">
-                  Za organizacije
+                  {t.threeSquares.square3.tag}
                 </div>
               </div>
 
               <div className="p-8 flex flex-col flex-grow">
                 <span className="text-[10px] uppercase tracking-widest text-[#6a882a] font-bold mb-2">
-                  Korporativni wellness &bull; Predavanja
+                  {t.threeSquares.square3.date}
                 </span>
                 <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-3 leading-snug group-hover:text-[var(--color-accent)] transition-colors">
-                  Vpliv stresa na telo &amp; Dobro počutje
+                  {t.threeSquares.square3.title}
                 </h3>
                 <p className="text-[var(--color-muted)] font-light text-sm leading-relaxed mb-6 flex-grow">
-                  Praktična strokovna izobraževanja za podjetja in zaključene skupine o prepoznavanju znakov telesa, sproščanju napetosti in ravnovesju na delovnem mestu.
+                  {t.threeSquares.square3.desc}
                 </p>
 
                 <div className="pt-4 border-t border-[var(--color-border)] flex items-center justify-between mt-auto">
@@ -314,13 +319,13 @@ export default function Home() {
                     href="/predavanja"
                     className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#6a882a] hover:text-[var(--color-primary)] transition-colors"
                   >
-                    Pošlji povpraševanje &rarr;
+                    {t.threeSquares.square3.cta}
                   </Link>
                   <Link
                     href="/predavanja"
                     className="text-[10px] uppercase tracking-widest font-semibold text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                   >
-                    Več informacij
+                    {t.threeSquares.square3.moreInfo}
                   </Link>
                 </div>
               </div>
@@ -335,7 +340,7 @@ export default function Home() {
           <div className="order-2 md:order-1 relative rounded-2xl overflow-hidden shadow-lg aspect-[3/4] max-w-sm mx-auto w-full">
             <Image
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpRMog5kCJ9ZBNxxvqxuysiEaWuQPOg0mx_iTUqF7r9fQLiSkCaUEO2QA&s=10"
-              alt="Mirjana Groznik - Akilea Holistični center"
+              alt={t.aboutSection.imageAlt}
               fill
               className="object-cover"
               unoptimized
@@ -343,20 +348,16 @@ export default function Home() {
           </div>
           <div className="order-1 md:order-2 space-y-6">
             <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold">
-              O ustanoviteljici
+              {t.aboutSection.badge}
             </span>
             <h2 className="text-3xl lg:text-4xl font-serif text-[var(--color-primary)]">
-              Moje ime je Mirjana Groznik, intuitivna svetovalka.
+              {t.aboutSection.title}
             </h2>
             <div className="text-[var(--color-muted)] font-light leading-relaxed space-y-4 text-base">
-              <p>
-                Sem večna študentka življenja in strastna raziskovalka človekovega delovanja. Po letih izkušenj v poslovnem svetu, osebni prelomnici ter študiju naturopatije in energijskih tehnik sem sledila klicu duše ter ustvarila prostor, kjer se fizično združuje z nefizičnim.
-              </p>
-              <p>
-                Tako je nastala avtorska <strong>INTUITIVNA MASAŽA</strong>. Orodje, s katerim skozi nežno poslušanje telesnih sporočil odpiramo prostor globokim transformacijam, sproščamo ujeta čustva in stopamo na pot do pristnega notranjega ravnovesja.
-              </p>
+              <p>{t.aboutSection.p1}</p>
+              <p>{t.aboutSection.p2}</p>
               <p className="italic text-[var(--color-primary)] font-serif text-lg pt-2">
-                »Center <span className="notranslate" translate="no">AKILEA</span> je varen kotiček za vračanje k sebi in celostno podporo vašemu telesu.«
+                {t.aboutSection.quote}
               </p>
             </div>
           </div>

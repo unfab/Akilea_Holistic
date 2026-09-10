@@ -1,20 +1,20 @@
-import ServiceAccordion from "@/components/ServiceAccordion";
+"use client";
 
-export const metadata = {
-  title: "Storitve | Akilea Holistični center",
-  description: "Pregled vseh storitev v holističnem centru Akilea.",
-};
+import ServiceAccordion from "@/components/ServiceAccordion";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function StoritvePage() {
+  const { t, language } = useLanguage();
+
   const services = [
     {
       id: "masaza-telesa",
-      title: "Intuitivna masaža celega telesa",
-      duration: "1 h 45 min",
-      price: "85 €",
+      title: t.servicesPage.items[0]?.name || "Intuitivna masaža celega telesa",
+      duration: t.servicesPage.items[0]?.duration || "1 h 45 min",
+      price: `${t.servicesPage.items[0]?.price || 85} €`,
       image: "/images/storitve/mirjana-masaza-hero.jpg",
       stripeLink: "https://buy.stripe.com/14AdRag2k9ts9HB46ycQU02",
-      description: (
+      description: language === "sl" ? (
         <div className="space-y-4 text-sm leading-relaxed">
           <p>
             Telo si vse zapomni – vsako čustvo, vsako misel, le prisluhniti mu moramo. In ko to storimo, se začnejo dogajati čudeži. Intuitivna masaža, ki jo izvajam, omogoča prav to: z združitvijo tradicionalne masažne tehnike z globokim čutenjem in intuitivnim zaznavanjem prepoznam področja napetosti, blokad in neravnovesij v telesu ter vam predam zapise in sporočila o mislih ter čustvih, ki so se vtisnila v telo.
@@ -61,16 +61,44 @@ export default function StoritvePage() {
             Za vprašanja ali naročanje mi lahko pišete na GSM: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">040 863 594</a>, v zasebno sporočilo na IG <a href="https://instagram.com/akilea_holistic" target="_blank" rel="noreferrer" className="font-bold text-[var(--color-primary)]">@akilea_holistic</a> ali na <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.
           </p>
         </div>
+      ) : (
+        <div className="space-y-4 text-sm leading-relaxed">
+          <p className="text-base font-light text-[var(--color-primary)] leading-relaxed">
+            {t.servicesPage.items[0]?.fullDesc}
+          </p>
+          <div className="bg-[var(--color-surface)] p-5 rounded-lg border border-[var(--color-border)] my-4">
+            <h4 className="font-serif text-[var(--color-primary)] font-bold mb-3">
+              {language === "en" && "Key Benefits:"}
+              {language === "hr" && "Glavne prednosti tretmana:"}
+              {language === "it" && "Principali benefici del trattamento:"}
+              {language === "sr" && "Главне предности третмана:"}
+            </h4>
+            <ul className="space-y-2 text-xs sm:text-sm">
+              {t.servicesPage.items[0]?.benefits.map((b, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="text-[#6a882a] font-bold">&bull;</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="text-xs text-[var(--color-muted)] pt-2">
+            {language === "en" && <>For questions or direct booking contact: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> or <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+            {language === "hr" && <>Za pitanja ili rezervacije obratite se na: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> ili <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+            {language === "it" && <>Per domande o prenotazioni dirette: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> oppure <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+            {language === "sr" && <>За питања или резервације контактирајте: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> или <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+          </p>
+        </div>
       ),
     },
     {
       id: "masaza-trebuha",
-      title: "Intuitivna masaža trebuha",
-      duration: "50 min",
-      price: "50 €",
+      title: t.servicesPage.items[2]?.name || "Intuitivna masaža trebuha",
+      duration: t.servicesPage.items[2]?.duration || "50 min",
+      price: `${t.servicesPage.items[2]?.price || 50} €`,
       image: "https://static.wixstatic.com/media/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png/v1/fill/w_863,h_574,al_c,q_90,enc_auto/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png",
       stripeLink: "https://buy.stripe.com/00w6oI3fyeNM1b59qScQU01",
-      description: (
+      description: language === "sl" ? (
         <div className="space-y-4 text-sm leading-relaxed">
           <p className="italic text-[var(--color-primary)] font-serif text-base">
             Nežen pristop k sproščanju ujete energije in čustev v predelu trebuha – prostor, kjer se pogosto skriva največ neizrečenega.
@@ -90,16 +118,44 @@ export default function StoritvePage() {
             Če ste začutili klic, mi pišite na GSM: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">040 863 594</a>, IG <a href="https://instagram.com/akilea_holistic" target="_blank" rel="noreferrer" className="font-bold text-[var(--color-primary)]">@akilea_holistic</a> ali <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.
           </p>
         </div>
+      ) : (
+        <div className="space-y-4 text-sm leading-relaxed">
+          <p className="text-base font-light text-[var(--color-primary)] leading-relaxed">
+            {t.servicesPage.items[2]?.fullDesc}
+          </p>
+          <div className="bg-[var(--color-surface)] p-5 rounded-lg border border-[var(--color-border)] my-4">
+            <h4 className="font-serif text-[var(--color-primary)] font-bold mb-3">
+              {language === "en" && "Key Benefits:"}
+              {language === "hr" && "Glavne prednosti tretmana:"}
+              {language === "it" && "Principali benefici del trattamento:"}
+              {language === "sr" && "Главне предности третмана:"}
+            </h4>
+            <ul className="space-y-2 text-xs sm:text-sm">
+              {t.servicesPage.items[2]?.benefits.map((b, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="text-[#6a882a] font-bold">&bull;</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="text-xs text-[var(--color-muted)] pt-2">
+            {language === "en" && <>For questions or direct booking contact: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> or <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+            {language === "hr" && <>Za pitanja ili rezervacije obratite se na: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> ili <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+            {language === "it" && <>Per domande o prenotazioni dirette: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> oppure <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+            {language === "sr" && <>За питања или резервације контактирајте: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> или <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+          </p>
+        </div>
       ),
     },
     {
       id: "masaza-hrbta",
-      title: "Intuitivna masaža hrbta",
-      duration: "50 min",
-      price: "50 €",
+      title: t.servicesPage.items[1]?.name || "Intuitivna masaža hrbta",
+      duration: t.servicesPage.items[1]?.duration || "50 min",
+      price: `${t.servicesPage.items[1]?.price || 50} €`,
       image: "https://static.wixstatic.com/media/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg/v1/fit/w_3648,h_5472,al_c,q_90/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg",
       stripeLink: "https://buy.stripe.com/28E00k7vOcFE1b5dH8cQU00",
-      description: (
+      description: language === "sl" ? (
         <div className="space-y-4 text-sm leading-relaxed">
           <p>
             Hrbet je več kot le fizična struktura; je most med našim telesom, umom in dušo. Njegova energija in struktura odražata našo notranjo moč, čustveno stanje in duhovno ravnovesje. Bolečine in poškodbe nas pogosto opozarjajo na potrebo po ozaveščanju, predelavi in spuščanju čustev, ki jih v veliki večini primerov potiskamo, ali na iskanje ravnotežja v življenju.
@@ -114,6 +170,34 @@ export default function StoritvePage() {
             Če ste začutili klic, mi pišite na GSM: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">040 863 594</a>, IG <a href="https://instagram.com/akilea_holistic" target="_blank" rel="noreferrer" className="font-bold text-[var(--color-primary)]">@akilea_holistic</a> ali <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.
           </p>
         </div>
+      ) : (
+        <div className="space-y-4 text-sm leading-relaxed">
+          <p className="text-base font-light text-[var(--color-primary)] leading-relaxed">
+            {t.servicesPage.items[1]?.fullDesc}
+          </p>
+          <div className="bg-[var(--color-surface)] p-5 rounded-lg border border-[var(--color-border)] my-4">
+            <h4 className="font-serif text-[var(--color-primary)] font-bold mb-3">
+              {language === "en" && "Key Benefits:"}
+              {language === "hr" && "Glavne prednosti tretmana:"}
+              {language === "it" && "Principali benefici del trattamento:"}
+              {language === "sr" && "Главне предности третмана:"}
+            </h4>
+            <ul className="space-y-2 text-xs sm:text-sm">
+              {t.servicesPage.items[1]?.benefits.map((b, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="text-[#6a882a] font-bold">&bull;</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="text-xs text-[var(--color-muted)] pt-2">
+            {language === "en" && <>For questions or direct booking contact: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> or <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+            {language === "hr" && <>Za pitanja ili rezervacije obratite se na: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> ili <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+            {language === "it" && <>Per domande o prenotazioni dirette: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> oppure <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+            {language === "sr" && <>За питања или резервације контактирајте: <a href="tel:040863594" className="font-bold text-[var(--color-primary)]">+386 40 863 594</a> или <a href="mailto:mirjana@akilea.si" className="font-bold text-[var(--color-primary)]">mirjana@akilea.si</a>.</>}
+          </p>
+        </div>
       ),
     }
   ];
@@ -122,10 +206,14 @@ export default function StoritvePage() {
     <div className="spa-view active bg-[var(--color-bg)] py-20 lg:py-32 min-h-screen">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">Naša ponudba</span>
-          <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6">Storitve in cenik</h1>
-          <p className="text-[var(--color-muted)] font-light leading-relaxed">
-            Izberite obravnavo, ki jo vaše telo v tem trenutku najbolj potrebuje. Za vsako storitev se lahko naročite na termin ali jo takoj zakupite preko spleta.
+          <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">
+            {t.servicesPage.badge}
+          </span>
+          <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6">
+            {t.servicesPage.title}
+          </h1>
+          <p className="text-[var(--color-muted)] font-light leading-relaxed max-w-xl mx-auto">
+            {t.servicesPage.desc}
           </p>
         </div>
 

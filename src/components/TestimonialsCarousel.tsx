@@ -1,75 +1,25 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
-
-interface Testimonial {
-  id: number;
-  text: string;
-  author: string;
-  tag: string;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    text: "Tako kot sami hrepenimo po tem, da bi bili slišani in razumljeni, tako si tudi telo želi intuitivne masaže pri Mirjani.",
-    author: "Zadovoljna stranka",
-    tag: "Intuitivna masaža telesa",
-  },
-  {
-    id: 2,
-    text: "Ciao, moram ti povedati, da tudi telesne bolečine nimam več. To ne morem verjeti, tako lepo in dobro se počutim.",
-    author: "Zadovoljna stranka",
-    tag: "Intuitivna masaža hrbta",
-  },
-  {
-    id: 3,
-    text: "Izjemna izkušnja. Zelo sproščujoča, meditacijska. Počutim se prerojen, navdahnjen in optimističen.",
-    author: "Zadovoljna stranka",
-    tag: "Intuitivna masaža telesa",
-  },
-  {
-    id: 4,
-    text: "Hvala, šepetalka teles… Neverjetno, kako natančno začutiš vsako blokado in jo nežno sprostiš.",
-    author: "Zadovoljna stranka",
-    tag: "Intuitivna masaža trebuha",
-  },
-  {
-    id: 5,
-    text: "Opravila sem prvo intuitivno masažo in bila presenečena, da je začutila moje dejansko stanje. Hvala za energijo.",
-    author: "Zadovoljna stranka",
-    tag: "Intuitivna masaža",
-  },
-  {
-    id: 6,
-    text: "Draga Mirjana, hvala, ker mi pomagaš premagovati moje globoko ukoreninjene strahove. Tvoje zlate roke delajo čudeže.",
-    author: "Zadovoljna stranka",
-    tag: "Intuitivna masaža telesa",
-  },
-  {
-    id: 7,
-    text: "Zelo pozitivna izkušnja. Počutim se lažje, manj bolečin v hrbtu, manj pod stresom in lažje poslušam svoje telo.",
-    author: "Zadovoljna stranka",
-    tag: "Intuitivna masaža hrbta",
-  },
-  {
-    id: 8,
-    text: "Vtisi so močni. S prvimi petimi besedami ste opisala dejansko stanje mojega jaza. Hvala iz srca.",
-    author: "Zadovoljna stranka",
-    tag: "Intuitivna masaža",
-  },
-];
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useLanguage } from "@/context/LanguageContext";
+import { TestimonialItem } from "@/i18n";
 
 export default function TestimonialsCarousel() {
+  const { t } = useLanguage();
+  const testimonials = t.testimonialsSection.items;
+
   // Group testimonials into pairs (2 per slide)
-  const pairs: [Testimonial, Testimonial][] = [];
-  for (let i = 0; i < testimonials.length; i += 2) {
-    if (i + 1 < testimonials.length) {
-      pairs.push([testimonials[i], testimonials[i + 1]]);
-    } else {
-      pairs.push([testimonials[i], testimonials[0]]);
+  const pairs = useMemo(() => {
+    const res: [TestimonialItem, TestimonialItem][] = [];
+    for (let i = 0; i < testimonials.length; i += 2) {
+      if (i + 1 < testimonials.length) {
+        res.push([testimonials[i], testimonials[i + 1]]);
+      } else {
+        res.push([testimonials[i], testimonials[0]]);
+      }
     }
-  }
+    return res;
+  }, [testimonials]);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [fade, setFade] = useState(true);
@@ -147,24 +97,24 @@ export default function TestimonialsCarousel() {
     };
   }, []);
 
-  const currentPair = pairs[currentSlide];
+  const currentPair = pairs[currentSlide] || pairs[0];
 
   return (
     <section
       className="py-20 lg:py-28 bg-[var(--color-surface)] border-b border-[var(--color-border)] relative overflow-hidden"
-      aria-label="Mnenja strank"
+      aria-label={t.testimonialsSection.title}
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-14">
           <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-3 block">
-            Zaupanje &amp; Izkušnje
+            {t.testimonialsSection.badge}
           </span>
           <h2 className="text-3xl lg:text-4xl font-serif text-[var(--color-primary)] mb-3">
-            Mnenja naših strank
+            {t.testimonialsSection.title}
           </h2>
           <p className="text-[var(--color-muted)] font-light max-w-xl mx-auto text-base">
-            Iskreni vtisi in občutki po obisku Holističnega centra <span className="notranslate" translate="no">AKILEA</span>.
+            {t.testimonialsSection.desc}
           </p>
         </div>
 
@@ -212,7 +162,7 @@ export default function TestimonialsCarousel() {
                   </span>
                 </div>
                 <span className="text-[10px] uppercase tracking-wider text-[var(--color-muted)]">
-                  Preverjeno mnenje
+                  {t.testimonialsSection.verified}
                 </span>
               </div>
             </div>
@@ -224,7 +174,7 @@ export default function TestimonialsCarousel() {
           {/* Prev button */}
           <button
             onClick={handlePrevClick}
-            aria-label="Prejšnji mnenji"
+            aria-label="Previous"
             className="w-10 h-10 rounded-full border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] hover:bg-white text-[var(--color-primary)] flex items-center justify-center transition-colors shadow-sm"
           >
             &larr;
@@ -236,7 +186,7 @@ export default function TestimonialsCarousel() {
               <button
                 key={idx}
                 onClick={() => handleDotClick(idx)}
-                aria-label={`Pojdi na par ${idx + 1}`}
+                aria-label={`Go to slide ${idx + 1}`}
                 className={`transition-all rounded-full ${
                   idx === currentSlide
                     ? "w-8 h-2.5 bg-[var(--color-primary)]"
@@ -249,7 +199,7 @@ export default function TestimonialsCarousel() {
           {/* Next button */}
           <button
             onClick={handleNextClick}
-            aria-label="Naslednji mnenji"
+            aria-label="Next"
             className="w-10 h-10 rounded-full border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] hover:bg-white text-[var(--color-primary)] flex items-center justify-center transition-colors shadow-sm"
           >
             &rarr;

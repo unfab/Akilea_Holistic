@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ServiceProps {
   id: string;
@@ -15,10 +16,11 @@ interface ServiceProps {
 }
 
 export default function ServiceAccordion({ service }: { service: ServiceProps }) {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-[var(--color-border)] overflow-hidden mb-6">
+    <div className="bg-white rounded-lg shadow-sm border border-[var(--color-border)] overflow-hidden mb-6" id={service.id}>
       <div 
         className="p-6 md:p-8 flex flex-col md:flex-row gap-6 md:items-center justify-between cursor-pointer hover:bg-[var(--color-surface)] transition-colors"
         onClick={() => setIsOpen(!isOpen)}
@@ -37,7 +39,7 @@ export default function ServiceAccordion({ service }: { service: ServiceProps })
         </div>
         <div className="shrink-0 flex items-center gap-4">
           <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-bold">
-            {isOpen ? "Skrij podrobnosti" : "Prikaži podrobnosti"}
+            {isOpen ? t.servicesPage.closeDetailsBtn : t.servicesPage.detailsBtn}
           </span>
           <svg className={`w-6 h-6 transform transition-transform ${isOpen ? 'rotate-180' : ''} text-[var(--color-primary)]`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -51,11 +53,11 @@ export default function ServiceAccordion({ service }: { service: ServiceProps })
             {service.description}
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/storitve" className="btn-primary px-8 py-3 text-xs uppercase tracking-widest font-bold text-center inline-block">
-              Rezerviraj termin
+            <Link href="/#rezervacija" className="btn-primary px-8 py-3 text-xs uppercase tracking-widest font-bold text-center inline-block">
+              {t.servicesPage.bookBtn}
             </Link>
             <a href={service.stripeLink} target="_blank" rel="noreferrer" className="bg-[var(--color-primary)] text-white px-8 py-3 text-xs uppercase tracking-widest font-bold text-center inline-block hover:bg-black transition-colors rounded">
-              V košarico
+              {t.servicesPage.payOnlineBtn}
             </a>
           </div>
         </div>
