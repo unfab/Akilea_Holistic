@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface Testimonial {
   id: number;
@@ -72,8 +72,9 @@ export default function TestimonialsCarousel() {
   }
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [fade, setFade] = useState(true);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const restartTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const goToNext = useCallback(() => {
     setFade(false);
@@ -100,24 +101,57 @@ export default function TestimonialsCarousel() {
     }, 200);
   };
 
-  // Auto rotate after 2 seconds if the user doesn't move them on their own
+  // Called when user clicks arrows or dots: pause auto-rotate and wait 7 seconds
+  const handleUserInteraction = useCallback(() => {
+    setIsInteracting(true);
+
+    if (restartTimerRef.current) {
+      clearTimeout(restartTimerRef.current);
+    }
+
+    restartTimerRef.current = setTimeout(() => {
+      setIsInteracting(false);
+    }, 7000);
+  }, []);
+
+  const handlePrevClick = () => {
+    goToPrev();
+    handleUserInteraction();
+  };
+
+  const handleNextClick = () => {
+    goToNext();
+    handleUserInteraction();
+  };
+
+  const handleDotClick = (idx: number) => {
+    goToSlide(idx);
+    handleUserInteraction();
+  };
+
+  // Auto rotate every 2 seconds when user is not interacting
   useEffect(() => {
-    if (isPaused) return;
+    if (isInteracting) return;
+
     const timer = setInterval(() => {
       goToNext();
     }, 2000);
+
     return () => clearInterval(timer);
-  }, [isPaused, currentSlide, goToNext]);
+  }, [isInteracting, goToNext]);
+
+  // Clean up timer on unmount
+  useEffect(() => {
+    return () => {
+      if (restartTimerRef.current) clearTimeout(restartTimerRef.current);
+    };
+  }, []);
 
   const currentPair = pairs[currentSlide];
 
   return (
     <section
       className="py-20 lg:py-28 bg-[var(--color-surface)] border-b border-[var(--color-border)] relative overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={() => setIsPaused(true)}
-      onTouchEnd={() => setIsPaused(false)}
       aria-label="Mnenja strank"
     >
       <div className="max-w-6xl mx-auto px-6">
@@ -130,7 +164,7 @@ export default function TestimonialsCarousel() {
             Mnenja naših strank
           </h2>
           <p className="text-[var(--color-muted)] font-light max-w-xl mx-auto text-base">
-            Iskreni vtisi in občutki po obisku Holističnega centra Akilea.
+            Iskreni vtisi in občutki po obisku Holističnega centra <span className="notranslate" translate="no">AKILEA</span>.
           </p>
         </div>
 
@@ -189,7 +223,7 @@ export default function TestimonialsCarousel() {
         <div className="flex items-center justify-between mt-10 max-w-xs mx-auto">
           {/* Prev button */}
           <button
-            onClick={goToPrev}
+            onClick={handlePrevClick}
             aria-label="Prejšnji mnenji"
             className="w-10 h-10 rounded-full border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] hover:bg-white text-[var(--color-primary)] flex items-center justify-center transition-colors shadow-sm"
           >
@@ -201,7 +235,7 @@ export default function TestimonialsCarousel() {
             {pairs.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => goToSlide(idx)}
+                onClick={() => handleDotClick(idx)}
                 aria-label={`Pojdi na par ${idx + 1}`}
                 className={`transition-all rounded-full ${
                   idx === currentSlide
@@ -214,7 +248,7 @@ export default function TestimonialsCarousel() {
 
           {/* Next button */}
           <button
-            onClick={goToNext}
+            onClick={handleNextClick}
             aria-label="Naslednji mnenji"
             className="w-10 h-10 rounded-full border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] hover:bg-white text-[var(--color-primary)] flex items-center justify-center transition-colors shadow-sm"
           >

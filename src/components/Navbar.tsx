@@ -14,33 +14,60 @@ export default function Navbar() {
     const match = document.cookie.match(/googtrans=\/sl\/([a-z]{2})/i);
     if (match && match[1]) {
       const code = match[1].toUpperCase();
-      if (["EN", "HR", "IT", "SR", "SL"].includes(code)) {
+      if (["EN", "HR", "IT", "SR"].includes(code)) {
         setCurrentLang(code);
+        return;
       }
     }
+    setCurrentLang("SL");
   }, []);
+
+  const resetToSlovenian = () => {
+    const hostname = window.location.hostname;
+    const domains = ["", hostname, "." + hostname];
+    const parts = hostname.split(".");
+    if (parts.length >= 2) {
+      domains.push("." + parts.slice(-2).join("."));
+    }
+
+    const paths = ["/", window.location.pathname];
+    const cookieNames = ["googtrans", "googtrans_"];
+
+    cookieNames.forEach((name) => {
+      paths.forEach((path) => {
+        domains.forEach((dom) => {
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};${dom ? ` domain=${dom};` : ""}`;
+        });
+      });
+    });
+
+    try {
+      sessionStorage.removeItem("googtrans");
+      localStorage.removeItem("googtrans");
+    } catch {
+      // ignore
+    }
+
+    window.location.reload();
+  };
 
   const handleLanguageChange = (lang: "SL" | "EN" | "HR" | "IT" | "SR") => {
     setCurrentLang(lang);
     setLangOpen(false);
 
+    if (lang === "SL") {
+      resetToSlovenian();
+      return;
+    }
+
     const langCode = lang.toLowerCase();
     const hostname = window.location.hostname;
+    const cookieVal = `/sl/${langCode}`;
 
-    if (lang === "SL") {
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${hostname};`;
-      if (hostname.includes(".")) {
-        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${hostname};`;
-      }
-      document.cookie = "googtrans=/sl/sl; path=/;";
-    } else {
-      const cookieVal = `/sl/${langCode}`;
-      document.cookie = `googtrans=${cookieVal}; path=/;`;
-      document.cookie = `googtrans=${cookieVal}; path=/; domain=${hostname};`;
-      if (hostname.includes(".")) {
-        document.cookie = `googtrans=${cookieVal}; path=/; domain=.${hostname};`;
-      }
+    document.cookie = `googtrans=${cookieVal}; path=/;`;
+    document.cookie = `googtrans=${cookieVal}; path=/; domain=${hostname};`;
+    if (hostname.includes(".")) {
+      document.cookie = `googtrans=${cookieVal}; path=/; domain=.${hostname};`;
     }
 
     const select = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;

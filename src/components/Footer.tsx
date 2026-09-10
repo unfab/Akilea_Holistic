@@ -47,12 +47,12 @@ export default function Footer() {
             <li>Šmarska cesta 5B</li>
             <li>6000 Koper, Slovenija</li>
             <li className="pt-2">
-              <a href="tel:+38640863594" className="hover:text-white transition-colors font-medium">
+              <a href="tel:+38640863594" className="hover:text-white transition-colors font-medium notranslate">
                 040 863 594
               </a>
             </li>
             <li>
-              <a href="mailto:mirjana@akilea.si" className="border-b border-white/30 hover:border-white transition-colors pb-0.5">
+              <a href="mailto:mirjana@akilea.si" className="border-b border-white/30 hover:border-white transition-colors pb-0.5 notranslate">
                 mirjana@akilea.si
               </a>
             </li>
@@ -73,7 +73,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto px-6 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-wider font-light text-white/50">
         <div>
-          &copy; {new Date().getFullYear()} AKILEA, MIRJANA GROZNIK S.P. VSE PRAVICE PRIDRŽANE.
+          &copy; {new Date().getFullYear()} <span className="notranslate" translate="no">AKILEA</span>, MIRJANA GROZNIK S.P. VSE PRAVICE PRIDRŽANE.
         </div>
         <div className="flex gap-6">
           <Link href="/pravilnik-o-zasebnosti" className="hover:text-white transition-colors">Politika zasebnosti</Link>

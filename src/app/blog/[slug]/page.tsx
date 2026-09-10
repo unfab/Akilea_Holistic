@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps) {
   if (!post) return { title: "Članek ni najden | Akilea" };
 
   return {
-    title: `${post.title} | Blog Akilea`,
+    title: `${post.title} | Blog AKILEA`,
     description: post.excerpt,
     openGraph: {
       title: post.title,
@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
           <div>
             <p className="font-semibold text-[var(--color-primary)]">{post.author}</p>
-            <p className="text-[10px] uppercase tracking-wider">Intuitivna svetovalka, Holistični center Akilea</p>
+            <p className="text-[10px] uppercase tracking-wider">Intuitivna svetovalka, Holistični center <span className="notranslate" translate="no">AKILEA</span></p>
           </div>
         </div>
       </div>
@@ -209,7 +209,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             Začutite, da je čas za sprostitev in posvet?
           </h3>
           <p className="text-sm text-[var(--color-muted)] max-w-lg mx-auto mb-6 leading-relaxed">
-            V Holističnem centru Akilea v Kopru ustvarjamo varen prostor za globoko sprostitev telesa, predelavo potlačenih napetosti ter vzpostavitev stika s seboj.
+            V Holističnem centru <span className="notranslate" translate="no">AKILEA</span> v Kopru ustvarjamo varen prostor za globoko sprostitev telesa, predelavo potlačenih napetosti ter vzpostavitev stika s seboj.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

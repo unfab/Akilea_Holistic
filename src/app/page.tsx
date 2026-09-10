@@ -19,7 +19,7 @@ export default function Home() {
               </div>
 
               <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white font-normal leading-[1.2] tracking-tight">
-                Dobrodošli v holističnem centru AKILEA – prostoru, kjer telo spregovori, duša zadiha in um najde svoj mir.
+                Dobrodošli v holističnem centru <span className="notranslate" translate="no">AKILEA</span> – prostoru, kjer telo spregovori, duša zadiha in um najde svoj mir.
               </h1>
 
               <p className="text-white/90 text-base sm:text-lg font-light leading-relaxed max-w-xl">
@@ -180,7 +180,7 @@ export default function Home() {
               Znanje, dogodki &amp; povezovanje
             </span>
             <h2 className="text-3xl lg:text-4xl font-serif text-[var(--color-primary)] mb-3">
-              Aktualno v centru Akilea
+              Aktualno v centru <span className="notranslate" translate="no">AKILEA</span>
             </h2>
             <p className="text-[var(--color-muted)] font-light max-w-2xl mx-auto text-base">
               V spodnjih sklopih spremljajte najnovejša razmišljanja, napovedane delavnice ter izobraževanja za posameznike in skupine.
@@ -356,7 +356,7 @@ export default function Home() {
                 Tako je nastala avtorska <strong>INTUITIVNA MASAŽA</strong>. Orodje, s katerim skozi nežno poslušanje telesnih sporočil odpiramo prostor globokim transformacijam, sproščamo ujeta čustva in stopamo na pot do pristnega notranjega ravnovesja.
               </p>
               <p className="italic text-[var(--color-primary)] font-serif text-lg pt-2">
-                »Center Akilea je varen kotiček za vračanje k sebi in celostno podporo vašemu telesu.«
+                »Center <span className="notranslate" translate="no">AKILEA</span> je varen kotiček za vračanje k sebi in celostno podporo vašemu telesu.«
               </p>
             </div>
           </div>

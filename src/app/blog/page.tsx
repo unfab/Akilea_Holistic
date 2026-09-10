@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BLOG_POSTS } from "@/data/blogs";
 
 export const metadata = {
-  title: "Blog | Akilea Holistični center",
+  title: "Blog AKILEA | Holistični center",
   description: "Preberite članke, razmišljanja in intuitivne vpoglede Mirjane Groznik o zdravju, odnosih in osebnem ravnovesju.",
 };
 
@@ -15,8 +15,8 @@ export default function BlogIndexPage() {
           <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">
             Znanje &amp; Razmišljanja
           </span>
-          <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6">
-            Akilea Blog
+          <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6 notranslate" translate="no">
+            Blog AKILEA
           </h1>
           <p className="text-[var(--color-muted)] font-light max-w-xl mx-auto text-base">
             Osebni zapisi, sporočila telesa in praktični nasveti za več notranjega miru, lahkotnosti ter pristnega stika s seboj.
