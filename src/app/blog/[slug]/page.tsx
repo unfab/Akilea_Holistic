@@ -8,13 +8,17 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  // Support both full and legacy/short slugs
   return [
     ...BLOG_POSTS.map((post) => ({ slug: post.slug })),
     { slug: "dam-tebi" },
     { slug: "ne-verjemi" },
     { slug: "brez-ljubezni" },
     { slug: "notranji-otrok" },
+    { slug: "globoka-sprostitev-telesa-z-intuitivno-masazo-v-koper" },
+    { slug: "odkrijte-prednosti-intuitivne-masaze-z-akileo-v-sloveniji" },
+    { slug: "moja-izkusnja-z-bolecinami-v-krizu" },
+    { slug: "moxanje" },
+    { slug: "toliko-se-trudimo-a-kaj-ko-se-ne-bi" },
   ];
 }
 
@@ -101,6 +105,50 @@ export default async function BlogPostPage({ params }: PageProps) {
       <div className="max-w-3xl mx-auto px-6">
         <div className="space-y-6 text-[var(--color-text)] font-light leading-relaxed text-base sm:text-lg">
           {post.paragraphs.map((block, idx) => {
+            if (block.type === "heading") {
+              return (
+                <h3
+                  key={idx}
+                  className="text-xl sm:text-2xl font-serif text-[var(--color-primary)] pt-6 pb-1 font-semibold"
+                >
+                  {block.content}
+                </h3>
+              );
+            }
+
+            if (block.type === "gallery") {
+              return (
+                <div key={idx} className="my-10 space-y-4">
+                  {block.content && (
+                    <p className="font-medium text-[var(--color-primary)] text-sm sm:text-base">
+                      {block.content}
+                    </p>
+                  )}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {block.images?.map((img, imgIdx) => (
+                      <figure
+                        key={imgIdx}
+                        className="bg-[var(--color-surface)] rounded-xl overflow-hidden shadow-sm border border-[var(--color-border)]"
+                      >
+                        <div className="aspect-[4/3] relative bg-[var(--color-border)]">
+                          <Image
+                            src={img.src}
+                            alt={img.caption}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        </div>
+                        <figcaption className="p-3.5 text-xs text-[var(--color-muted)] leading-relaxed italic bg-white">
+                          {img.caption}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
             if (block.type === "quote") {
               return (
                 <blockquote
@@ -118,7 +166,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   key={idx}
                   className="bg-[#f5eff7] p-6 sm:p-8 rounded-xl border border-[var(--color-border)] my-6 text-[var(--color-primary)] font-medium"
                 >
-                  <p className="leading-relaxed">{block.content}</p>
+                  <p className="leading-relaxed whitespace-pre-line">{block.content}</p>
                 </div>
               );
             }
