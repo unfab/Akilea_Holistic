@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -8,6 +8,49 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState("SL");
+
+  useEffect(() => {
+    // Check if googtrans cookie is set
+    const match = document.cookie.match(/googtrans=\/sl\/([a-z]{2})/i);
+    if (match && match[1]) {
+      const code = match[1].toUpperCase();
+      if (["EN", "HR", "IT", "SR", "SL"].includes(code)) {
+        setCurrentLang(code);
+      }
+    }
+  }, []);
+
+  const handleLanguageChange = (lang: "SL" | "EN" | "HR" | "IT" | "SR") => {
+    setCurrentLang(lang);
+    setLangOpen(false);
+
+    const langCode = lang.toLowerCase();
+    const hostname = window.location.hostname;
+
+    if (lang === "SL") {
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${hostname};`;
+      if (hostname.includes(".")) {
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${hostname};`;
+      }
+      document.cookie = "googtrans=/sl/sl; path=/;";
+    } else {
+      const cookieVal = `/sl/${langCode}`;
+      document.cookie = `googtrans=${cookieVal}; path=/;`;
+      document.cookie = `googtrans=${cookieVal}; path=/; domain=${hostname};`;
+      if (hostname.includes(".")) {
+        document.cookie = `googtrans=${cookieVal}; path=/; domain=.${hostname};`;
+      }
+    }
+
+    const select = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
+    if (select) {
+      select.value = langCode;
+      select.dispatchEvent(new Event("change"));
+    } else {
+      window.location.reload();
+    }
+  };
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -20,7 +63,7 @@ export default function Navbar() {
             alt="Akilea Logo"
             width={96}
             height={72}
-            className="h-16 w-auto object-contain"
+            className="h-16 w-auto object-contain notranslate"
             unoptimized
           />
           <span className="hidden sm:inline-block text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)] border-l border-[var(--color-border)] pl-3">
@@ -58,29 +101,29 @@ export default function Navbar() {
           </Link>
 
           {/* Language Selector */}
-          <div className="relative ml-2">
+          <div className="relative ml-2 notranslate" translate="no">
             <button 
               onClick={() => setLangOpen(!langOpen)}
-              className="flex items-center gap-1 hover:text-[var(--color-accent)] transition-colors"
+              className="flex items-center gap-1 hover:text-[var(--color-accent)] transition-colors font-semibold"
             >
               {currentLang}
               <svg className={`w-3 h-3 transition-transform ${langOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             
             {langOpen && (
-              <div className="absolute top-full right-0 mt-2 w-32 bg-white border border-[var(--color-border)] shadow-lg rounded py-2 flex flex-col z-50">
-                <button onClick={() => { setCurrentLang("SL"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Slovenščina</button>
-                <button onClick={() => { setCurrentLang("EN"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Angleščina</button>
-                <button onClick={() => { setCurrentLang("HR"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Hrvaščina</button>
-                <button onClick={() => { setCurrentLang("IT"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Italijanščina</button>
-                <button onClick={() => { setCurrentLang("SR"); setLangOpen(false); }} className="text-left px-4 py-2 hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors">Srbščina</button>
+              <div className="absolute top-full right-0 mt-2 w-36 bg-white border border-[var(--color-border)] shadow-lg rounded py-2 flex flex-col z-50">
+                <button onClick={() => handleLanguageChange("SL")} className={`text-left px-4 py-2 hover:bg-gray-50 transition-colors ${currentLang === 'SL' ? 'text-[var(--color-primary)] font-bold' : 'text-gray-700'}`}>🇸🇮 Slovenščina</button>
+                <button onClick={() => handleLanguageChange("EN")} className={`text-left px-4 py-2 hover:bg-gray-50 transition-colors ${currentLang === 'EN' ? 'text-[var(--color-primary)] font-bold' : 'text-gray-700'}`}>🇬🇧 English</button>
+                <button onClick={() => handleLanguageChange("HR")} className={`text-left px-4 py-2 hover:bg-gray-50 transition-colors ${currentLang === 'HR' ? 'text-[var(--color-primary)] font-bold' : 'text-gray-700'}`}>🇭🇷 Hrvatski</button>
+                <button onClick={() => handleLanguageChange("IT")} className={`text-left px-4 py-2 hover:bg-gray-50 transition-colors ${currentLang === 'IT' ? 'text-[var(--color-primary)] font-bold' : 'text-gray-700'}`}>🇮🇹 Italiano</button>
+                <button onClick={() => handleLanguageChange("SR")} className={`text-left px-4 py-2 hover:bg-gray-50 transition-colors ${currentLang === 'SR' ? 'text-[var(--color-primary)] font-bold' : 'text-gray-700'}`}>🇷🇸 Srpski</button>
               </div>
             )}
           </div>
         </nav>
 
         <div className="hidden sm:flex items-center gap-6">
-          <a href="tel:+38640863594" className="text-xs font-bold text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors">
+          <a href="tel:+38640863594" className="text-xs font-bold text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors notranslate">
             040 863 594
           </a>
           <Link
@@ -163,14 +206,14 @@ export default function Navbar() {
             E-knjiga
           </Link>
           
-          <div className="border-t border-[var(--color-border)] pt-4 mt-2">
+          <div className="border-t border-[var(--color-border)] pt-4 mt-2 notranslate" translate="no">
             <p className="text-[10px] uppercase tracking-widest text-[var(--color-muted)] font-bold mb-2">Jezik</p>
             <div className="flex flex-wrap gap-4">
-              <button onClick={() => { setCurrentLang("SL"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'SL' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>SLO</button>
-              <button onClick={() => { setCurrentLang("EN"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'EN' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>ENG</button>
-              <button onClick={() => { setCurrentLang("HR"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'HR' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>HRV</button>
-              <button onClick={() => { setCurrentLang("IT"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'IT' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>ITA</button>
-              <button onClick={() => { setCurrentLang("SR"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'SR' ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'}`}>SRB</button>
+              <button onClick={() => { handleLanguageChange("SL"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'SL' ? 'text-[var(--color-primary)] font-bold' : 'text-[var(--color-muted)]'}`}>🇸🇮 SLO</button>
+              <button onClick={() => { handleLanguageChange("EN"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'EN' ? 'text-[var(--color-primary)] font-bold' : 'text-[var(--color-muted)]'}`}>🇬🇧 ENG</button>
+              <button onClick={() => { handleLanguageChange("HR"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'HR' ? 'text-[var(--color-primary)] font-bold' : 'text-[var(--color-muted)]'}`}>🇭🇷 HRV</button>
+              <button onClick={() => { handleLanguageChange("IT"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'IT' ? 'text-[var(--color-primary)] font-bold' : 'text-[var(--color-muted)]'}`}>🇮🇹 ITA</button>
+              <button onClick={() => { handleLanguageChange("SR"); toggleMenu(); }} className={`text-xs uppercase font-medium ${currentLang === 'SR' ? 'text-[var(--color-primary)] font-bold' : 'text-[var(--color-muted)]'}`}>🇷🇸 SRB</button>
             </div>
           </div>
           <Link

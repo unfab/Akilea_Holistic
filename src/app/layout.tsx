@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 
+import GoogleTranslateScript from "@/components/GoogleTranslateScript";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -75,6 +77,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans selection:bg-[var(--color-accent)] selection:text-white">
+        <GoogleTranslateScript />
         <Navbar />
         <main className="flex-1">
           {children}
