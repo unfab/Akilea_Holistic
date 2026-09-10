@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Marquee from "@/components/Marquee";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import BookingWidget from "@/components/BookingWidget";
 
 export default function Home() {
@@ -63,10 +63,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. REVIEWS MARQUEE (Dve vrstici s karticami mnenj) */}
-      <Marquee />
-
-      {/* 3. PREDSTAVITEV INTUITIVNIH MASAŽ */}
+      {/* 2. PREDSTAVITEV INTUITIVNIH MASAŽ */}
       <section className="py-20 bg-white border-b border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -365,6 +362,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 5. MNENJA STRANK (Vrtljivi kvadratki po 2 v krogu) */}
+      <TestimonialsCarousel />
 
       {/* 6. REZERVACIJA TERMINA */}
       <BookingWidget />
