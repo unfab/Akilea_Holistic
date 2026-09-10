@@ -127,7 +127,7 @@ export default function TestimonialsCarousel() {
           {currentPair.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl p-8 sm:p-10 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative min-h-[260px]"
+              className="bg-white rounded-2xl p-8 sm:p-10 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative min-h-[260px] h-full"
             >
               {/* Decorative quotation icon */}
               <div className="absolute top-6 right-6 text-4xl font-serif text-[var(--color-primary)]/10 select-none">

@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function EKnjigaPage() {
+  const { t } = useLanguage();
+  const eb = t.ebookPage;
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
@@ -10,6 +13,7 @@ export default function EKnjigaPage() {
     e.preventDefault();
     if (!email) return;
     try {
+      setStatus("submitting");
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -31,12 +35,12 @@ export default function EKnjigaPage() {
         setEmail("");
       } else {
         console.error("Web3Forms error:", result);
-        alert("Napaka pri prijavi. Prosimo, poskusite kasneje.");
+        alert(eb.errorMsg);
         setStatus("idle");
       }
     } catch (err) {
       console.error(err);
-      alert("Napaka na omrežju. Prosimo, preverite povezavo in poskusite znova.");
+      alert(eb.networkError);
       setStatus("idle");
     }
   };
@@ -44,8 +48,12 @@ export default function EKnjigaPage() {
   return (
     <div className="spa-view active bg-white min-h-[100dvh] py-20 lg:py-32">
       <div className="max-w-3xl mx-auto px-6 text-center">
-        <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">Prihaja Kmalu</span>
-        <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6">Moja prva E-knjiga</h1>
+        <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">
+          {eb.badge}
+        </span>
+        <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6">
+          {eb.title}
+        </h1>
         
         <div className="bg-[var(--color-surface)] p-8 lg:p-12 rounded-lg mt-12 shadow-sm border border-[var(--color-border)]">
           {status === "success" ? (
@@ -55,34 +63,32 @@ export default function EKnjigaPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-serif text-[var(--color-primary)] mb-4">Uspešno ste prijavljeni!</h2>
+              <h2 className="text-2xl font-serif text-[var(--color-primary)] mb-4">{eb.successTitle}</h2>
               <p className="text-[var(--color-muted)] font-light leading-relaxed">
-                Obvestili vas bomo takoj, ko bo e-knjiga izšla. Hvala za vaše zaupanje in zanimanje.
+                {eb.successDesc}
               </p>
+              <button 
+                onClick={() => setStatus("idle")}
+                className="mt-6 text-[10px] uppercase tracking-widest font-bold text-[var(--color-primary)] border-b border-[var(--color-primary)] pb-1 hover:text-[var(--color-accent)]"
+              >
+                {eb.newSubBtn}
+              </button>
             </div>
           ) : (
             <>
               <h2 className="text-2xl sm:text-3xl font-serif text-[var(--color-primary)] mb-4">
-                Konec oktobra 2026 bo izšla moja prva e-knjiga!
+                {eb.cardTitle}
               </h2>
-              <div className="text-[var(--color-muted)] font-light leading-relaxed mb-8 max-w-xl mx-auto text-[15px] sm:text-[16px] space-y-3">
-                <p>
-                  V e-knjigi bom z vami delila povezave med čustvi, vzorci, prepričanji in kako le-ti vplivajo na telo ter usmerjajo naše življenje. Veliko bo praktičnih nasvetov, ki jih boste lahko uporabili v vsakdanjem življenju.
-                </p>
-                <p>
-                  Zanimivo bo, obljubim, predvsem pa uporabno in z veliko željo ponuditi vam drug pogled na telo in vaš notranji svet ter spodbuditi transformacije, na katere vas vaša duša in telo spodbujata.
-                </p>
-                <p className="font-serif italic text-[var(--color-primary)]">
-                  Res se že veselim, da pride v vaše roke in vam služi!
-                </p>
-              </div>
+              <p className="text-[var(--color-muted)] font-light leading-relaxed mb-8 max-w-xl mx-auto text-[15px] sm:text-[16px]">
+                {eb.cardDesc}
+              </p>
               
               <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col gap-4">
                 <input 
                   type="email" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Vaš e-poštni naslov" 
+                  placeholder={eb.emailPlaceholder} 
                   className="w-full px-4 py-3 border border-[var(--color-border)] rounded focus:outline-none focus:border-[var(--color-accent)] text-[16px]"
                   required
                 />
@@ -91,12 +97,9 @@ export default function EKnjigaPage() {
                   disabled={status === "submitting"}
                   className="btn-primary w-full py-3.5 text-xs uppercase tracking-widest font-bold disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all"
                 >
-                  {status === "submitting" ? "Prijavljam..." : "Obvesti me ob izidu"}
+                  {status === "submitting" ? eb.submittingBtn : eb.submitBtn}
                 </button>
               </form>
-              <p className="text-[11px] text-[var(--color-muted)] mt-4">
-                Vaši podatki so varni. Prijavite se spodaj in prvi boste obveščeni o uradnem izidu.
-              </p>
             </>
           )}
         </div>

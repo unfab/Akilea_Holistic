@@ -17,6 +17,18 @@ export interface ServiceItem {
   fullDesc: string;
   benefits: string[];
   stripePriceId?: string;
+  introP1?: string;
+  introP2?: string;
+  offersTitle?: string;
+  offers?: string[];
+  questionsTitle?: string;
+  questions?: string[];
+  pRelease?: string;
+  quotesTitle?: string;
+  quotes?: string[];
+  calloutBox?: string;
+  conclusionP?: string;
+  contactText?: string;
 }
 
 export interface TranslationDictionary {
@@ -35,6 +47,7 @@ export interface TranslationDictionary {
     badge: string;
     title: string;
     desc: string;
+    quote: string;
     ctaServices: string;
     ctaAbout: string;
   };
@@ -141,6 +154,41 @@ export interface TranslationDictionary {
     ctaDesc: string;
     ctaBtn: string;
     ctaEmailBtn: string;
+  };
+  consultationPage: {
+    badge: string;
+    title: string;
+    desc: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    submitBtn: string;
+    submittingBtn: string;
+    successTitle: string;
+    successDesc: string;
+    newMsgBtn: string;
+    errorMsg: string;
+    networkError: string;
+  };
+  ebookPage: {
+    badge: string;
+    title: string;
+    desc: string;
+    cardTitle: string;
+    cardDesc: string;
+    emailPlaceholder: string;
+    submitBtn: string;
+    submittingBtn: string;
+    successTitle: string;
+    successDesc: string;
+    newSubBtn: string;
+    errorMsg: string;
+    networkError: string;
   };
   footer: {
     ctaTitle: string;

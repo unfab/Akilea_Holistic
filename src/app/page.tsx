@@ -60,7 +60,7 @@ export default function Home() {
               />
               <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm p-4 text-center">
                 <p className="font-serif text-[var(--color-primary)] text-lg italic">
-                  "Ko telo spregovori, se dogajajo čudeži. Prisluhni mu."
+                  "{t.hero.quote}"
                 </p>
               </div>
             </div>

@@ -37,40 +37,40 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-4 lg:gap-6 text-xs uppercase tracking-widest font-medium text-[var(--color-text)]">
-          <Link href="/" className="hover:text-[var(--color-accent)] transition-colors">
+        <nav className="hidden lg:flex items-center gap-3 xl:gap-5 text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest font-medium text-[var(--color-text)]">
+          <Link href="/" className="hover:text-[var(--color-accent)] transition-colors whitespace-nowrap">
             {t.nav.home}
           </Link>
-          <Link href="/storitve" className="hover:text-[var(--color-accent)] transition-colors">
+          <Link href="/storitve" className="hover:text-[var(--color-accent)] transition-colors whitespace-nowrap">
             {t.nav.services}
           </Link>
-          <Link href="/#o-meni" className="hover:text-[var(--color-accent)] transition-colors">
+          <Link href="/#o-meni" className="hover:text-[var(--color-accent)] transition-colors whitespace-nowrap">
             {t.nav.about}
           </Link>
-          <Link href="/blog" className="hover:text-[var(--color-accent)] transition-colors">
+          <Link href="/blog" className="hover:text-[var(--color-accent)] transition-colors whitespace-nowrap">
             {t.nav.blog}
           </Link>
-          <Link href="/posvet" className="hover:text-[var(--color-accent)] transition-colors">
+          <Link href="/posvet" className="hover:text-[var(--color-accent)] transition-colors whitespace-nowrap">
             {t.nav.consultation}
           </Link>
           <Link
             href="/predavanja"
-            className="hover:text-[var(--color-accent)] transition-colors text-[var(--color-accent)]"
+            className="hover:text-[var(--color-accent)] transition-colors text-[var(--color-accent)] whitespace-nowrap"
           >
             {t.nav.lectures}
           </Link>
           <Link
             href="/e-knjiga"
-            className="hover:text-[var(--color-accent)] transition-colors text-[var(--color-accent)]"
+            className="hover:text-[var(--color-accent)] transition-colors text-[var(--color-accent)] whitespace-nowrap"
           >
             {t.nav.ebook}
           </Link>
 
           {/* Language Selector */}
-          <div className="relative ml-2">
+          <div className="relative ml-1">
             <button 
               onClick={() => setLangOpen(!langOpen)}
-              className="flex items-center gap-1 hover:text-[var(--color-accent)] transition-colors font-semibold text-xs"
+              className="flex items-center gap-1 hover:text-[var(--color-accent)] transition-colors font-semibold text-xs whitespace-nowrap"
             >
               {currentLangLabel}
               <svg className={`w-3 h-3 transition-transform ${langOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -88,13 +88,13 @@ export default function Navbar() {
           </div>
         </nav>
 
-        <div className="hidden sm:flex items-center gap-6">
-          <a href="tel:+38640863594" className="text-xs font-bold text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors">
+        <div className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0">
+          <a href="tel:+38640863594" className="text-xs font-bold text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors whitespace-nowrap">
             040 863 594
           </a>
           <Link
             href="/storitve"
-            className="btn-primary px-6 py-2.5 text-[10px] uppercase tracking-widest font-semibold cursor-pointer"
+            className="btn-primary px-4 xl:px-6 py-2.5 text-[10px] uppercase tracking-wider xl:tracking-widest font-semibold cursor-pointer whitespace-nowrap"
           >
             {t.nav.bookAppointment}
           </Link>
@@ -102,7 +102,7 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden text-[var(--color-primary)] p-2"
+          className="lg:hidden text-[var(--color-primary)] p-2"
           aria-label="Menu"
           onClick={toggleMenu}
         >
@@ -121,7 +121,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-[var(--color-border)] px-6 py-4 space-y-4 shadow-lg absolute w-full left-0 z-40">
+        <div className="lg:hidden bg-white border-t border-[var(--color-border)] px-6 py-4 space-y-4 shadow-lg absolute w-full left-0 z-40">
           <Link
             href="/"
             className="block text-xs uppercase tracking-widest font-medium text-[var(--color-text)] hover:text-[var(--color-accent)]"

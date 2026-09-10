@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function PosvetPage() {
+  const { t } = useLanguage();
+  const c = t.consultationPage;
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "", honeypot: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
@@ -37,12 +40,12 @@ export default function PosvetPage() {
         setFormData({ name: "", email: "", phone: "", message: "", honeypot: "" });
       } else {
         console.error("Web3Forms error:", result);
-        alert("Napaka pri pošiljanju. Prosimo, poskusite kasneje.");
+        alert(c.errorMsg);
         setStatus("idle");
       }
     } catch (err) {
       console.error(err);
-      alert("Napaka na omrežju. Prosimo, preverite povezavo in poskusite znova.");
+      alert(c.networkError);
       setStatus("idle");
     }
   };
@@ -51,10 +54,14 @@ export default function PosvetPage() {
     <div className="spa-view active bg-[var(--color-surface)] min-h-screen py-20 lg:py-32">
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center">
-          <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">Prvi Korak</span>
-          <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6">Uvodni Posvet</h1>
+          <span className="text-[10px] uppercase tracking-widest text-[var(--color-accent)] font-semibold mb-4 block">
+            {c.badge}
+          </span>
+          <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6">
+            {c.title}
+          </h1>
           <p className="text-[var(--color-muted)] font-light leading-relaxed mb-12 max-w-xl mx-auto">
-            Niste prepričani, katera obravnava bi bila prava za vas? Pošljite nam sporočilo in dogovorili se bomo za kratek brezplačen posvet.
+            {c.desc}
           </p>
         </div>
         
@@ -66,15 +73,15 @@ export default function PosvetPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-serif text-[var(--color-primary)] mb-4">Sporočilo poslano!</h2>
+              <h2 className="text-2xl font-serif text-[var(--color-primary)] mb-4">{c.successTitle}</h2>
               <p className="text-[var(--color-muted)] font-light">
-                Hvala za povpraševanje. Odgovorili vam bomo v najkrajšem možnem času.
+                {c.successDesc}
               </p>
               <button 
                 onClick={() => setStatus("idle")}
                 className="mt-8 text-[10px] uppercase tracking-widest font-bold text-[var(--color-primary)] border-b border-[var(--color-primary)] pb-1 hover:text-[var(--color-accent)]"
               >
-                Pošlji novo sporočilo
+                {c.newMsgBtn}
               </button>
             </div>
           ) : (
@@ -83,49 +90,49 @@ export default function PosvetPage() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">Ime in Priimek</label>
+                  <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">{c.nameLabel}</label>
                   <input 
                     type="text" 
                     required 
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     className="w-full px-4 py-3 border border-[var(--color-border)] rounded focus:outline-none focus:border-[var(--color-primary)] text-[16px]"
-                    placeholder="Vaše ime"
+                    placeholder={c.namePlaceholder}
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">E-pošta</label>
+                  <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">{c.emailLabel}</label>
                   <input 
                     type="email" 
                     required 
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className="w-full px-4 py-3 border border-[var(--color-border)] rounded focus:outline-none focus:border-[var(--color-primary)] text-[16px]"
-                    placeholder="vasa@eposta.com"
+                    placeholder={c.emailPlaceholder}
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">Telefon</label>
+                <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">{c.phoneLabel}</label>
                 <input 
                   type="tel" 
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   className="w-full px-4 py-3 border border-[var(--color-border)] rounded focus:outline-none focus:border-[var(--color-primary)] text-[16px]"
-                  placeholder="040 123 456 (opcijsko)"
+                  placeholder={c.phonePlaceholder}
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">Vaše sporočilo</label>
+                <label className="block text-[11px] uppercase tracking-widest font-bold text-[var(--color-muted)] mb-2">{c.messageLabel}</label>
                 <textarea 
                   required 
                   rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({...formData, message: e.target.value})}
                   className="w-full px-4 py-3 border border-[var(--color-border)] rounded focus:outline-none focus:border-[var(--color-primary)] text-[16px] resize-none"
-                  placeholder="Kako vam lahko pomagamo?"
+                  placeholder={c.messagePlaceholder}
                 />
               </div>
               
@@ -134,7 +141,7 @@ export default function PosvetPage() {
                 disabled={status === "submitting"}
                 className="w-full btn-primary py-4 text-xs uppercase tracking-widest font-bold disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {status === "submitting" ? "Pošiljanje..." : "Pošlji sporočilo"}
+                {status === "submitting" ? c.submittingBtn : c.submitBtn}
               </button>
             </form>
           )}
