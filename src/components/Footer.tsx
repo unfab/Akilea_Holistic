@@ -70,6 +70,7 @@ export default function Footer() {
           <ul className="space-y-3 text-sm font-light">
             <li><a href="#" className="hover:text-white transition-colors">Facebook Skupnost</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
+            <li><a href="https://dashboard.mailerlite.com/forms/1336581/148227624341079087/share" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Prijava na e-novice</a></li>
             <li><Link href="/storitve" className="hover:text-white transition-colors">{t.footer.allServices}</Link></li>
           </ul>
         </div>
