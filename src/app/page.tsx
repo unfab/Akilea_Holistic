@@ -409,7 +409,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. MNENJA STRANK (Vrtljivi kvadratki po 2 v krogu) */}
+      {/* 6. NEWSLETTER BANNER */}
+      <section className="py-16 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center mx-auto mb-6 shadow-sm border border-[var(--color-border)]">
+            <svg className="w-6 h-6 text-[var(--color-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-serif text-[var(--color-primary)] mb-4">
+            Ostanimo povezani
+          </h2>
+          <p className="text-[var(--color-muted)] font-light leading-relaxed mb-8 text-[15px] max-w-xl mx-auto">
+            Prijavite se na e-novice in bodite pravočasno obveščeni o novih delavnicah, predavanjih ter prejemajte uporabne nasvete za vzdrževanje notranjega miru.
+          </p>
+          <a
+            href="https://dashboard.mailerlite.com/forms/1336581/148227624341079087/share"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary inline-block px-10 py-4 text-xs uppercase tracking-widest font-bold shadow-md hover:shadow-lg transition-all"
+          >
+            Prijava na e-novice
+          </a>
+        </div>
+      </section>
+
+      {/* 7. MNENJA STRANK (Vrtljivi kvadratki po 2 v krogu) */}
       <TestimonialsCarousel />
 
       {/* 6. REZERVACIJA TERMINA */}
