@@ -54,6 +54,9 @@ export default function EKnjigaPage() {
         <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-6">
           {eb.title}
         </h1>
+        <p className="text-xl text-[var(--color-muted)] mb-8 font-light max-w-2xl mx-auto">
+          {eb.desc}
+        </p>
         
         <div className="bg-[var(--color-surface)] p-8 lg:p-12 rounded-lg mt-12 shadow-sm border border-[var(--color-border)]">
           {status === "success" ? (
@@ -79,7 +82,7 @@ export default function EKnjigaPage() {
               <h2 className="text-2xl sm:text-3xl font-serif text-[var(--color-primary)] mb-4">
                 {eb.cardTitle}
               </h2>
-              <p className="text-[var(--color-muted)] font-light leading-relaxed mb-8 max-w-xl mx-auto text-[15px] sm:text-[16px]">
+              <p className="text-[var(--color-muted)] font-light leading-relaxed mb-8 max-w-xl mx-auto text-[15px] sm:text-[16px] whitespace-pre-wrap text-left">
                 {eb.cardDesc}
               </p>
               

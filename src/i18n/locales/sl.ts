@@ -73,9 +73,9 @@ export const sl: TranslationDictionary = {
   aboutSection: {
     badge: "O ustanoviteljici",
     title: "Moje ime je Mirjana Groznik, intuitivna svetovalka.",
-    p1: "Sem večna študentka življenja in strastna raziskovalka človekovega delovanja. Po letih izkušenj v poslovnem svetu, osebni prelomnici ter študiju naturopatije in energijskih tehnik sem sledila klicu duše ter ustvarila prostor, kjer se fizično združuje z nefizičnim.",
-    p2: "Tako je nastala avtorska INTUITIVNA MASAŽA. Orodje, s katerim skozi nežno poslušanje telesnih sporočil odpiramo prostor globokim transformacijam, sproščamo ujeta čustva in stopamo na pot do pristnega notranjega ravnovesja.",
-    quote: "»Center AKILEA je varen kotiček za vračanje k sebi in celostno podporo vašemu telesu.«",
+    p1: "Sem večna študentka življenja in strastna raziskovalka človekovega delovanja s holističnega vidika; duša-um-telo. Po letih izkušenj v poslovnem svetu, osebni prelomnici ter študiju naturopatije in energijskih tehnik sem sledila klicu duše ter ustvarila prostor, kjer se fizično združuje z nefizičnim.",
+    p2: "Tako je nastala avtorska INTUITIVNA MASAŽA. Orodje, s katerim skozi nežno poslušanje telesnih sporočil odpiramo prostor za ozaveščanje in sproščanje v telesu ujetih čustev in stopamo na pot globokih transformacij z namenom, da bi ponovno slišali in živeli sebe.",
+    quote: "»Ko telo spregovori, se dogajajo čudeži. Prisluhni mu. Dobrodošla v HC AKILEA«",
     imageAlt: "Mirjana Groznik - Akilea Holistični center",
   },
   testimonialsSection: {
@@ -303,9 +303,9 @@ export const sl: TranslationDictionary = {
   ebookPage: {
     badge: "Prihaja Kmalu",
     title: "Moja prva E-knjiga",
-    desc: "Praktični vodnik za vsakodnevno poslušanje telesa, razumevanje njegovih signalov in vračanje v notranje ravnovesje.",
+    desc: "Praktični vodnik k poslušanju telesa",
     cardTitle: "Prijavite se na prednaročniško čakalno vrsto",
-    cardDesc: "Bodite med prvimi, ki bodo prejeli brezplačen izvod in ekskluzivna poglavja takoj ob izidu.",
+    cardDesc: "Konec oktobra 2026 bo izšla moja prva e-knjiga!\n\nV e-knjigi bom z vami delila povezave med čustvi, vzorci, prepričanji in kako le-ti vplivajo na telo ter usmerjajo naše življenje.\n\nVeliko bo praktičnih nasvetov, ki jih boste lahko uporabili v vsakdanjem življenju.\n\nZanimivo bo, obljubim, predvsem pa uporabno in z veliko željo ponuditi vam drug pogled na telo in vaš notranji svet ter spodbuditi transformacije, na katere vas vaša duša in telo spodbujajo.\n\nPrijavite se spodaj in prvi boste obveščeni o izidu.\n\nRes se že veselim, da pride v vaše roke in vam služi!",
     emailPlaceholder: "Vnesite vaš e-poštni naslov...",
     submitBtn: "Obvesti me ob izidu",
     submittingBtn: "Prijavljanje...",
