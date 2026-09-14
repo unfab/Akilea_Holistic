@@ -409,8 +409,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. NEWSLETTER BANNER */}
-      <section className="py-16 bg-[var(--color-surface)] border-b border-[var(--color-border)]">
+      {/* 7. MNENJA STRANK (Vrtljivi kvadratki po 2 v krogu) */}
+      <TestimonialsCarousel />
+
+      {/* 6. REZERVACIJA TERMINA */}
+      <BookingWidget />
+
+      {/* 7. NEWSLETTER BANNER */}
+      <section className="py-16 bg-[var(--color-surface)]">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center mx-auto mb-6 shadow-sm border border-[var(--color-border)]">
             <svg className="w-6 h-6 text-[var(--color-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -433,12 +439,6 @@ export default function Home() {
           </a>
         </div>
       </section>
-
-      {/* 7. MNENJA STRANK (Vrtljivi kvadratki po 2 v krogu) */}
-      <TestimonialsCarousel />
-
-      {/* 6. REZERVACIJA TERMINA */}
-      <BookingWidget />
     </div>
   );
 }
