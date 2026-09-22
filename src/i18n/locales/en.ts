@@ -16,7 +16,7 @@ export const en: TranslationDictionary = {
     badge: "Intuitive Counselor",
     title: "Welcome to the AKILEA holistic center – a space where the body speaks, the soul breathes, and the mind finds its peace.",
     desc: "Ancient wisdom, intuitive body messages, and the gentle power of touch unite here. I believe each of us carries all the answers within – sometimes we just need a safe sanctuary and supportive guidance to hear them. Let intuitive massages, workshops, and everyday tips support your journey of deep transformation.",
-    quote: "When the body speaks, miracles happen. Listen to it.",
+    quote: "When the body speaks, miracles begin to happen. Listen to it.",
     ctaServices: "Explore Services & Pricing",
     ctaAbout: "Discover My Story",
   },
@@ -34,9 +34,9 @@ export const en: TranslationDictionary = {
     sectionDesc: "Follow the latest insights, upcoming interactive workshops, and corporate lectures for individuals and organizations.",
     ebookBanner: {
       badge: "Upcoming E-Book",
-      title: "My First E-Book: A Practical Guide to Listening to Your Body",
-      desc: "Discover what your body is trying to tell you before unexpressed emotions and daily stress turn into chronic lower back pain. Join the early-bird waitlist for a free copy.",
-      cta: "Join Free Waitlist →",
+      title: "My first e-book will be released at the end of October 2026!",
+      desc: "In the e-book, I will share the connections between emotions, patterns, beliefs, and how they affect the body and guide our lives. There will also be many practical tips.",
+      cta: "I want to learn more about the e-book release →",
     },
     square1: {
       badge: "1. Blogs",

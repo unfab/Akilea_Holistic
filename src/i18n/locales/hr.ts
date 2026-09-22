@@ -16,7 +16,7 @@ export const hr: TranslationDictionary = {
     badge: "Intuitivna savjetnica",
     title: "Dobrodošli u holistički centar AKILEA – prostor u kojem tijelo govori, duša diše, a um pronalazi mir.",
     desc: "Ovdje se susreću drevna znanja, intuitivne poruke tijela i nježna snaga dodira. Vjerujem da svatko od nas sve odgovore nosi u sebi – no ponekad nam je potreban siguran prostor i prava podrška kako bismo ih čuli. Neka intuitivne masaže, radionice i praktični savjeti budu vaša podrška na putu duboke preobrazbe.",
-    quote: "Kad tijelo progovori, događaju se čuda. Poslušaj ga.",
+    quote: "Kad tijelo progovori, počinju se događati čuda. Poslušaj ga.",
     ctaServices: "Istražite ponudu usluga",
     ctaAbout: "Upoznajte moju priču",
   },
@@ -34,9 +34,9 @@ export const hr: TranslationDictionary = {
     sectionDesc: "Pratite najnovija razmišljanja, najavljene radionice te edukacije za pojedince i organizacije.",
     ebookBanner: {
       badge: "E-knjiga u pripremi",
-      title: "Moja prva E-knjiga: Praktični vodič za slušanje tijela",
-      desc: "Saznajte što vam tijelo poručuje prije nego se neizrečene emocije i svakodnevni stres pretvore u kroničnu bol u križima. Prijavite se na listu čekanja za besplatan primjerak.",
-      cta: "Besplatna prijava na listu čekanja →",
+      title: "Krajem listopada 2026. izlazi moja prva e-knjiga!",
+      desc: "U e-knjizi ću s vama podijeliti povezanost emocija, obrazaca, uvjerenja i kako oni utječu na tijelo te usmjeravaju naše živote. Bit će i mnogo praktičnih savjeta.",
+      cta: "Želim saznati više o izlasku e-knjige →",
     },
     square1: {
       badge: "1. Blog",

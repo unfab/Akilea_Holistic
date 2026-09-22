@@ -16,7 +16,7 @@ export const it: TranslationDictionary = {
     badge: "Consulente Intuitiva",
     title: "Benvenuti al centro olistico AKILEA – uno spazio dove il corpo parla, l'anima respira e la mente trova la pace.",
     desc: "Qui si incontrano antiche conoscenze, messaggi intuitivi del corpo e la delicata forza del tocco. Credo che ognuno di noi custodisca tutte le risposte dentro di sé, ma a volte abbiamo solo bisogno di uno spazio protetto e del giusto supporto per ascoltarle. Lasciate che i massaggi intuitivi, i laboratori e i consigli pratici accompagnino il vostro cammino verso una profonda trasformazione.",
-    quote: "Quando il corpo parla, accadono miracoli. Ascoltalo.",
+    quote: "Quando il corpo parla, iniziano ad accadere miracoli. Ascoltalo.",
     ctaServices: "Scopri i servizi e i prezzi",
     ctaAbout: "Scopri la mia storia",
   },
@@ -34,9 +34,9 @@ export const it: TranslationDictionary = {
     sectionDesc: "Segui le ultime riflessioni, i prossimi laboratori annunciati e i percorsi formativi per privati e aziende.",
     ebookBanner: {
       badge: "E-book in arrivo",
-      title: "Il mio primo E-book: Guida pratica all'ascolto del corpo",
-      desc: "Scopri cosa ti sta comunicando il tuo corpo prima che le emozioni represse e lo stress quotidiano si trasformino in dolore lombare cronico. Iscriviti alla lista d'attesa per una copia omaggio.",
-      cta: "Iscriviti gratis alla lista d'attesa →",
+      title: "Alla fine di ottobre 2026 uscirà il mio primo e-book!",
+      desc: "Nell'e-book condividerò con voi i legami tra emozioni, schemi, convinzioni e come questi influenzano il corpo e guidano la nostra vita. Ci saranno anche molti consigli pratici.",
+      cta: "Voglio saperne di più sull'uscita dell'e-book →",
     },
     square1: {
       badge: "1. Blog",

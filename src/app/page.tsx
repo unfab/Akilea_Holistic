@@ -193,9 +193,11 @@ export default function Home() {
           </div>
 
           {/* E-BOOK TEASER BANNER (Squeezed between section intro and 3 boxes) */}
-          <Link
-            href="/e-knjiga"
-            className="block max-w-5xl mx-auto mb-14 bg-gradient-to-br from-white via-[#fcfbf9] to-[#f4f7ee] border border-[#e2dcd2] hover:border-[#6a882a] rounded-2xl p-6 sm:p-8 shadow-xs hover:shadow-md transition-all duration-300 group relative overflow-hidden"
+          <a
+            href="https://preview.mailerlite.io/preview/1336581/forms/198580470970057791"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block max-w-5xl mx-auto mb-14 bg-gradient-to-br from-white via-[#fcfbf9] to-[#f4f7ee] border border-[#e2dcd2] hover:border-[#6a882a] rounded-2xl p-6 sm:p-8 shadow-xs hover:shadow-md transition-all duration-300 group relative overflow-hidden cursor-pointer"
           >
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
               <div className="flex items-start gap-4 sm:gap-5">
@@ -219,12 +221,12 @@ export default function Home() {
               </div>
 
               <div className="shrink-0 w-full md:w-auto self-end md:self-center">
-                <span className="inline-flex items-center justify-center gap-2 w-full md:w-auto px-5 py-3 rounded-lg bg-[var(--color-primary)] text-white text-xs uppercase tracking-widest font-bold group-hover:bg-[#6a882a] transition-all duration-300 shadow-sm">
+                <span className="inline-flex items-center justify-center gap-2 w-full md:w-auto px-5 py-3 rounded-lg bg-[var(--color-primary)] text-white text-xs uppercase tracking-widest font-bold group-hover:bg-[#6a882a] transition-all duration-300 shadow-sm text-center">
                   <span>{t.threeSquares.ebookBanner.cta}</span>
                 </span>
               </div>
             </div>
-          </Link>
+          </a>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* KVADRAT 1: BLOGI */}
