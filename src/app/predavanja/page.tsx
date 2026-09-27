@@ -1,9 +1,38 @@
-import Link from "next/link";
+import type { Metadata } from "next";
 import Image from "next/image";
 
-export const metadata = {
-  title: "Predavanja & B2B Delavnice | Akilea Holistični Center",
-  description: "Predavanje in izkustvena delavnica: Ko križ boli – kaj mi sporoča telo? Korporativni wellness in obvladovanje stresa na delovnem mestu.",
+export const metadata: Metadata = {
+  title: "Predavanja & Korporativni Wellness Koper | Akilea",
+  description: "Predavanje in izkustvena delavnica: Ko križ boli – kaj mi sporoča telo? Korporativni wellness, obvladovanje stresa in zdravje zaposlenih na delovnem mestu.",
+  keywords: [
+    "predavanja",
+    "korporativni wellness",
+    "izobraževanja",
+    "obvladovanje stresa",
+    "stres",
+    "zaposleni",
+    "sedeče delo",
+    "bolečine v križu",
+    "bolecine v krizu",
+    "bolečine v hrbtu",
+    "bolecine v hrbtu",
+    "bolečine v ramenih",
+    "zdravje",
+    "zdrav duh v zdravem telesu",
+    "telo pove",
+    "ko telo spregovori",
+    "poslušaj svoje telo",
+    "sporočila telesa",
+    "odgovornost",
+    "pretirana odgovornost",
+    "bremena",
+    "bremena ki jih nosimo",
+    "izkustvene delavnice",
+    "delavnice za podjetja"
+  ],
+  alternates: {
+    canonical: "https://www.akilea.si/predavanja",
+  },
 };
 
 export default function PredavanjaPage() {

@@ -1,9 +1,32 @@
 import Link from "next/link";
-import Image from "next/image";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Delavnice in Čajanke | Akilea Center zdravja",
-  description: "Skupinske delavnice in sproščene čajanke v centru Akilea.",
+export const metadata: Metadata = {
+  title: "Delavnice in Čajanke s Sporočilom Koper | Akilea",
+  description: "Skupinske delavnice, čajanke o čustvih in meditacije v varnem okolju centra Akilea v Kopru. Povežite se s sabo in odkrijte notranji mir.",
+  keywords: [
+    "delavnice",
+    "delavnice Koper",
+    "čajanke s sporočilom",
+    "čajanka o čustvih",
+    "skupinska meditacija",
+    "delavnica za ženske",
+    "poveži se s sabo",
+    "čustva",
+    "notranji mir",
+    "ženska energija",
+    "notranji otrok",
+    "ranjeni notranji otrok",
+    "druženje za ženske",
+    "samomasaža",
+    "varen prostor",
+    "delo na sebi",
+    "pogum",
+    "nežnost"
+  ],
+  alternates: {
+    canonical: "https://www.akilea.si/delavnice",
+  },
 };
 
 export default function DelavnicePage() {

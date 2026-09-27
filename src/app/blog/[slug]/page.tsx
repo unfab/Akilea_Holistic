@@ -29,6 +29,20 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${post.title} | Blog AKILEA`,
     description: post.excerpt,
+    keywords: [
+      post.category,
+      "Akilea blog",
+      "Mirjana Groznik",
+      "intuitivna masaža",
+      "telo pove",
+      "sporočila telesa",
+      "delo na sebi",
+      "čustva",
+      "holistični center Koper"
+    ],
+    alternates: {
+      canonical: `https://www.akilea.si/blog/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,

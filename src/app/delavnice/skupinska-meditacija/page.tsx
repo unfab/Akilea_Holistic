@@ -1,9 +1,26 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Skupinska meditacija | Akilea Center zdravja",
-  description: "Vodena meditacija za vzpostavljanje notranjega miru in odpravljanje nakopičenega stresa.",
+export const metadata: Metadata = {
+  title: "Skupinska meditacija Koper | Akilea Holistični Center",
+  description: "Vodena skupinska meditacija za vzpostavljanje notranjega miru, odpravljanje nakopičenega stresa in stik s svojo dušo v Kopru.",
+  keywords: [
+    "skupinska meditacija",
+    "meditacija Koper",
+    "notranji mir",
+    "obvladovanje stresa",
+    "sproščanje",
+    "energija",
+    "čakre",
+    "dihalne tehnike",
+    "duša",
+    "stik z dušami",
+    "delo na sebi"
+  ],
+  alternates: {
+    canonical: "https://www.akilea.si/delavnice/skupinska-meditacija",
+  },
 };
 
 export default function SkupinskaMeditacijaPage() {

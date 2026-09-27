@@ -1,9 +1,28 @@
-import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Čajanka s sporočilom: Kako biti balon med kaktusi? | Akilea",
-  description: "Vabljena na Čajanko s sporočilom in dobrodelno noto za Lunino vilo, 15. 10. 2026 ob 19:00 v centru Akilea.",
+  description: "Vabljena na Čajanko s sporočilom in dobrodelno noto za Lunino vilo, 15. 10. 2026 ob 19:00 v centru Akilea Koper. Vsaka udeleženka prejme osebno intuitivno sporočilo.",
+  keywords: [
+    "čajanka s sporočilom",
+    "kako biti balon med kaktusi",
+    "čustva",
+    "notranji svet",
+    "intuitivno sporočilo",
+    "postavljanje mej",
+    "ranjeni notranji otrok",
+    "pridna punčka",
+    "ženska energija",
+    "odnosi",
+    "občutki krivde",
+    "Lunina vila",
+    "delavnice Koper",
+    "delo na sebi"
+  ],
+  alternates: {
+    canonical: "https://www.akilea.si/delavnice/cajanka-o-custvih",
+  },
 };
 
 export default function CajankaPage() {

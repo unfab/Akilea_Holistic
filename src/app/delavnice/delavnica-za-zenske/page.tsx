@@ -1,9 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Delavnica za ženske | Akilea Center zdravja",
-  description: "Spoznajte tehnike samomasaže in povezovanja z lastnim telesom.",
+export const metadata: Metadata = {
+  title: "Delavnica za ženske: Poveži se s sabo | Akilea Koper",
+  description: "Spoznajte tehnike samomasaže, poslušanja telesa in povezovanja z lastno žensko energijo v centru Akilea Koper.",
+  keywords: [
+    "delavnica za ženske",
+    "poveži se s sabo",
+    "ženska energija",
+    "samomasaža",
+    "telo pove",
+    "poslušaj svoje telo",
+    "maternica",
+    "ko maternica spregovori",
+    "jajčniki",
+    "nežnost",
+    "ljubezen",
+    "delo na sebi"
+  ],
+  alternates: {
+    canonical: "https://www.akilea.si/delavnice/delavnica-za-zenske",
+  },
 };
 
 export default function DelavnicaZaZenskePage() {
