@@ -16,6 +16,128 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "ko-maternica-spregovori",
+    title: "Ko maternica spregovori",
+    author: "Mirjana Groznik",
+    date: "28. september 2026",
+    readTime: "4 min",
+    category: "Intuitivna masaža & Telo",
+    image: "/images/blog/ko-maternica-spregovori.jpg",
+    excerpt: "Z vsakim dnem se bolj zavedam in prejemam potrditve, kako pomembno je spoznanje, da naše telo ni le fizična lupina, ni le stroj. Kaj se zgodi, ko na intuitivni masaži maternica končno spregovori?",
+    paragraphs: [
+      {
+        type: "p",
+        content: "Z vsakim dnem se bolj zavedam in prejemam potrditve, kako pomembno je spoznanje, da naše\ntelo ni le fizična lupina, ni le stroj, ni le nekaj, kar nam služi in na koncu “odsluži”. Kako\npomembno je ozavestiti tudi nefizični del nas, našega teles(a) in ta neoprijemljiv, na trenutke\ntežko razumljiv. Za nekatere še vedno težko sprejemljiv.",
+      },
+      {
+        type: "p",
+        content: "Hvaležna za možnost, da lahko s pomočjo intuitivne masaže predajam zapise, ki so se skozi leta\nzapisali v telo. Hvaležna, da se tudi maternica in jajčniki počutijo dovolj varne in mi zaupajo.",
+      },
+      {
+        type: "p",
+        content: "Sprva se to lahko pokaže skozi energijo, ko začutim:",
+      },
+      {
+        type: "list",
+        content: [
+          "da je maternica tako zelo utrujena, izčrpana",
+          "da v maternici zeva ogromna luknja (skozi katero ji odteka največ energije),",
+          "da ima odebeljene stene, brazgotine",
+          "da je razočarana,",
+          "da žaluje",
+          "jajčnik (ali oba) je tako velik kot jabolko ali tako posušen kot rozina",
+        ],
+      },
+      {
+        type: "p",
+        content: "Pogosto se zgodi, da že skoraj na koncu intuitivne masaže, preda sporočila,\nko začne kričati od neizražene bolečine,\nod občutkov, odnosov, razočaranj, žalosti, neizgovorjenih besed in vsega tistega, kar je leta\nnosila v sebi.",
+      },
+      {
+        type: "p",
+        content: "Od občutkov izdaje, razočaranja, od jeze in zamere, ker je v partnerskem odnosu nenehno\ndajala:\nLjubezen.\nČas.\nSvojo energijo.\nSvoje telo.",
+      },
+      {
+        type: "p",
+        content: "In končno spregovori. Ubesedi misli, občutke, ki jih je mnoga leta zadrževala.\n\nZgodi se, da preda spomine in vso bolečino iz določenih preteklih življenj, ki jih tako zelo\ngloboko nosi v sebi. Napočil je čas, da jih izpusti.",
+      },
+      {
+        type: "highlight",
+        content: "Spomini na nasilje, na izdajo.\nMaternica si želi občutka varnosti.\nŽeli si zaupanja.\nŽeli si občutka, da je ljubljena.\nDa je sprejeta.\nDa je opažena.\nDa je zaželena.\nDa ji ni treba ves čas biti močna in ponavljati “zmorem”, tudi ko v resnici ne more več.\nDa ni za vse sama.",
+      },
+      {
+        type: "p",
+        content: "Vse to išče najprej pri partnerju. A najprej mora začeti graditi občutek varnosti v sebi, ker je to\npredpogoj za zaupanje partnerju. Občutek varnosti in zaupanja je dvosmeren proces.\n\nNa intutivnih masažah se zelo močno čuti in vidi, da je ob partnerju, ob katerem se ženska\npočuti varno, ljubljeno, opaženo in slišano, partnerju, ki mu zaupa, grajenje notranjega stebra\nlažje. Lahko je veliko več v svoji ženski energiji.\n\nPotrebuje občutek varnosti, želi biti sprejeta, ljubljena, biti dovolj takšna kot je.\n\nŠele nato je pripravljena tudi na sprejemanje.",
+      },
+      {
+        type: "list",
+        content: [
+          "Sprejemanje ljubezni – ljubim in sprejemam ljubezen",
+          "Sprejemanje pomoči – pomagam, a zname sprejeti tudi pomoč",
+          "Sprejemanje sebe – sprejemam tebe, a tudi sebe.",
+        ],
+      },
+      {
+        type: "p",
+        content: "Dajem tebi, a tudi sebi. ([tukaj si lahko prebereš blog na to temo](/blog/dam-tebi-a-tudi-sebi))",
+      },
+      {
+        type: "p",
+        content: "Vse pogosteje se govori tudi o endometriozi. Kako jo na intuitivnih masažah čutim, vidim jaz?\n\nPri ženskah z endometriozo je v maternici zaznati",
+      },
+      {
+        type: "list",
+        content: [
+          "občutek velike energetske blokade",
+          "veliko bolečine.",
+          "veliko neizražene jeze in neizjokanih solz",
+        ],
+      },
+      {
+        type: "highlight",
+        content: "Več o tem bo v e-knjigi, ki izide predvidoma konec oktobra. [Tukaj se lahko prijavš in med prvimi izveš o njenem izidu.](https://preview.mailerlite.io/preview/1336581/forms/198580470970057791)",
+      },
+      {
+        type: "heading",
+        content: "Maternica in druga čakra",
+      },
+      {
+        type: "p",
+        content: "Ko govorimo o maternici, ne moremo mimo druge čakre.\nSakralne čakre.\n\nDruga čakra leži v spodnjem delu trebuha in je v energijskem izročilu povezan z ženskostjo,\nustvarjalnostjo, čustvi, užitkom, spolnostjo, odnosi in sposobnostjo sprejemanja.\n\nDruga čakra je v energijskem smislu prostor »jaz čutim«.\n\nIn maternica res veliko čuti, nosi.",
+      },
+      {
+        type: "heading",
+        content: "Spremembe na bolje",
+      },
+      {
+        type: "p",
+        content: "A spremembe so možne. Hvaležna sem, da lahko s pomočjo predaje sporočil telesa na\nintiuitivnih masažah celega telesa, stranko podprem na poti transformacije:",
+      },
+      {
+        type: "list",
+        content: [
+          "velika energetska gmota se zmanjša",
+          "energija steče po nogah",
+          "maternica zadiha, začne šepetati, ne kriči več",
+          "napetost v trebuhu se zmanjša",
+          "bolečine so na splošno manjše",
+          "občutek lahkotnosti v telesu in srcu",
+        ],
+      },
+      {
+        type: "p",
+        content: "To je le nekaj primerov, o katerih mi stranke poročajo.",
+      },
+      {
+        type: "highlight",
+        content: "O vsem tem bo več govora v e-knjigi, ki izide predvidoma konec oktobra. [Tukaj se lahko prijavš in med prvimi izveš o njenem izidu.](https://preview.mailerlite.io/preview/1336581/forms/198580470970057791)",
+      },
+      {
+        type: "p",
+        content: "Če se najdeš v zgoraj opisanem in bi si želela rezervirati termin za intuitivno masažo, mi piši na [mirjana@akilea.si](mailto:mirjana@akilea.si) ali na tel.št.: [040 863 594](tel:040863594).\n\nVsekakor so vprašanja ali predlogi o čem bi želela izvedeti več, dobrodošli.\n\nVeselim se srečanja ter vseh sporočil in uvidov, ki ti jih želi telo predati.",
+      },
+    ],
+  },
+  {
     slug: "brez-ljubezni-mi-ziveti-ni",
     title: "“Brez ljubezni mi živeti ni…”",
     author: "Mirjana Groznik",
@@ -543,6 +665,9 @@ export function getBlogPost(slug: string): BlogPost | undefined {
     BLOG_POSTS.find((p) => p.slug === normalized) ||
     BLOG_POSTS.find((p) => normalized.startsWith(p.slug) || p.slug.startsWith(normalized)) ||
     // Wix URL alias mappings
+    (normalized.includes("maternica")
+      ? BLOG_POSTS.find((p) => p.slug === "ko-maternica-spregovori")
+      : undefined) ||
     (normalized.includes("dermatitis") || normalized.includes("globoka-sprostitev")
       ? BLOG_POSTS.find((p) => p.slug === "nasa-izkusnja-z-atopijskim-dermatitisom")
       : undefined) ||

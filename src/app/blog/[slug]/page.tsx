@@ -9,6 +9,8 @@ type PageProps = {
 export async function generateStaticParams() {
   return [
     ...BLOG_POSTS.map((post) => ({ slug: post.slug })),
+    { slug: "ko-maternica-spregovori" },
+    { slug: "maternica" },
     { slug: "dam-tebi" },
     { slug: "ne-verjemi" },
     { slug: "brez-ljubezni" },

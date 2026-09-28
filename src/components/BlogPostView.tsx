@@ -10,6 +10,76 @@ interface BlogPostViewProps {
   relatedPosts: BlogPost[];
 }
 
+function renderFormattedText(text: string): React.ReactNode {
+  if (!text || typeof text !== "string") return text;
+
+  // Regex to match markdown links: [label](url)
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  if (!regex.test(text)) {
+    return text;
+  }
+  regex.lastIndex = 0;
+
+  const parts: (string | React.ReactNode)[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    const label = match[1];
+    const url = match[2];
+    const isInternal = url.startsWith("/") || url.startsWith("#");
+
+    if (isInternal) {
+      parts.push(
+        <Link
+          key={match.index}
+          href={url}
+          className="text-[#6a882a] font-semibold underline underline-offset-4 hover:text-[var(--color-primary)] transition-colors inline-flex items-baseline"
+        >
+          {label}
+        </Link>
+      );
+    } else {
+      parts.push(
+        <a
+          key={match.index}
+          href={url}
+          target={url.startsWith("http") ? "_blank" : undefined}
+          rel={url.startsWith("http") ? "noopener noreferrer" : undefined}
+          className="text-[#6a882a] font-semibold underline underline-offset-4 hover:text-[var(--color-primary)] transition-colors inline-flex items-baseline gap-1"
+        >
+          <span>{label}</span>
+          {url.startsWith("http") && (
+            <svg
+              className="w-3.5 h-3.5 inline-block self-center opacity-80"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          )}
+        </a>
+      );
+    }
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+}
+
 export default function BlogPostView({ post, relatedPosts }: BlogPostViewProps) {
   const { t, language } = useLanguage();
 
@@ -91,7 +161,7 @@ export default function BlogPostView({ post, relatedPosts }: BlogPostViewProps) 
                   key={idx}
                   className="text-xl sm:text-2xl font-serif text-[var(--color-primary)] pt-6 pb-1 font-semibold"
                 >
-                  {block.content}
+                  {typeof block.content === "string" ? renderFormattedText(block.content) : block.content}
                 </h3>
               );
             }
@@ -135,7 +205,7 @@ export default function BlogPostView({ post, relatedPosts }: BlogPostViewProps) 
                   key={idx}
                   className="font-serif italic text-xl sm:text-2xl text-[var(--color-primary)] my-8 p-6 sm:p-8 bg-[var(--color-surface)] rounded-lg text-center border-l-4 border-[var(--color-primary)] shadow-sm"
                 >
-                  {block.content}
+                  {typeof block.content === "string" ? renderFormattedText(block.content) : block.content}
                 </blockquote>
               );
             }
@@ -146,7 +216,9 @@ export default function BlogPostView({ post, relatedPosts }: BlogPostViewProps) 
                   key={idx}
                   className="bg-[#f5eff7] p-6 sm:p-8 rounded-xl border border-[var(--color-border)] my-6 text-[var(--color-primary)] font-medium"
                 >
-                  <p className="leading-relaxed whitespace-pre-line">{block.content}</p>
+                  <p className="leading-relaxed whitespace-pre-line">
+                    {typeof block.content === "string" ? renderFormattedText(block.content) : block.content}
+                  </p>
                 </div>
               );
             }
@@ -160,7 +232,7 @@ export default function BlogPostView({ post, relatedPosts }: BlogPostViewProps) 
                   {block.content.map((item, itemIdx) => (
                     <li key={itemIdx} className="flex items-start gap-2">
                       <span className="text-[#6a882a] font-bold">&bull;</span>
-                      <span>{item}</span>
+                      <span className="whitespace-pre-line">{renderFormattedText(item)}</span>
                     </li>
                   ))}
                 </ul>
@@ -172,7 +244,9 @@ export default function BlogPostView({ post, relatedPosts }: BlogPostViewProps) 
               return (
                 <div key={idx} className="space-y-4">
                   {lines.map((pText, pIdx) => (
-                    <p key={pIdx}>{pText}</p>
+                    <p key={pIdx} className="whitespace-pre-line">
+                      {renderFormattedText(pText)}
+                    </p>
                   ))}
                 </div>
               );
