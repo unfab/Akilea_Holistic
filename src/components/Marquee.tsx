@@ -51,7 +51,7 @@ export default function Marquee() {
                 </span>
               </div>
               <p className="font-serif italic text-sm sm:text-base text-white/95 leading-relaxed">
-                "{item.text}"
+                &quot;{item.text}&quot;
               </p>
             </div>
           ))}
@@ -70,7 +70,7 @@ export default function Marquee() {
                 </span>
               </div>
               <p className="font-serif italic text-sm sm:text-base text-white/95 leading-relaxed">
-                "{item.text}"
+                &quot;{item.text}&quot;
               </p>
             </div>
           ))}

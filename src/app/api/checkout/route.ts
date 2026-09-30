@@ -50,10 +50,11 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Stripe API napaka:', error);
+    const message = error instanceof Error ? error.message : '';
     return NextResponse.json(
-      { error: error.message || 'Prišlo je do napake pri obdelavi plačila.' },
+      { error: message || 'Prišlo je do napake pri obdelavi plačila.' },
       { status: 500 }
     );
   }

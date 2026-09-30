@@ -159,7 +159,6 @@ export default function BookingWidget() {
   };
 
   const isContactValid = formData.name.trim().length > 0 && (formData.email.trim().length > 0 || formData.phone.trim().length > 0);
-  const selectedSvcDetails = services.find(s => s.id === selectedService);
 
   if (isSuccess) {
     return (

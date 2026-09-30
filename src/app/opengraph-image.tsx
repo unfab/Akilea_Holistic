@@ -26,7 +26,6 @@ export default async function Image() {
           borderBottom: "16px solid #915296",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={emblemSrc} width={330} height={248} alt="" />
         <div
           style={{

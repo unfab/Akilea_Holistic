@@ -147,7 +147,7 @@ export default function TestimonialsCarousel() {
 
                 {/* Quote Text */}
                 <p className="font-serif italic text-lg sm:text-xl text-[var(--color-text)] leading-relaxed mb-6">
-                  "{item.text}"
+                  &quot;{item.text}&quot;
                 </p>
               </div>
 

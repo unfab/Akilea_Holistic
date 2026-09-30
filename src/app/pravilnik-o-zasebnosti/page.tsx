@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Pravilnik o zasebnosti | Akilea Center zdravja",
@@ -20,7 +19,7 @@ export default function PravilnikZasebnostiPage() {
           
           <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">1. Uvod</h2>
           <p>
-            V centru zdravja Akilea (v nadaljevanju "mi", "nas" ali "naš") spoštujemo vašo zasebnost in se zavezujemo k varovanju vaših osebnih podatkov. Ta pravilnik pojasnjuje, kako zbiramo, uporabljamo in varujemo vaše podatke, ko obiščete našo spletno stran in uporabljate naše storitve.
+            V centru zdravja Akilea (v nadaljevanju &quot;mi&quot;, &quot;nas&quot; ali &quot;naš&quot;) spoštujemo vašo zasebnost in se zavezujemo k varovanju vaših osebnih podatkov. Ta pravilnik pojasnjuje, kako zbiramo, uporabljamo in varujemo vaše podatke, ko obiščete našo spletno stran in uporabljate naše storitve.
           </p>
 
           <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">2. Zbiranje podatkov</h2>

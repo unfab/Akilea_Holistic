@@ -12,6 +12,8 @@ export default function CookieBanner() {
     // Check if the user has already consented
     const consent = localStorage.getItem("cookieConsent");
     if (!consent) {
+      // localStorage is only readable after mount; reading it during render would cause a hydration mismatch.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsVisible(true);
     }
   }, []);

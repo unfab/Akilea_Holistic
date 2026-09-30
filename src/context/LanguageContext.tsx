@@ -21,6 +21,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     try {
       const savedLang = localStorage.getItem("akilea_lang") as Language | null;
       if (savedLang && VALID_LANGUAGES.includes(savedLang)) {
+        // Server renders "sl"; the saved language can only be applied after mount without a hydration mismatch.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setLanguageState(savedLang);
         return;
       }
