@@ -4,7 +4,10 @@ import { useState, useMemo, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { WEB3FORMS_KEY, isOnlinePaymentEnabled } from "@/config/site";
 import { toLocalDateString } from "@/lib/date";
-import { SLOT_TIMES } from "@/config/booking";
+import { BOOKING_HORIZON_DAYS, SERVICE_DURATIONS_MIN } from "@/config/booking";
+import { freeTimesForDay, serviceDuration } from "@/lib/slots";
+
+const DAY_MS = 24 * 60 * 60 * 1000;
 
 const SLOT_TAKEN_MESSAGE = "Ta termin je zaseden. Prosimo, izberite drug termin.";
 
@@ -63,7 +66,12 @@ export default function BookingWidget() {
   const freeDays = availability?.key === availabilityKey ? availability.days : null;
   const isDayFull = (dateStr: string) => freeDays?.[dateStr]?.length === 0;
   const selectedDate = pickedDate && !isDayFull(pickedDate) ? pickedDate : null;
-  const availableTimes: readonly string[] = (selectedDate && freeDays?.[selectedDate]) || SLOT_TIMES;
+  // Without calendar data every slot would be offered, including past ones and
+  // dates beyond the booking horizon that the server rejects. Apply the same
+  // rules locally so the customer only sees times the server accepts.
+  const localTimesFor = (dateStr: string): string[] =>
+    freeTimesForDay(dateStr, serviceDuration(selectedService ?? 0) ?? Math.min(...SERVICE_DURATIONS_MIN), [], new Date());
+  const availableTimes: readonly string[] = selectedDate ? (freeDays?.[selectedDate] ?? localTimesFor(selectedDate)) : [];
   const selectedTime = pickedTime && availableTimes.includes(pickedTime) ? pickedTime : null;
 
   // Calendar generation logic
@@ -100,6 +108,7 @@ export default function BookingWidget() {
     if (date < today) return;
     const dateStr = toLocalDateString(date);
     if (isDayFull(dateStr)) return;
+    if (!freeDays && localTimesFor(dateStr).length === 0) return;
     setSelectedDate(dateStr);
     setSelectedTime(null);
   };
@@ -334,7 +343,8 @@ export default function BookingWidget() {
                   {calendarDays.map((date, index) => {
                     if (!date) return <div key={`pad-${index}`} className="p-2"></div>;
                     const dateStr = toLocalDateString(date);
-                    const isPast = date < today || isDayFull(dateStr);
+                    const isBeyondHorizon = date.getTime() >= today.getTime() + BOOKING_HORIZON_DAYS * DAY_MS;
+                    const isPast = date < today || isBeyondHorizon || isDayFull(dateStr);
                     const isSelected = selectedDate === dateStr;
                     return (
                       <button 

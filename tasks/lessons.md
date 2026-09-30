@@ -33,3 +33,8 @@
 - **Netlify is not linked to GitHub.** A push to `main` deployed nothing (previous deploys have `deploy_source: api`). Deploy with the connector's `deploy-site` command from a `git archive` export: running it in the working tree tried to upload ~900 MB (`.next`) plus `.env.local` and failed with `fetch failed`.
 - Set required env vars on Netlify **before** the first build that needs them (`NEXT_PUBLIC_*` is baked in at build time). The site had no env vars at all before 2026-09-30.
 - Wix image URLs: strip `/v1/fill/...` to get the original. Originals can be 15 MB; cap at 2400 px (`sips -Z 2400`).
+
+## Booking widget fallback (found live 2026-09-30)
+
+- When Google is unavailable the widget used to offer **all** slots. The server still applies its rules (future only, 90-day horizon) and answered 400 for e.g. today's 11:00 at 14:48 → generic error alert, booking lost. The widget now applies the same rules locally (`freeTimesForDay` with no busy times) whenever it has no calendar data. Keep client and server rules in sync (`src/lib/slots.ts` is shared).
+- Test time-dependent UI with Playwright `ctx.clock.setFixedTime(...)` (see the scenario approach in earlier sessions) instead of hoping the real clock hits the case.

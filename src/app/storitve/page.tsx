@@ -81,7 +81,7 @@ export default function StoritvePage() {
       title: t.servicesPage.items[0]?.name || "Intuitivna masaža celega telesa",
       duration: t.servicesPage.items[0]?.duration || "1 h 45 min",
       price: `${t.servicesPage.items[0]?.price || 85} €`,
-      image: "/images/storitve/mirjana-masaza-hero.jpg",
+      image: "/images/storitve/masaza-nog.jpg",
       stripeLink: "https://buy.stripe.com/14AdRag2k9ts9HB46ycQU02",
       description: t.servicesPage.items[0] ? (
         <ServiceContent item={t.servicesPage.items[0]} />
