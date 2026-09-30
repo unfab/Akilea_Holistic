@@ -39,3 +39,5 @@
 
 - When Google is unavailable the widget used to offer **all** slots. The server still applies its rules (future only, 90-day horizon) and answered 400 for e.g. today's 11:00 at 14:48 → generic error alert, booking lost. The widget now applies the same rules locally (`freeTimesForDay` with no busy times) whenever it has no calendar data. Keep client and server rules in sync (`src/lib/slots.ts` is shared).
 - Test time-dependent UI with Playwright `ctx.clock.setFixedTime(...)` (see the scenario approach in earlier sessions) instead of hoping the real clock hits the case.
+
+- **Right after a deploy, `/_next/image` URLs are cold** (~1 s each, many at once). A live browser check may flag some images as broken on the first run; curl one URL and re-run before assuming a real problem.
