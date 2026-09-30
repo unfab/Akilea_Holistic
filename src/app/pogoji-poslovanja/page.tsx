@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Pogoji poslovanja | Akilea Center zdravja",
   description: "Splošni pogoji poslovanja in uporabe storitev.",
+  alternates: {
+    canonical: "https://www.akilea.si/pogoji-poslovanja",
+  },
 };
 
 export default function PogojiPoslovanjaPage() {

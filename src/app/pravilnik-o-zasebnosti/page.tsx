@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Pravilnik o zasebnosti | Akilea Center zdravja",
   description: "Preberite naš pravilnik o zasebnosti in varovanju osebnih podatkov.",
+  alternates: {
+    canonical: "https://www.akilea.si/pravilnik-o-zasebnosti",
+  },
 };
 
 export default function PravilnikZasebnostiPage() {

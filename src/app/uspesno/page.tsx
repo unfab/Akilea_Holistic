@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isOnlinePaymentEnabled } from "@/config/site";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default function UspesnoPlacilo() {
   if (!isOnlinePaymentEnabled()) notFound();
