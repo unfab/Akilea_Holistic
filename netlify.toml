@@ -1,0 +1,9 @@
+# Next.js is detected automatically by Netlify (OpenNext adapter).
+# Security headers live in next.config.ts so they apply to static and SSR responses alike.
+
+[build]
+  command = "npm run build"
+
+[build.environment]
+  # Next 16 requires Node 20.9+.
+  NODE_VERSION = "22"
