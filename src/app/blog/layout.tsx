@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Blog o zdravju, intuiciji in modrosti telesa | Akilea",
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
     canonical: "https://www.akilea.si/blog",
   },
   openGraph: {
+    images: [DEFAULT_OG_IMAGE],
     title: "Blog o zdravju, intuiciji in modrosti telesa | Akilea",
     description: "Zapisi Mirjane Groznik o intuiciji, masažah, bolečinah v križu in čustvih.",
     url: "https://www.akilea.si/blog",

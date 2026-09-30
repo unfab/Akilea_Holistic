@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Intuitivno svetovanje & Reading Koper | Akilea",
@@ -59,6 +60,7 @@ export const metadata: Metadata = {
     canonical: "https://www.akilea.si/posvet",
   },
   openGraph: {
+    images: [DEFAULT_OG_IMAGE],
     title: "Intuitivno svetovanje & Reading Koper | Akilea",
     description: "Intuitivno svetovanje in reading z Mirjano Groznik v Kopru ali na daljavo.",
     url: "https://www.akilea.si/posvet",

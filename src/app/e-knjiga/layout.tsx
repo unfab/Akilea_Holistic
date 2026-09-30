@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "E-knjiga & Praktični vodnik: Ko telo spregovori | Akilea",
@@ -40,6 +41,7 @@ export const metadata: Metadata = {
     canonical: "https://www.akilea.si/e-knjiga",
   },
   openGraph: {
+    images: [DEFAULT_OG_IMAGE],
     title: "E-knjiga & Praktični vodnik: Ko telo spregovori | Akilea",
     description: "Brezplačna e-knjiga in praktični vodnik Mirjane Groznik za poslušanje sporočil telesa.",
     url: "https://www.akilea.si/e-knjiga",

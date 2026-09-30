@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Intuitivna masaža Koper — storitve | Akilea",
@@ -39,6 +40,7 @@ export const metadata: Metadata = {
     canonical: "https://www.akilea.si/storitve",
   },
   openGraph: {
+    images: [DEFAULT_OG_IMAGE],
     title: "Intuitivna masaža Koper — storitve | Akilea",
     description: "Intuitivna masaža celega telesa, hrbta in trebuha v Kopru. Sprostite bolečine in prisluhnite telesu.",
     url: "https://www.akilea.si/storitve",
