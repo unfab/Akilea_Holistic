@@ -1,15 +1,20 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { WEB3FORMS_KEY, isOnlinePaymentEnabled } from "@/config/site";
 import { toLocalDateString } from "@/lib/date";
+import { SLOT_TIMES } from "@/config/booking";
+
+const SLOT_TAKEN_MESSAGE = "Ta termin je zaseden. Prosimo, izberite drug termin.";
+
+type ReserveResult = "ok" | "taken" | "rejected" | "fallback";
 
 export default function BookingWidget() {
   const { t } = useLanguage();
   const [selectedService, setSelectedService] = useState<number | null>(null);
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [pickedDate, setSelectedDate] = useState<string | null>(null);
+  const [pickedTime, setSelectedTime] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<'lokacija' | 'stripe'>('lokacija');
   
   // Calendar state
@@ -31,7 +36,31 @@ export default function BookingWidget() {
     }));
   }, [t]);
 
-  const availableTimes = ['09:00', '11:00', '13:30', '16:00', '18:00'];
+  // Availability from Google Calendar. null days = unknown (loading or
+  // unavailable): every slot is shown, as before the calendar integration.
+  const monthKey = `${currentMonthStart.getFullYear()}-${String(currentMonthStart.getMonth() + 1).padStart(2, "0")}`;
+  const [refreshCount, setRefreshCount] = useState(0);
+  const availabilityKey = `${monthKey}|${selectedService ?? ""}|${refreshCount}`;
+  const [availability, setAvailability] = useState<{ key: string; days: Record<string, string[]> | null } | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const params = new URLSearchParams({ month: monthKey });
+    if (selectedService) params.set("service", String(selectedService));
+    fetch(`/api/availability?${params}`, { signal: controller.signal, cache: "no-store" })
+      .then(async (res) => (res.ok ? ((await res.json()) as { days: Record<string, string[]> }).days : null))
+      .catch(() => null)
+      .then((days) => {
+        if (!controller.signal.aborted) setAvailability({ key: availabilityKey, days });
+      });
+    return () => controller.abort();
+  }, [availabilityKey, monthKey, selectedService]);
+
+  const freeDays = availability?.key === availabilityKey ? availability.days : null;
+  const isDayFull = (dateStr: string) => freeDays?.[dateStr]?.length === 0;
+  const selectedDate = pickedDate && !isDayFull(pickedDate) ? pickedDate : null;
+  const availableTimes: readonly string[] = (selectedDate && freeDays?.[selectedDate]) || SLOT_TIMES;
+  const selectedTime = pickedTime && availableTimes.includes(pickedTime) ? pickedTime : null;
 
   // Calendar generation logic
   const calendarDays = useMemo(() => {
@@ -66,8 +95,33 @@ export default function BookingWidget() {
   const handleDateSelect = (date: Date) => {
     if (date < today) return;
     const dateStr = toLocalDateString(date);
+    if (isDayFull(dateStr)) return;
     setSelectedDate(dateStr);
     setSelectedTime(null);
+  };
+
+  const reserveSlot = async (serviceId: number): Promise<ReserveResult> => {
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          serviceId,
+          date: selectedDate,
+          time: selectedTime,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          honeypot: formData.honeypot,
+        }),
+      });
+      if (res.ok) return "ok";
+      if (res.status === 409) return "taken";
+      if (res.status === 400 || res.status === 429) return "rejected";
+      return "fallback";
+    } catch {
+      return "fallback";
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -101,7 +155,7 @@ export default function BookingWidget() {
         
         const data = await response.json();
         if (data.url) {
-          window.location.href = data.url; // Redirect to Stripe Checkout
+          window.location.assign(data.url); // Redirect to Stripe Checkout
         } else {
           console.error("Stripe error:", data.error);
           alert("Napaka pri povezavi s plačilnim sistemom. Preverite .env ključe.");
@@ -113,6 +167,23 @@ export default function BookingWidget() {
         setIsSubmitting(false);
       }
     } else {
+      // Reserve the slot in Google Calendar first. If the calendar is not
+      // reachable the booking still goes out by email (no lost bookings).
+      const reservation = await reserveSlot(svc.id);
+      if (reservation === "taken") {
+        alert(SLOT_TAKEN_MESSAGE);
+        setSelectedTime(null);
+        setRefreshCount((n) => n + 1);
+        setIsSubmitting(false);
+        return;
+      }
+      if (reservation === "rejected") {
+        alert("Napaka pri pošiljanju rezervacije. Prosimo, poskusite kasneje.");
+        setIsSubmitting(false);
+        return;
+      }
+      const isInCalendar = reservation === "ok";
+
       try {
         const res = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
@@ -137,7 +208,8 @@ export default function BookingWidget() {
         
         const result = await res.json();
         
-        if (result.success) {
+        // Once the event is in the calendar the booking is recorded, even if the email fails.
+        if (result.success || isInCalendar) {
           setIsSubmitting(false);
           setIsSuccess(true);
           // Reset form
@@ -152,6 +224,15 @@ export default function BookingWidget() {
         }
       } catch (err) {
         console.error(err);
+        if (isInCalendar) {
+          setIsSubmitting(false);
+          setIsSuccess(true);
+          setSelectedService(null);
+          setSelectedDate(null);
+          setSelectedTime(null);
+          setFormData({ name: "", email: "", phone: "", honeypot: "" });
+          return;
+        }
         alert("Napaka na omrežju. Prosimo, preverite povezavo in poskusite znova.");
         setIsSubmitting(false);
       }
@@ -247,8 +328,9 @@ export default function BookingWidget() {
                 <div className="grid grid-cols-7 gap-2 text-center">
                   {calendarDays.map((date, index) => {
                     if (!date) return <div key={`pad-${index}`} className="p-2"></div>;
-                    const isPast = date < today;
-                    const isSelected = selectedDate === toLocalDateString(date);
+                    const dateStr = toLocalDateString(date);
+                    const isPast = date < today || isDayFull(dateStr);
+                    const isSelected = selectedDate === dateStr;
                     return (
                       <button 
                         key={date.toISOString()}
