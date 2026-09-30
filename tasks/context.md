@@ -12,7 +12,7 @@ Replaces her old Wix site.
 |---|---|
 | Live | https://akilea.netlify.app (production domain www.akilea.si, DNS cutover not done yet) |
 | Repo | github.com/unfab/Akilea_Holistic (public), branch `main` = production |
-| Hosting | Netlify project `akilea` (site id `4346de5b-8692-48a2-93f5-7e7c4ae70f39`), auto-deploys on push to `main` |
+| Hosting | Netlify project `akilea` (site id `4346de5b-8692-48a2-93f5-7e7c4ae70f39`). **Not git-connected**: pushing to GitHub does not deploy. Deploys go through the Netlify API (see "Deploying" below) |
 | Stack | Next.js 16.3.7 (App Router, Turbopack), React 19, Tailwind 4, TypeScript. No database |
 | Languages | SL (default), EN, HR, IT, SR — client-side dictionaries in `src/i18n/locales/*.ts` |
 | Forms | Web3Forms (booking email + /posvet), MailerLite links (e-book, newsletter) |
@@ -20,6 +20,7 @@ Replaces her old Wix site.
 
 ## Status
 
+- **Live since 2026-09-30** (deploy `6abd001ffcbeb02d04d52a1a`, commit `783354e`): Phase A + Phase B code. Verified live: headers, real 404s, robots, OG images, 22 pages load, booking falls back to email (Web3Forms mocked in the check).
 - **Phase A (launch prep): done** — A1–A11 from `plan.md`.
 - **Phase B (no double-booking): code done (B1–B6), B7 blocked** on the Google Cloud setup (see `leftover.md`).
   Until `GOOGLE_*` env vars exist, the booking APIs answer 503 and the widget uses the old email-only flow.
@@ -65,6 +66,15 @@ Widget ──▶ Web3Forms email to Mirjana (client side, after the calendar con
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY`, `GOOGLE_BOOKING_CALENDAR_ID`, `GOOGLE_BUSY_CALENDAR_IDS` | no | Phase B. See `.env.example` |
 
 Local: `.env.local` (git-ignored) holds the Web3Forms key.
+
+## Deploying
+
+1. Commit and push `main` to GitHub (source of truth).
+2. Export only committed files: `git archive main | tar -x -C <empty dir>` — never deploy the working tree (the tool zips everything except `node_modules`/`.git`, including the ~900 MB `.next` cache and `.env.local`).
+3. Netlify connector `deploy-site` with the site id → run the returned `npx @netlify/mcp … --site-id … --proxy-path …` command **inside the export dir**. It builds on Netlify and waits until ready.
+4. Verify live: `curl -I https://akilea.netlify.app`, 404s, and a browser pass (see `lessons.md`).
+
+Optional improvement: link the GitHub repo in Netlify (Site configuration → Build & deploy) so pushes to `main` deploy automatically.
 
 ## Commands
 

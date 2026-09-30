@@ -5,9 +5,10 @@
 
 ## 1. Verify the 2026-09-30 production deploy (me, first thing)
 
-- [ ] Real Web3Forms submission from the live booking widget and from `/posvet` arrives in Mirjana's inbox (**you** confirm the email).
-- [ ] `curl -I https://akilea.netlify.app` shows the security headers; unknown route and `/blog/xyz` return 404.
-- [ ] `/api/availability?month=…` answers 503 (expected until Google is configured) and booking still works by email.
+- [ ] Real Web3Forms submission from the live booking widget and from `/posvet` arrives in Mirjana's inbox (**you** confirm the email — my checks mocked Web3Forms so no email was sent).
+- [x] Security headers, 404s (`/ne-obstaja`, `/blog/xyz`, `/uspesno`), robots, OG images, all 22 sitemap pages — verified live 2026-09-30.
+- [x] `/api/availability` answers 503 (expected until Google is configured); booking falls back to email — verified live.
+- [ ] Optional: link GitHub repo in Netlify so pushes deploy automatically (**you**, dashboard).
 
 ## 2. Phase B7 — Google Calendar go-live (you, then me)
 

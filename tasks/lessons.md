@@ -30,5 +30,6 @@
 
 - The `block-no-verify` hook rejects any Bash command that contains `git commit` together with a `-n` flag anywhere (e.g. `grep -n`). Run commits as their own command.
 - zsh: `echo =====` fails (`=` expansion). Use quotes.
-- Netlify builds from GitHub `main` automatically; there is no Netlify CLI locally. Env vars and deploys are managed through the Netlify connector or the dashboard.
+- **Netlify is not linked to GitHub.** A push to `main` deployed nothing (previous deploys have `deploy_source: api`). Deploy with the connector's `deploy-site` command from a `git archive` export: running it in the working tree tried to upload ~900 MB (`.next`) plus `.env.local` and failed with `fetch failed`.
+- Set required env vars on Netlify **before** the first build that needs them (`NEXT_PUBLIC_*` is baked in at build time). The site had no env vars at all before 2026-09-30.
 - Wix image URLs: strip `/v1/fill/...` to get the original. Originals can be 15 MB; cap at 2400 px (`sips -Z 2400`).

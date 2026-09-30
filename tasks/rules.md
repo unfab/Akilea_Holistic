@@ -32,4 +32,4 @@
 - Keep the Stripe flag **off** until the items in `debt.md` D2 are done.
 - Booking constants live in `src/config/booking.ts`; site constants in `src/config/site.ts`. Do not hardcode them elsewhere.
 - Testable logic stays framework-free with injected deps and relative `.ts` imports (see `lessons.md`).
-- Production = push to `main` (Netlify auto-deploys). Push only when Aleksandar says so, and check the deploy afterwards.
+- Production deploys only when Aleksandar says so. Push `main` first, then deploy a clean `git archive` export via the Netlify connector (steps in `context.md` → Deploying), then verify the live site.
