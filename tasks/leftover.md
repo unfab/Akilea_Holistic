@@ -1,0 +1,42 @@
+# Leftover — next session
+
+> Ordered by priority. Tick items off here and move finished context into `context.md`.
+> Owner: **me** = can be done by Claude in the repo, **you** = needs Aleksandar / Mirjana.
+
+## 1. Verify the 2026-09-30 production deploy (me, first thing)
+
+- [ ] Real Web3Forms submission from the live booking widget and from `/posvet` arrives in Mirjana's inbox (**you** confirm the email).
+- [ ] `curl -I https://akilea.netlify.app` shows the security headers; unknown route and `/blog/xyz` return 404.
+- [ ] `/api/availability?month=…` answers 503 (expected until Google is configured) and booking still works by email.
+
+## 2. Phase B7 — Google Calendar go-live (you, then me)
+
+Checklist for **you**, logged in as mirjana@akilea.si, with Mirjana's knowledge (full version in `plan.md`, "Google setup checklist"):
+
+1. Google Cloud project (e.g. `akilea-booking`) → enable Google Calendar API.
+2. Service account → JSON key. If key creation is blocked by org policy: allow `iam.disableServiceAccountKeyCreation` for this project, or fall back to OAuth refresh token (only `getAccessToken()` in `src/lib/google-calendar.ts` changes).
+3. New calendar **"Akilea rezervacije"** → share with the service-account email, "Make changes to events" → copy its Calendar ID.
+4. Share her **primary** calendar with the service account, "See only free/busy".
+5. If sharing is refused: Admin console → Apps → Google Workspace → Calendar → Sharing settings → allow external sharing.
+6. Netlify env vars (store only email + key, not the whole JSON; ~4 KB function env limit):
+   `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY` (with `\n`), `GOOGLE_BOOKING_CALENDAR_ID`, `GOOGLE_BUSY_CALENDAR_IDS` (primary ID + booking calendar ID, comma separated). Redeploy.
+
+Then **me** (B7):
+- [ ] Sandbox first: book → slot disappears → delete the event → slot returns. Also add a personal event on the primary calendar → slot disappears.
+- [ ] Two parallel `POST /api/bookings` for one slot → exactly one 200, one 409.
+- [ ] Check Netlify function logs for `Google Calendar unavailable` lines.
+- [ ] Same on the real calendar, then write the report.
+
+## 3. Content and decisions (you)
+
+- [ ] **About photo**: original file of Mirjana, 3:4, min 1200×1600 → put in `public/images/brand/`, swap in `src/app/page.tsx` (TODO comment there), drop `unoptimized`. This is the last external image host (Google thumbnail).
+- [ ] **Facebook / Instagram URLs** → `SOCIAL_LINKS` in `src/config/site.ts` (empty = hidden).
+- [ ] **DNS for www.akilea.si**: keep at Domenca (Webtasy d.o.o.) or move to Netlify. After cutover: add domain in Netlify, apex → www redirect, re-check canonicals.
+- [ ] **Privacy policy update** — see `privacy-policy.md`. Needs Mirjana's approval before any text changes on the site.
+- [ ] **Cookie banner copy** mentions "analitiko" but the site has no analytics. Mirjana to decide wording (copy is hers).
+
+## 4. Engineering follow-ups (me, after approval)
+
+See `debt.md`. Highest value first:
+- [ ] Booking calendar hydration mismatch (render calendar after mount).
+- [ ] Before re-enabling Stripe: server-side price lookup, webhook, real success check, reserve calendar slot on the card path.
