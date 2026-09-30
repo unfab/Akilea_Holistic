@@ -77,8 +77,9 @@ export async function getAvailability(
     try {
       busy = await deps.client.freeBusy(range);
     } catch (err) {
-      if (err instanceof GoogleCalendarError) return unavailable;
-      throw err;
+      if (!(err instanceof GoogleCalendarError)) throw err;
+      console.error("availability: Google Calendar unavailable:", err.message);
+      return unavailable;
     }
   }
   return { status: 200, body: { month, days: monthAvailability(month, durationMin, busy, deps.now) } };
@@ -228,6 +229,7 @@ export async function createBooking(input: unknown, deps: BookingDeps): Promise<
     return { status: 200, body: { ok: true } };
   } catch (err) {
     if (!(err instanceof GoogleCalendarError)) throw err;
+    console.error("bookings: Google Calendar error:", err.message);
     // The event exists, so the booking is recorded; do not make the customer retry.
     if (inserted) return { status: 200, body: { ok: true } };
     return unavailable;
