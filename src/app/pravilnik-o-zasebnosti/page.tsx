@@ -43,6 +43,10 @@ export default function PravilnikZasebnostiPage() {
             Pravna podlaga: zakoniti interes (člen 6(1)(f) GDPR) za zaščito rezervacijskega sistema.
           </p>
           <p>
+            <strong>Računi in računovodstvo.</strong> Če vam izdamo račun, podatke z računa obdelujemo in hranimo, kolikor to zahtevajo
+            davčni in računovodski predpisi. Pravna podlaga: izpolnjevanje zakonske obveznosti (člen 6(1)(c) GDPR).
+          </p>
+          <p>
             <strong>Povpraševanje za posvet.</strong> Ob pošiljanju obrazca za posvet prejmemo ime in priimek, e-pošto, telefonsko
             številko (neobvezno) in vaše sporočilo. Uporabimo jih le za odgovor na vaše povpraševanje. Pravna podlaga: ukrepi na vašo
             zahtevo pred sklenitvijo pogodbe (člen 6(1)(b) GDPR).
@@ -72,13 +76,17 @@ export default function PravilnikZasebnostiPage() {
           <p>Podatkov ne prodajamo. Za delovanje strani in poslovanja uporabljamo naslednje ponudnike, ki podatke obdelujejo v našem imenu:</p>
           <ul>
             <li>Netlify, Inc. – gostovanje spletne strani;</li>
-            <li>Web3Forms – posredovanje vsebine obrazcev (rezervacija, posvet) na našo e-pošto;</li>
+            <li>
+              Web3Forms (ponudnik s sedežem v Indiji) – posredovanje vsebine obrazcev (rezervacija, posvet) na našo e-pošto. Ponudnik za
+              to na strežnikih svojih infrastrukturnih ponudnikov hrani tudi kopijo poslanega obrazca (glejte točko 4);
+            </li>
             <li>Google Workspace (Google LLC) – naš e-poštni predal in koledar, v katerem so zapisani termini;</li>
             <li>MailerLite – prijava in pošiljanje e-novic.</li>
           </ul>
           <p>
-            Nekateri od teh ponudnikov imajo sedež v ZDA ali podatke obdelujejo izven Evropske unije. V tem primeru se prenos opira na
-            zaščitne ukrepe po GDPR (standardne pogodbene klavzule ali sklep Evropske komisije o ustreznosti). Podatke lahko razkrijemo
+            Nekateri od teh ponudnikov imajo sedež v ZDA ali Indiji ali podatke obdelujejo izven Evropske unije. V tem primeru se prenos
+            opira na zaščitne ukrepe po GDPR (standardne pogodbene klavzule iz pogodbe o obdelavi podatkov ali sklep Evropske komisije o
+            ustreznosti). Podatke lahko razkrijemo
             še organom, kadar to zahteva zakon.
           </p>
 
@@ -87,6 +95,10 @@ export default function PravilnikZasebnostiPage() {
             <li>
               <strong>Rezervacije in povpraševanja</strong> (e-pošta in koledar): dokler jih potrebujemo za dogovor in izvedbo storitve.
               Nato jih izbrišemo, razen kadar zakon zahteva daljšo hrambo (na primer računovodska dokumentacija).
+            </li>
+            <li>
+              <strong>Kopija obrazca pri Web3Forms:</strong> največ tri leta od oddaje obrazca oziroma krajše, kot je nastavljeno v našem
+              računu pri tem ponudniku.
             </li>
             <li>
               <strong>E-novice:</strong> do vašega preklica privolitve oziroma odjave.
@@ -107,7 +119,7 @@ export default function PravilnikZasebnostiPage() {
           </p>
           <ul>
             <li>
-              <strong>app_lang</strong> (piškotek, 1 leto) in <strong>akilea_lang</strong> (lokalna shramba): izbrani jezik strani;
+              <strong>app_lang</strong> (piškotek, 30 dni) in <strong>akilea_lang</strong> (lokalna shramba): izbrani jezik strani;
             </li>
             <li>
               <strong>cookieConsent</strong> (lokalna shramba): podatek, da ste obvestilo o piškotkih že potrdili.

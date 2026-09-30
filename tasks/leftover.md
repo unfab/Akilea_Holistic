@@ -35,7 +35,13 @@ Then **me** (B7):
 - [x] Facebook / Instagram URLs set in `SOCIAL_LINKS` (`src/config/site.ts`).
 - [x] About photo self-hosted at `public/images/brand/mirjana-o-meni.jpg` — but it is only **547×365** (the old Google thumbnail), soft on retina. **you**: get the original file from Mirjana (3:4, min 1200×1600) and overwrite that path. No code change needed.
 - [ ] **DNS for www.akilea.si**: keep at Domenca (Webtasy d.o.o.) or move to Netlify. After cutover: add domain in Netlify, apex → www redirect, re-check canonicals.
-- [ ] **Legal pages review by Mirjana** — privacy policy, terms and cookie notice were rewritten 2026-09-30 (details and open questions in `privacy-policy.md`). Needs her OK, a decision on the "informativne cene" wording, and ideally a check by someone qualified.
+- [ ] **Legal items that need Mirjana's green light** — full list with ready-to-paste Slovenian drafts in `privacy-policy.md` ("Needs Mirjana's green light"): ZIsRPS statement, withdrawal-right information, complaints handling + reply time, VAT wording, health warning next to the forms (5 languages), price wording / tips, cancellation fee, fixed retention periods, whole-page review (ideally by a lawyer).
+
+## 3b. Web3Forms (you, before launch)
+
+- [ ] In the Web3Forms dashboard set the **retention of stored submissions** for the form key to a short period (e.g. 30 days — Mirjana gets each submission by email anyway). Then update the sentence in `/pravilnik-o-zasebnosti` section 4 ("največ tri leta oziroma krajše…") to the exact period.
+- [ ] **Move the Web3Forms account to Mirjana** (her email as owner/recipient), create a new access key, set `NEXT_PUBLIC_WEB3FORMS_KEY` on Netlify (redeploy) and in `.env.local`. Until then customer data goes to your Gmail.
+- [ ] Optionally save Web3Forms' DPA (https://web3forms.com/dpa) with the business records.
 
 ## 4. Engineering follow-ups (me, after approval)
 

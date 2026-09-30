@@ -48,11 +48,34 @@ Verified against sources (search results; primary sites ip-rs.si and web3forms.c
 
 Not verified (article numbers and figures from the paste): retention numbers (10 years invoices, 3–5 years booking logs, 6–12 months inquiries), "8 working days" complaint deadline, ZDavP-2/ZDDV-1 article numbers, exact IP-RS guideline wording. Treat as leads, not as law.
 
-### Gaps found in what is live now (not yet changed)
+### Gaps found — status
 
-1. **Privacy policy omits the Web3Forms copy.** It says data goes by email; in fact Web3Forms keeps a copy (max 3 years) and is based in India. Fix the text and set a short retention in the Web3Forms dashboard for the key `NEXT_PUBLIC_WEB3FORMS_KEY`.
-2. **The Web3Forms account belongs to Aleksandar's email.** Mirjana's customers' data sits in his account. Move the key/account to Mirjana (or a shared AMS Solutions account with a DPA) before launch.
-3. **Terms lack:** withdrawal-right information (missing information can extend the withdrawal period by 12 months, per the paste — verify Art. 136), ZIsRPS statement, complaints contact and reply time, VAT wording ("nisem zavezanec za DDV" — current text says "nismo zavezanci").
-4. **Language cookie lives 1 year** and is redundant (localStorage already holds it). Shorten to ≤ 30 days or drop the cookie; then update section 5 of the policy.
-5. **Health data:** the policy asks people not to send health details; the paste additionally says the form itself should carry that instruction. Needs new visible text near the booking/posvet forms (Mirjana's approval).
-6. **Withdrawal consent at booking** (a checkbox for services not covered by the leisure exception) would be new UI text and a change to the booking flow — only if the legal check says so.
+| # | Gap | Status |
+|---|---|---|
+| 1 | Policy omitted the Web3Forms copy (India, up to 3 years) | **Fixed 2026-09-30** (sections 3 and 4). After the dashboard retention is set (leftover.md), replace "največ tri leta oziroma krajše…" with the exact period. |
+| 2 | Web3Forms account belongs to Aleksandar's email | **Open — Aleksandar** (leftover.md) |
+| 3 | Terms lack withdrawal info, ZIsRPS statement, complaints handling, VAT wording | **Needs Mirjana** — drafts below |
+| 4 | Language cookie lasted 1 year | **Fixed 2026-09-30** (30 days; policy section 5 updated). Set only after the user picks a language. |
+| 5 | Health-data warning next to the forms | **Needs Mirjana** — draft below |
+| 6 | Withdrawal consent checkbox at booking | **Needs Mirjana + legal check** — draft below |
+| — | Invoicing / accounting purpose (Art. 6(1)(c)) missing | **Added 2026-09-30** ("Računi in računovodstvo") |
+
+## Needs Mirjana's green light — draft wording
+
+All drafts are Slovenian, unpublished, and **must be checked by someone qualified** before use. Article numbers come from the pasted checklist plus search; verify them. Once approved: paste into `src/app/pogoji-poslovanja/page.tsx` (and the forms), keep `Zadnja posodobitev/Veljavnost od` dates current, translate any new *form* text into en/hr/it/sr (`src/i18n/locales/*.ts`), deploy.
+
+1. **Out-of-court dispute resolution (ZIsRPS Art. 32).** Mirjana chooses: recognise no provider (typical for a small business) or name one. Draft for "no provider":
+   > „Podjetje v skladu z 32. členom Zakona o izvensodnem reševanju potrošniških sporov (ZIsRPS) ne priznava nobenega izvajalca izvensodnega reševanja potrošniških sporov kot pristojnega za reševanje potrošniškega spora, ki bi ga potrošnik lahko sprožil v skladu s tem zakonom.“
+   Check the paragraph number, and whether a link to an EU/national dispute platform is still required (the EU ODR platform was, to my knowledge, shut down in 2025).
+2. **Right of withdrawal (ZVPot-1 Art. 134/135).** Must be told to the customer *before* booking; missing info can extend the withdrawal period. Draft for the terms:
+   > „Pravica do odstopa od pogodbe: Pri storitvah za prosti čas, ki jih izvedemo v točno določenem terminu (npr. intuitivna masaža), potrošnik v skladu z 135. členom ZVPot-1 nima pravice do odstopa od pogodbe, sklenjene na daljavo. Za druge storitve (npr. svetovanje) velja 14-dnevni rok za odstop; če potrošnik zahteva, da se storitev izvede v izbranem terminu, ob celotni izvedbi storitve pravico do odstopa izgubi.“
+   Open: which of her services count as "leisure" (massage probably; consulting/posvet unclear). If some do not, a checkbox at booking may be needed (draft): „Strinjam se, da se storitev izvede v izbranem terminu, in potrjujem, da z njeno celotno izvedbo izgubim pravico do odstopa od pogodbe.“ — this changes the booking flow (new widget text + validation + translations); only implement on the legal check's advice.
+3. **Complaints.** Mirjana decides the reply time (the checklist says 8 days is common practice — do not promise what she cannot keep). Draft:
+   > „Pritožbe lahko pošljete na mirjana@akilea.si ali po pošti na naslov AKILEA, Mirjana Groznik s.p., Šmarska cesta 5B, 6000 Koper. Na pritožbo odgovorimo v [8] dneh.“
+4. **VAT wording.** Terms say „nismo zavezanci za DDV“. The checklist suggests the statutory form: „Nisem zavezanka za DDV na podlagi 1. odstavka 94. člena ZDDV-1.“ Her accountant confirms the exact basis.
+5. **Health warning next to the forms** (booking widget step 3 and /posvet). New visible text in 5 languages. Slovenian draft: „Prosimo, ne vpisujte podatkov o svojem zdravstvenem stanju; o tem se pogovoriva osebno.“ (The privacy policy already says this.)
+6. **Prices ("informativne narave").** Consumer law expects the displayed price to be the price charged. Suggested: „Cene storitev so navedene na spletni strani v evrih.“ A voluntary tip does not need "informativne"; optional sentence: „Stranka lahko po lastni presoji doda napitnino.“ Aleksandar will ask her.
+7. **Cancellation fee (50 %).** Legal in principle if proportionate; a high fee for early cancellation can be an unfair term. Confirm she is comfortable with 50 % and 24 h. Terms already say how to cancel.
+8. **Retention.** Policy says "until no longer needed, unless law requires longer". Optional fixed periods to agree with her/accountant (the checklist's numbers are unverified): unbooked inquiries 6–12 months, booking logs 3–5 years, accounting records per tax law. Only promise what she will really delete.
+9. **Who owns the customer data stream:** move the Web3Forms account to Mirjana (Aleksandar, leftover.md) — also matters for who is "processor" for AMS Solutions.
+10. **Whole-page review** by Mirjana of privacy policy, terms and cookie notice; ideally by a lawyer.

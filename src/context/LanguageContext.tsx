@@ -43,7 +43,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
     try {
       localStorage.setItem("akilea_lang", newLang);
-      document.cookie = `app_lang=${newLang}; path=/; max-age=31536000; SameSite=Lax;`;
+      document.cookie = `app_lang=${newLang}; path=/; max-age=2592000; SameSite=Lax;`;
 
       // Clean up any old Google Translate cookies completely
       const host = window.location.hostname;
