@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { WEB3FORMS_KEY, isOnlinePaymentEnabled } from "@/config/site";
+import { toLocalDateString } from "@/lib/date";
 
 export default function BookingWidget() {
   const { t } = useLanguage();
@@ -64,7 +65,7 @@ export default function BookingWidget() {
   
   const handleDateSelect = (date: Date) => {
     if (date < today) return;
-    const dateStr = date.toISOString().split('T')[0];
+    const dateStr = toLocalDateString(date);
     setSelectedDate(dateStr);
     setSelectedTime(null);
   };
@@ -248,7 +249,7 @@ export default function BookingWidget() {
                   {calendarDays.map((date, index) => {
                     if (!date) return <div key={`pad-${index}`} className="p-2"></div>;
                     const isPast = date < today;
-                    const isSelected = selectedDate === date.toISOString().split('T')[0];
+                    const isSelected = selectedDate === toLocalDateString(date);
                     return (
                       <button 
                         key={date.toISOString()}
