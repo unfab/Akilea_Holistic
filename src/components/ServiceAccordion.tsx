@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
+import { isOnlinePaymentEnabled } from "@/config/site";
 
 interface ServiceProps {
   id: string;
@@ -56,9 +57,11 @@ export default function ServiceAccordion({ service }: { service: ServiceProps })
             <Link href="/#rezervacija" className="btn-primary px-8 py-3 text-xs uppercase tracking-widest font-bold text-center inline-block">
               {t.servicesPage.bookBtn}
             </Link>
+            {isOnlinePaymentEnabled() && (
             <a href={service.stripeLink} target="_blank" rel="noreferrer" className="bg-[var(--color-primary)] text-white px-8 py-3 text-xs uppercase tracking-widest font-bold text-center inline-block hover:bg-black transition-colors rounded">
               {t.servicesPage.payOnlineBtn}
             </a>
+            )}
           </div>
         </div>
       )}

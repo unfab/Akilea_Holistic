@@ -1,7 +1,12 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { isOnlinePaymentEnabled } from '@/config/site';
 
 export async function POST(req: Request) {
+  if (!isOnlinePaymentEnabled()) {
+    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  }
+
   if (!process.env.STRIPE_SECRET_KEY) {
     return NextResponse.json(
       { error: 'Stripe ni konfiguriran (manjka STRIPE_SECRET_KEY v .env)' },

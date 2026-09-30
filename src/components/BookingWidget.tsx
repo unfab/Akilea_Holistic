@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { WEB3FORMS_KEY } from "@/config/site";
+import { WEB3FORMS_KEY, isOnlinePaymentEnabled } from "@/config/site";
 
 export default function BookingWidget() {
   const { t } = useLanguage();
@@ -347,6 +347,7 @@ export default function BookingWidget() {
                   {isSubmitting && paymentMethod === 'lokacija' ? t.bookingWidget.waitingText : t.bookingWidget.payAtLocationBtn}
                 </button>
 
+                {isOnlinePaymentEnabled() && (
                 <button 
                   type="submit"
                   onClick={() => setPaymentMethod('stripe')}
@@ -358,6 +359,7 @@ export default function BookingWidget() {
                 >
                   {isSubmitting && paymentMethod === 'stripe' ? t.bookingWidget.redirectingText : t.bookingWidget.payWithCardBtn}
                 </button>
+                )}
               </div>
             </div>
           </div>

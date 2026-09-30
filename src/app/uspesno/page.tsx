@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { isOnlinePaymentEnabled } from "@/config/site";
 
 export default function UspesnoPlacilo() {
+  if (!isOnlinePaymentEnabled()) notFound();
+
   return (
     <div className="min-h-screen bg-[var(--color-bg)] flex flex-col items-center justify-center py-20 px-6">
       <div className="bg-white max-w-lg w-full rounded-2xl shadow-xl p-10 text-center border border-[var(--color-border)]">
