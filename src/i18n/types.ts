@@ -72,9 +72,7 @@ export interface TranslationDictionary {
     square1: {
       badge: string;
       tag: string;
-      date: string;
-      title: string;
-      desc: string;
+      label: string;
       cta: string;
       allBlogs: string;
     };

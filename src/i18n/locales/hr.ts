@@ -41,9 +41,7 @@ export const hr: TranslationDictionary = {
     square1: {
       badge: "1. Blog",
       tag: "Najnovije",
-      date: "Članci i razmišljanja • 30. tra",
-      title: "“Bez ljubavi mi živjeti nije…”",
-      desc: "Ljubav – najmoćnija sila u Svemiru. No zašto se u partnerskim odnosima tako često bude strah, obrambeni mehanizmi i sumnja u vlastitu vrijednost?",
+      label: "Članci i razmišljanja",
       cta: "Pročitaj članak →",
       allBlogs: "Svi blogovi",
     },

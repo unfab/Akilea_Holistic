@@ -41,9 +41,7 @@ export const it: TranslationDictionary = {
     square1: {
       badge: "1. Blog",
       tag: "Più recente",
-      date: "Articoli e riflessioni • 30 apr",
-      title: "“Vivere senza amore non si può…”",
-      desc: "L'amore – la forza più potente dell'Universo. Ma perché nelle relazioni di coppia emergono così spesso paure, meccanismi di difesa e dubbi sul proprio valore?",
+      label: "Articoli e riflessioni",
       cta: "Leggi l'articolo →",
       allBlogs: "Tutti i blog",
     },

@@ -5,6 +5,10 @@ import Image from "next/image";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import BookingWidget from "@/components/BookingWidget";
 import { useLanguage } from "@/context/LanguageContext";
+import { BLOG_POSTS } from "@/data/blogs";
+
+// BLOG_POSTS is ordered newest first.
+const latestPost = BLOG_POSTS[0];
 
 export default function Home() {
   const { t } = useLanguage();
@@ -233,8 +237,8 @@ export default function Home() {
             <div className="bg-white rounded-2xl border border-[var(--color-border)] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
               <div className="aspect-[16/10] overflow-hidden relative bg-[var(--color-surface)]">
                 <Image
-                  src="https://static.wixstatic.com/media/dfaf38_a0bc3f19155947b6b1c3e2c9a4aa3f6b~mv2.jpeg/v1/fill/w_800,h_1000,al_c,q_85,usm_0.66_1.00_0.01/dfaf38_a0bc3f19155947b6b1c3e2c9a4aa3f6b~mv2.jpeg"
-                  alt="Najnovejši blog"
+                  src={latestPost.image}
+                  alt={latestPost.title}
                   fill
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   unoptimized
@@ -249,18 +253,18 @@ export default function Home() {
 
               <div className="p-8 flex flex-col flex-grow">
                 <span className="text-[10px] uppercase tracking-widest text-[#6a882a] font-bold mb-2">
-                  {t.threeSquares.square1.date}
+                  {t.threeSquares.square1.label} • {latestPost.date}
                 </span>
                 <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-3 leading-snug group-hover:text-[var(--color-accent)] transition-colors">
-                  {t.threeSquares.square1.title}
+                  {latestPost.title}
                 </h3>
                 <p className="text-[var(--color-muted)] font-light text-sm leading-relaxed mb-6 flex-grow">
-                  {t.threeSquares.square1.desc}
+                  {latestPost.excerpt}
                 </p>
 
                 <div className="pt-4 border-t border-[var(--color-border)] flex items-center justify-between mt-auto">
                   <Link
-                    href="/blog/brez-ljubezni-mi-ziveti-ni"
+                    href={`/blog/${latestPost.slug}`}
                     className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#6a882a] hover:text-[var(--color-primary)] transition-colors"
                   >
                     {t.threeSquares.square1.cta}

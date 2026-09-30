@@ -41,9 +41,7 @@ export const en: TranslationDictionary = {
     square1: {
       badge: "1. Blogs",
       tag: "Latest",
-      date: "Articles & Reflections • Apr 30",
-      title: "“Life is not worth living without love…”",
-      desc: "Love – the most powerful force in the Universe. But why do fear, defense mechanisms, and self-doubt so frequently take over in partnerships?",
+      label: "Articles & Reflections",
       cta: "Read article →",
       allBlogs: "All blogs",
     },
