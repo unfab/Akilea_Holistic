@@ -92,7 +92,7 @@ export default function StoritvePage() {
       title: t.servicesPage.items[2]?.name || "Intuitivna masaža trebuha",
       duration: t.servicesPage.items[2]?.duration || "50 min",
       price: `${t.servicesPage.items[2]?.price || 50} €`,
-      image: "https://static.wixstatic.com/media/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png/v1/fill/w_863,h_574,al_c,q_90,enc_auto/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png",
+      image: "/images/storitve/masaza-trebuha.png",
       stripeLink: "https://buy.stripe.com/00w6oI3fyeNM1b59qScQU01",
       description: t.servicesPage.items[2] ? (
         <ServiceContent item={t.servicesPage.items[2]} />
@@ -103,7 +103,7 @@ export default function StoritvePage() {
       title: t.servicesPage.items[1]?.name || "Intuitivna masaža hrbta",
       duration: t.servicesPage.items[1]?.duration || "50 min",
       price: `${t.servicesPage.items[1]?.price || 50} €`,
-      image: "https://static.wixstatic.com/media/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg/v1/fit/w_3648,h_5472,al_c,q_90/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg",
+      image: "/images/storitve/masaza-hrbta.jpg",
       stripeLink: "https://buy.stripe.com/28E00k7vOcFE1b5dH8cQU00",
       description: t.servicesPage.items[1] ? (
         <ServiceContent item={t.servicesPage.items[1]} />

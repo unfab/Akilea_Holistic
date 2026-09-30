@@ -28,7 +28,7 @@ export default function ServiceAccordion({ service }: { service: ServiceProps })
       >
         <div className="flex items-center gap-6">
           <div className="w-20 h-20 md:w-32 md:h-32 shrink-0 relative rounded overflow-hidden hidden sm:block">
-            <Image src={service.image} alt={service.title} fill className="object-cover" unoptimized />
+            <Image src={service.image} alt={service.title} fill className="object-cover" sizes="128px" />
           </div>
           <div>
             <h3 className="text-2xl font-serif text-[var(--color-primary)] mb-2">{service.title}</h3>

@@ -28,11 +28,11 @@ export default function SkupinskaMeditacijaPage() {
     <div className="spa-view active bg-[var(--color-bg)] min-h-screen pb-20">
       <div className="relative h-[40vh] w-full min-h-[300px]">
         <Image 
-          src="https://static.wixstatic.com/media/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png/v1/fill/w_1200,h_600,al_c,q_90/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png"
+          src="/images/storitve/masaza-trebuha.png"
           alt="Skupinska meditacija"
           fill
           className="object-cover"
-          unoptimized
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <div className="text-center px-6">

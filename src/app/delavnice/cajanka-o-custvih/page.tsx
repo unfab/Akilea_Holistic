@@ -32,12 +32,12 @@ export default function CajankaPage() {
       {/* Hero Header */}
       <div className="relative h-[45vh] w-full min-h-[340px]">
         <Image 
-          src="https://static.wixstatic.com/media/11062b_dd8a0854f84e495a8e5d10f2b8c5f4ec~mv2.jpg/v1/fill/w_1200,h_600,al_c,q_85/11062b_dd8a0854f84e495a8e5d10f2b8c5f4ec~mv2.jpg"
+          src="/images/storitve/masaza-ramen-svece.jpg"
           alt="Topel čaj in varen prostor za pogovor"
           fill
           className="object-cover"
           priority
-          unoptimized
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex items-center justify-center">
           <div className="text-center px-6 max-w-3xl">

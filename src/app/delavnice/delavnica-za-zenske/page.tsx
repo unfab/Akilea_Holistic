@@ -29,11 +29,11 @@ export default function DelavnicaZaZenskePage() {
     <div className="spa-view active bg-[var(--color-bg)] min-h-screen pb-20">
       <div className="relative h-[40vh] w-full min-h-[300px]">
         <Image 
-          src="https://static.wixstatic.com/media/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg/v1/fit/w_1200,h_600,al_c,q_90/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg"
+          src="/images/storitve/masaza-hrbta.jpg"
           alt="Delavnica za ženske"
           fill
           className="object-cover"
-          unoptimized
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <div className="text-center px-6">

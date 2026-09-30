@@ -92,11 +92,11 @@ export default function Home() {
             <div className="group bg-[var(--color-surface)] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow">
               <div className="aspect-[4/3] overflow-hidden relative">
                 <Image
-                  src="https://static.wixstatic.com/media/a35aecb9d76b4ae39f68a92c19ffe590.jpg/v1/fill/w_333,h_220,fp_0.50_0.50,lg_1,q_80,enc_auto/a35aecb9d76b4ae39f68a92c19ffe590.jpg"
+                  src="/images/storitve/masaza-nog.jpg"
                   alt={t.servicesPage.items[0]?.name || "Intuitivna masaža telesa"}
                   fill
                   className="object-cover img-editorial"
-                  unoptimized
+                  sizes="(min-width: 768px) 33vw, 100vw"
                 />
                 <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-sm text-xs font-bold text-[var(--color-primary)]">
                   105 min &bull; 85 €
@@ -122,11 +122,11 @@ export default function Home() {
             <div className="group bg-[var(--color-surface)] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow">
               <div className="aspect-[4/3] overflow-hidden relative">
                 <Image
-                  src="https://static.wixstatic.com/media/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png/v1/fill/w_863,h_574,al_c,q_90,enc_auto/dfaf38_267e4d3890be41498fe3c650a577dd4f~mv2.png"
+                  src="/images/storitve/masaza-trebuha.png"
                   alt={t.servicesPage.items[2]?.name || "Intuitivna masaža trebuha"}
                   fill
                   className="object-cover img-editorial"
-                  unoptimized
+                  sizes="(min-width: 768px) 33vw, 100vw"
                 />
                 <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-sm text-xs font-bold text-[var(--color-primary)]">
                   50 min &bull; 50 €
@@ -152,11 +152,11 @@ export default function Home() {
             <div className="group bg-[var(--color-surface)] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow">
               <div className="aspect-[4/3] overflow-hidden relative">
                 <Image
-                  src="https://static.wixstatic.com/media/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg/v1/fit/w_3648,h_5472,al_c,q_90/nsplsh_316996a4b9cf4d828de72f45a7ea095c~mv2.jpg"
+                  src="/images/storitve/masaza-hrbta.jpg"
                   alt={t.servicesPage.items[1]?.name || "Intuitivna masaža hrbta"}
                   fill
                   className="object-cover img-editorial"
-                  unoptimized
+                  sizes="(min-width: 768px) 33vw, 100vw"
                 />
                 <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-sm text-xs font-bold text-[var(--color-primary)]">
                   50 min &bull; 50 €
@@ -241,7 +241,7 @@ export default function Home() {
                   alt={latestPost.title}
                   fill
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  unoptimized
+                  sizes="(min-width: 1024px) 33vw, 100vw"
                 />
                 <div className="absolute top-4 left-4 bg-[var(--color-primary)] text-white px-3 py-1 rounded-sm text-[10px] uppercase tracking-widest font-bold">
                   {t.threeSquares.square1.badge}
@@ -283,11 +283,11 @@ export default function Home() {
             <div className="bg-white rounded-2xl border border-[var(--color-border)] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
               <div className="aspect-[16/10] overflow-hidden relative bg-[var(--color-surface)]">
                 <Image
-                  src="https://static.wixstatic.com/media/11062b_dd8a0854f84e495a8e5d10f2b8c5f4ec~mv2.jpg/v1/fill/w_1200,h_600,al_c,q_85/11062b_dd8a0854f84e495a8e5d10f2b8c5f4ec~mv2.jpg"
+                  src="/images/storitve/masaza-ramen-svece.jpg"
                   alt="Čajanka s sporočilom"
                   fill
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  unoptimized
+                  sizes="(min-width: 1024px) 33vw, 100vw"
                 />
                 <div className="absolute top-4 left-4 bg-[var(--color-primary)] text-white px-3 py-1 rounded-sm text-[10px] uppercase tracking-widest font-bold">
                   {t.threeSquares.square2.badge}
@@ -389,6 +389,7 @@ export default function Home() {
       <section id="o-meni" className="py-20 lg:py-28 bg-white border-b border-[var(--color-border)]">
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1 relative rounded-2xl overflow-hidden shadow-lg aspect-[3/4] max-w-sm mx-auto w-full">
+            {/* TODO: replace with the original photo from Mirjana (3:4, min 1200x1600) in /public/images/brand, then drop unoptimized. Last external image host. */}
             <Image
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpRMog5kCJ9ZBNxxvqxuysiEaWuQPOg0mx_iTUqF7r9fQLiSkCaUEO2QA&s=10"
               alt={t.aboutSection.imageAlt}

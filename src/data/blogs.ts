@@ -144,7 +144,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "30. april 2026",
     readTime: "4 min",
     category: "Odnosi & Ljubezen",
-    image: "https://static.wixstatic.com/media/dfaf38_a0bc3f19155947b6b1c3e2c9a4aa3f6b~mv2.jpeg/v1/fill/w_800,h_1000,al_c,q_85,usm_0.66_1.00_0.01/dfaf38_a0bc3f19155947b6b1c3e2c9a4aa3f6b~mv2.jpeg",
+    image: "/images/blog/brez-ljubezni-mi-ziveti-ni.jpg",
     excerpt: "Ljubezen – najmočnejša sila v Vesolju. A zakaj se v partnerskih odnosih tako pogosto vklopi strah, obrambni mehanizem in misel, da si ljubezni ne zaslužimo?",
     paragraphs: [
       {
@@ -219,7 +219,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "16. marec 2026",
     readTime: "3 min",
     category: "Intuitivna masaža & Telo",
-    image: "https://static.wixstatic.com/media/dfaf38_3dde454674654e2f8cd0cecf1837fd2e~mv2.jpeg/v1/fill/w_667,h_1000,al_c,q_85,usm_0.66_1.00_0.01/dfaf38_3dde454674654e2f8cd0cecf1837fd2e~mv2.jpeg",
+    image: "/images/blog/notranji-otrok-kako-jih-vidim-jaz-na-intuitivnih-masazah.jpg",
     excerpt: "Majhna punčka, stara 4 leta, sedi na tleh z rokami okoli kolen in joče: »Zakaj me ne poslušajo?« Kako se nepredelani občutki iz otroštva zapišejo v telo in kako jih skozi masažo zacelimo.",
     paragraphs: [
       {
@@ -276,7 +276,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "30. januar 2026",
     readTime: "2 min",
     category: "Skrb zase",
-    image: "https://static.wixstatic.com/media/dfaf38_8440b8bbc3ca47aca7c986f4ec8354bd~mv2.jpeg/v1/fill/w_800,h_1000,al_c,q_85,usm_0.66_1.00_0.01/dfaf38_8440b8bbc3ca47aca7c986f4ec8354bd~mv2.jpeg",
+    image: "/images/blog/dam-tebi-a-tudi-sebi.jpg",
     excerpt: "»Kdor hoče, najde pot, kdor pa ne, najde izgovore« .. brrr, ne vem za vas, ampak mene je ta stavek v preteklosti tolikokrat prav znerviral...",
     paragraphs: [
       {
@@ -316,7 +316,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "11. december 2025",
     readTime: "4 min",
     category: "Umiritev & Čuječnost",
-    image: "https://static.wixstatic.com/media/dfaf38_5ec3cd8402024e1bbf1b56695359ed48~mv2.jpeg/v1/fill/w_1000,h_563,al_c,q_85,usm_0.66_1.00_0.01/dfaf38_5ec3cd8402024e1bbf1b56695359ed48~mv2.jpeg",
+    image: "/images/blog/ne-verjemi-vsemu-kar-slisis.jpg",
     excerpt: "Preprosta enačba DECEMBER = HITENJE + STRES + IZČRPANOST. Zapisana v kolektivni zavesti. Kaj pa če izberemo hvaležnost in notranji mir?",
     paragraphs: [
       {
@@ -369,7 +369,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "30. oktober 2025",
     readTime: "2 min",
     category: "Čustva & Prisotnost",
-    image: "https://static.wixstatic.com/media/dfaf38_d211d9f8785948cfb615e1151b09c99e~mv2.png/v1/fill/w_1000,h_1000,al_c,q_90,usm_0.66_1.00_0.01/dfaf38_d211d9f8785948cfb615e1151b09c99e~mv2.png",
+    image: "/images/blog/toliko-se-trudimo-a-kaj-ko-se-ne-bi.png",
     excerpt: "Toliko se trudimo slišati sebe, da slišimo samo tisto, kar prihaja od zunaj. A kaj, ko se ne bi več trudili, ampak enostavno končno le SMO?",
     paragraphs: [
       {
@@ -421,7 +421,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "16. oktober 2025",
     readTime: "3 min",
     category: "Telo & Zdravje",
-    image: "https://static.wixstatic.com/media/dfaf38_b8fc30075de84ce9b872d620d0859c42~mv2.jpg/v1/fill/w_678,h_678,al_c,lg_1,q_85/dfaf38_b8fc30075de84ce9b872d620d0859c42~mv2.jpg",
+    image: "/images/blog/moja-izkusnja-z-bolecinami-v-krizu.jpg",
     excerpt: "»… ne že spet … ne grem še enkrat skozi to …« Fizična bolečina v križu je pogosto odraz notranje bolečine, spuščanja nadzora in potlačenih čustev.",
     paragraphs: [
       {
@@ -480,7 +480,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "20. maj 2025",
     readTime: "2 min",
     category: "Tradicionalne tehnike",
-    image: "https://static.wixstatic.com/media/dfaf38_ebeb9c043801435a891973858b9ebe06~mv2.jpg/v1/fill/w_1000,h_667,al_c,q_85,usm_0.66_1.00_0.01/dfaf38_ebeb9c043801435a891973858b9ebe06~mv2.jpg",
+    image: "/images/blog/moxanje.jpg",
     excerpt: "Moxanje je postopek, kjer s prižgano mokso v obliki cigare ogrevamo akupresurne točke in meridiane, razsluzimo organe ter krepimo imunski sistem.",
     paragraphs: [
       {
@@ -524,7 +524,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "28. marec 2025",
     readTime: "9 min",
     category: "TKM & Osebnost",
-    image: "https://static.wixstatic.com/media/dfaf38_2fcb198e18a8473ea6c5a5082d008cb3~mv2.jpg/v1/fill/w_1000,h_1000,al_c,q_85,usm_0.66_1.00_0.01/dfaf38_2fcb198e18a8473ea6c5a5082d008cb3~mv2.jpg",
+    image: "/images/blog/5-tipov-osebnosti-po-tkm.jpg",
     excerpt: "Najpomembnejši korak do boljšega odnosa s sabo in drugimi je ta, da ugotovimo KDO SMO. Spoznajte 5 tipov osebnosti: les, ogenj, zemlja, kovina in voda.",
     paragraphs: [
       {

@@ -43,7 +43,7 @@ export default function BlogIndexPage() {
                   alt={post.title}
                   fill
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  unoptimized
+                  sizes="(min-width: 768px) 50vw, 100vw"
                 />
                 <span className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1 text-[10px] uppercase tracking-wider font-bold text-[var(--color-primary)] rounded-sm shadow-sm">
                   {post.category}

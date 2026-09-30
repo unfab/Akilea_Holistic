@@ -146,7 +146,7 @@ export default function BlogPostView({ post, relatedPosts }: BlogPostViewProps) 
             fill
             className="object-cover"
             priority
-            unoptimized
+            sizes="(min-width: 896px) 896px, 100vw"
           />
         </div>
       </div>
@@ -186,7 +186,7 @@ export default function BlogPostView({ post, relatedPosts }: BlogPostViewProps) 
                             alt={img.caption}
                             fill
                             className="object-cover"
-                            unoptimized
+                            sizes="(min-width: 640px) 50vw, 100vw"
                           />
                         </div>
                         <figcaption className="p-3.5 text-xs text-[var(--color-muted)] leading-relaxed italic bg-white">
