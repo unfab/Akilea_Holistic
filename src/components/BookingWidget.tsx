@@ -48,7 +48,11 @@ export default function BookingWidget() {
     const params = new URLSearchParams({ month: monthKey });
     if (selectedService) params.set("service", String(selectedService));
     fetch(`/api/availability?${params}`, { signal: controller.signal, cache: "no-store" })
-      .then(async (res) => (res.ok ? ((await res.json()) as { days: Record<string, string[]> }).days : null))
+      .then(async (res) => {
+        // Always read the body so the request completes, even on 503.
+        const data = (await res.json().catch(() => null)) as { days?: Record<string, string[]> } | null;
+        return res.ok && data?.days ? data.days : null;
+      })
       .catch(() => null)
       .then((days) => {
         if (!controller.signal.aborted) setAvailability({ key: availabilityKey, days });
@@ -115,6 +119,7 @@ export default function BookingWidget() {
           honeypot: formData.honeypot,
         }),
       });
+      await res.json().catch(() => null);
       if (res.ok) return "ok";
       if (res.status === 409) return "taken";
       if (res.status === 400 || res.status === 429) return "rejected";
