@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
+import { SOCIAL_LINKS } from "@/config/site";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -68,8 +69,12 @@ export default function Footer() {
         <div>
           <h4 className="text-[10px] uppercase tracking-widest text-[#D4E89C] font-bold mb-6">{t.footer.linksTitle}</h4>
           <ul className="space-y-3 text-sm font-light">
-            <li><a href="#" className="hover:text-white transition-colors">Facebook Skupnost</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
+            {SOCIAL_LINKS.facebook && (
+              <li><a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook Skupnost</a></li>
+            )}
+            {SOCIAL_LINKS.instagram && (
+              <li><a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a></li>
+            )}
             <li><a href="https://dashboard.mailerlite.com/forms/1336581/148227624341079087/share" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Prijava na e-novice</a></li>
             <li><Link href="/storitve" className="hover:text-white transition-colors">{t.footer.allServices}</Link></li>
           </ul>
