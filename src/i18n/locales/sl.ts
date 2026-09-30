@@ -327,8 +327,8 @@ export const sl: TranslationDictionary = {
   },
   cookieBanner: {
     title: "Uporabljamo piškotke 🍪",
-    text: "Za najboljšo uporabniško izkušnjo, analitiko in delovanje rezervacijskega sistema naša spletna stran uporablja piškotke. Z nadaljnjo uporabo se strinjate z našim",
-    privacyLink: "pravilnikom o zasebnosti",
+    text: "Naša spletna stran shrani le nujne podatke za delovanje, in sicer izbrani jezik in vašo potrditev tega obvestila. Analitičnih ali oglaševalskih piškotkov ne uporabljamo. Več v našem",
+    privacyLink: "pravilniku o zasebnosti",
     acceptBtn: "Strinjam se",
   },
 };

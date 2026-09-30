@@ -35,8 +35,7 @@ Then **me** (B7):
 - [x] Facebook / Instagram URLs set in `SOCIAL_LINKS` (`src/config/site.ts`).
 - [x] About photo self-hosted at `public/images/brand/mirjana-o-meni.jpg` — but it is only **547×365** (the old Google thumbnail), soft on retina. **you**: get the original file from Mirjana (3:4, min 1200×1600) and overwrite that path. No code change needed.
 - [ ] **DNS for www.akilea.si**: keep at Domenca (Webtasy d.o.o.) or move to Netlify. After cutover: add domain in Netlify, apex → www redirect, re-check canonicals.
-- [ ] **Privacy policy update** — see `privacy-policy.md`. Needs Mirjana's approval before any text changes on the site.
-- [ ] **Cookie banner copy** mentions "analitiko" but the site has no analytics. Mirjana to decide wording (copy is hers).
+- [ ] **Legal pages review by Mirjana** — privacy policy, terms and cookie notice were rewritten 2026-09-30 (details and open questions in `privacy-policy.md`). Needs her OK, a decision on the "informativne cene" wording, and ideally a check by someone qualified.
 
 ## 4. Engineering follow-ups (me, after approval)
 

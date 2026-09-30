@@ -15,7 +15,7 @@
 - **No Slovenian copy changes without approval.** Existing text is Mirjana's, even when it has typos. Escaping `"` as `&quot;` is fine (renders identically).
 - **No invented content**: no prices, testimonials, statistics, dates or claims that Mirjana did not provide.
 - Any **new visible text** (including alerts, titles, alt text) needs approval. Reuse existing strings when possible.
-- Legal pages (`/pravilnik-o-zasebnosti`, `/pogoji-poslovanja`) and the cookie banner text are Mirjana's to change. Draft in `tasks/privacy-policy.md`, never edit the page directly.
+- Legal pages (`/pravilnik-o-zasebnosti`, `/pogoji-poslovanja`) and the cookie banner text are Mirjana's. They were rewritten on 2026-09-30 with Aleksandar's approval (see `tasks/privacy-policy.md`). Further wording changes need his approval and should be shown to Mirjana; keep the pages in sync with the data inventory in that file.
 - MailerLite links (e-book, newsletter) work. Do not touch them.
 
 ## Adding a blog post

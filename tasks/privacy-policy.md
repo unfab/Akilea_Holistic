@@ -1,68 +1,39 @@
-# Privacy policy — gap analysis and draft
+# Privacy policy, terms and cookie notice
 
-> Status 2026-09-30: **nothing here is published.** The live page `/pravilnik-o-zasebnosti` is unchanged.
-> Any change to the page needs Mirjana's approval (her text, her legal responsibility). This is not legal advice;
-> for certainty have it checked against GDPR / ZVOP-2 by someone qualified.
+> Status 2026-09-30: **rewritten and committed** (commit "fix(legal): ..."). Aleksandar approved the changes; **Mirjana has not reviewed them yet** and nobody qualified in Slovenian data-protection law has checked the wording. This is not legal advice.
 
-## 1. What the site actually does with personal data (inventory from the code)
+## What was changed (all Slovenian unless noted)
+
+| Where | Change |
+|---|---|
+| `/pravilnik-o-zasebnosti` | Full rewrite: controller identified (AKILEA, Mirjana Groznik s.p., Šmarska cesta 5B, 6000 Koper, MŠ 9489983000, DŠ 28773977, mirjana@akilea.si, 040 863 594); purposes and legal bases per data flow; processors named (Netlify, Web3Forms, Google Workspace, MailerLite); transfers outside EU; retention; cookies and local storage table; rights incl. complaint to Informacijski pooblaščenec (Dunajska cesta 22, Ljubljana); health-data notice; "no analytics / no profiling / fonts self-hosted". Date 30. september 2026. |
+| `/pogoji-poslovanja` | Provider identity added (address, MŠ, DŠ, not VAT-liable); cancellation channel added (phone / email); false sentence about online card payment (Stripe) replaced with "Plačilo se opravi na lokaciji."; new section 6 linking to the privacy policy; date updated. |
+| Cookie banner (all 5 languages) | Removed the false "analytics" claim. Now says the site stores only the chosen language and the acknowledgement, and uses no analytics/advertising cookies. Link text put into the correct grammatical case (sl, hr, sr). |
+
+## Data inventory (source for the policy — keep in sync with the code)
 
 | Data flow | What | Where it goes | Code |
 |---|---|---|---|
-| Booking form | name, email and/or phone, service, date, time | Web3Forms (email relay) → Mirjana's inbox | `BookingWidget.tsx` |
-| Booking → calendar (after B7) | same data as event title/description + hashed email/phone keys | Google Workspace calendar "Akilea rezervacije" (Google, US processor) | `booking-service.ts` |
-| /posvet form | name, email, phone, message | Web3Forms → inbox | `posvet/page.tsx` |
-| E-book / newsletter | whatever the MailerLite form asks | MailerLite (link to their hosted form) | `page.tsx`, `e-knjiga`, `Footer.tsx` |
-| Hosting / logs | IP address, user agent (server logs) | Netlify (US) | — |
-| About photo | — | self-hosted since 2026-09-30, no third-party request | `page.tsx` |
-| Online payment (currently OFF) | name, email, card data | Stripe | `api/checkout` |
-| Browser storage | `localStorage.akilea_lang`, cookie `app_lang` (language), `localStorage.cookieConsent` | visitor's browser only | `LanguageContext.tsx`, `CookieBanner.tsx` |
+| Booking form | name, email and/or phone, service, date, time, payment method | Web3Forms → email; Google Workspace calendar "Akilea rezervacije" (after B7), plus hashed email/phone keys for the 3-per-contact limit | `BookingWidget.tsx`, `booking-service.ts` |
+| /posvet form | name, email, phone (optional), message | Web3Forms → email | `posvet/page.tsx` |
+| E-book / newsletter | whatever the MailerLite form asks | MailerLite hosted form | `page.tsx`, `e-knjiga`, `Footer.tsx` |
+| Hosting | IP, user agent in server logs | Netlify | — |
+| Browser storage | cookie `app_lang` (1 year), localStorage `akilea_lang`, `cookieConsent` | visitor's browser only | `LanguageContext.tsx`, `CookieBanner.tsx` |
+| Online payment | OFF. Would add Stripe | — | `api/checkout` |
 
-**No analytics, no tracking pixels, no ads.** Fonts are self-hosted by Next.js (no Google Fonts requests).
+No analytics, no tracking pixels, no third-party fonts or images (all self-hosted since 2026-09-30).
 
-## 2. Gaps in the current page
+## Update the policy when any of these change
 
-1. **Controller not identified** — no "Mirjana Groznik s.p., Šmarska cesta 5B, 6000 Koper" with contact.
-2. **Processors not named** — Web3Forms, Google (calendar), MailerLite, Netlify, (Stripe). The page says data is never shared with third parties without consent; processors acting on her behalf should still be disclosed.
-3. **Transfers outside the EU** (US providers) not mentioned.
-4. **Legal basis** missing (booking = steps before/performance of a contract; newsletter = consent).
-5. **Retention period** missing (how long bookings / emails / calendar events are kept).
-6. **Right to complain** to the Informacijski pooblaščenec (www.ip-rs.si) missing; other rights (restriction, objection, portability) missing.
-7. **Cookies/storage** not described; the cookie banner mentions "analitiko", which the site does not use.
-8. Health-related context: massage bookings may reveal health information only if customers write it in the /posvet message. Worth a sentence asking not to send health details by form.
+- **Google Calendar goes live (B7):** the policy already says appointments are written to the calendar — true only after B7.
+- **Stripe re-enabled:** add Stripe as processor + card data note, and restore the payment sentence in the terms.
+- **Web3Forms recipient / other email tools change**, analytics added, new form, new embed, new third-party script.
+- Update the date at the top of both pages.
 
-## 3. Draft additions (Slovenian, for Mirjana to review)
+## Open items
 
-> PREDLOG — ni objavljeno. Oklepaji [ ] = Mirjana mora dopolniti.
-
-**Upravljavec osebnih podatkov**
-Upravljavec je Mirjana Groznik s.p., Šmarska cesta 5B, 6000 Koper, e-pošta: mirjana@akilea.si.
-
-**Pravna podlaga**
-Podatke iz obrazca za rezervacijo in posvet obdelujemo, ker so potrebni za dogovor o terminu in izvedbo storitve. Za prejemanje e-novic podatke obdelujemo na podlagi vaše privolitve, ki jo lahko kadarkoli prekličete.
-
-**Obdelovalci**
-Za delovanje spletne strani uporabljamo zunanje ponudnike, ki podatke obdelujejo v našem imenu:
-- Netlify (gostovanje spletne strani),
-- Web3Forms (posredovanje sporočil iz obrazcev na naš e-poštni naslov),
-- Google Workspace (koledar, v katerega se zapišejo rezervacije),
-- MailerLite (pošiljanje e-novic),
-- [Stripe (spletno plačilo), če bo ponovno vključeno].
-Nekateri ponudniki imajo sedež v ZDA; prenos poteka na podlagi ustreznih zaščitnih ukrepov (standardne pogodbene klavzule oziroma okvir EU-ZDA za zasebnost podatkov).
-
-**Hramba**
-Podatke o rezervacijah hranimo [npr. 2 leti po zadnjem obisku], nato jih izbrišemo. Podatke za e-novice hranimo do preklica prijave.
-
-**Piškotki in lokalna shramba**
-Spletna stran shrani le izbrani jezik (piškotek `app_lang` in lokalna shramba) in vašo potrditev obvestila o piškotkih. Analitičnih ali oglaševalskih piškotkov ne uporabljamo.
-
-**Vaše pravice**
-Imate pravico do dostopa, popravka, izbrisa, omejitve obdelave, ugovora in prenosljivosti podatkov ter pravico do preklica privolitve. Pišite nam na mirjana@akilea.si. Če menite, da obdelava ni zakonita, lahko vložite pritožbo pri Informacijskem pooblaščencu (www.ip-rs.si).
-
-**Zdravstveni podatki**
-Prosimo, da v obrazce ne vpisujete podrobnosti o svojem zdravju; o tem se pogovoriva osebno.
-
-## 4. Related
-
-- Cookie banner (`sl.ts` → cookie text) says "analitiko" — suggest removing that word once Mirjana agrees.
-- `/pogoji-poslovanja` section 3 says payment by card online is possible — not true while `NEXT_PUBLIC_ENABLE_ONLINE_PAYMENT` is off. Mirjana to decide the wording.
-- Update "Zadnja posodobitev" on the page when the text changes.
+- [ ] Mirjana reads both pages and confirms they describe how she works. Ask her whether she wants a **fixed retention period** for bookings (now: "until no longer needed, unless law requires longer, e.g. accounting records").
+- [ ] Web3Forms currently delivers to Aleksandar's Gmail. Change the recipient to Mirjana **before launch**, otherwise the policy ("we receive it by email") describes a mailbox that is not hers.
+- [ ] Terms section 3 still says prices are "informativne narave" (informational). Consumer law expects the displayed price to be the price charged. Business decision for Mirjana; suggested wording: "Cene storitev so navedene na spletni strani v evrih."
+- [ ] Have someone qualified check the consumer-law side of the terms (distance-contract information such as right of withdrawal for online bookings, cancellation fee of 50 %, complaints handling). Not covered by this rewrite.
+- [ ] Not done on purpose: a consent-choice cookie banner. Only functional storage is used, so a notice is enough. Add real consent choices only if analytics or marketing tools are ever added.

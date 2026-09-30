@@ -327,7 +327,7 @@ export const it: TranslationDictionary = {
   },
   cookieBanner: {
     title: "Utilizziamo i cookie 🍪",
-    text: "Per garantire la migliore esperienza utente, analisi e funzionalità di prenotazione, il nostro sito utilizza i cookie. Continuando, accetti la nostra",
+    text: "Il nostro sito memorizza solo ciò che serve al suo funzionamento: la lingua scelta e la conferma di questa informativa. Non utilizziamo cookie di analisi o pubblicitari. Maggiori informazioni nella nostra",
     privacyLink: "normativa sulla privacy",
     acceptBtn: "Accetto",
   },
