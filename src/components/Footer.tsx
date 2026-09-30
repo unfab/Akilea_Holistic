@@ -32,12 +32,12 @@ export default function Footer() {
         <div>
           <Link href="/" className="inline-block mb-6">
             <Image
-              src="https://static.wixstatic.com/media/dfaf38_813cc971e5e8455085e68fdb596e3ebc~mv2.png/v1/fill/w_240,h_179,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/dfaf38_813cc971e5e8455085e68fdb596e3ebc~mv2.png"
+              src="/images/brand/akilea-emblem.png"
               alt="Akilea Logo"
               width={96}
               height={72}
               className="h-14 w-auto object-contain brightness-0 invert opacity-90"
-              unoptimized
+              sizes="96px"
             />
           </Link>
           <p className="text-sm font-light leading-relaxed max-w-sm">

@@ -25,12 +25,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="https://static.wixstatic.com/media/dfaf38_813cc971e5e8455085e68fdb596e3ebc~mv2.png/v1/fill/w_240,h_179,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/dfaf38_813cc971e5e8455085e68fdb596e3ebc~mv2.png"
+            src="/images/brand/akilea-emblem.png"
             alt="Akilea Logo"
             width={96}
             height={72}
             className="h-16 w-auto object-contain"
-            unoptimized
+            sizes="96px"
           />
           <span className="hidden sm:inline-block text-[10px] uppercase tracking-[0.2em] text-[var(--color-accent)] border-l border-[var(--color-border)] pl-3">
             {t.nav.holisticCenter}
