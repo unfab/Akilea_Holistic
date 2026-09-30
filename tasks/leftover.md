@@ -35,7 +35,7 @@ Then **me** (B7):
 - [x] Facebook / Instagram URLs set in `SOCIAL_LINKS` (`src/config/site.ts`).
 - [x] About photo self-hosted at `public/images/brand/mirjana-o-meni.jpg` — but it is only **547×365** (the old Google thumbnail), soft on retina. **you**: get the original file from Mirjana (3:4, min 1200×1600) and overwrite that path. No code change needed.
 - [ ] **DNS for www.akilea.si**: keep at Domenca (Webtasy d.o.o.) or move to Netlify. After cutover: add domain in Netlify, apex → www redirect, re-check canonicals.
-- [ ] **Legal items that need Mirjana's green light** — full list with ready-to-paste Slovenian drafts in `privacy-policy.md` ("Needs Mirjana's green light"): ZIsRPS statement, withdrawal-right information, complaints handling + reply time, VAT wording, health warning next to the forms (5 languages), price wording / tips, cancellation fee, fixed retention periods, whole-page review (ideally by a lawyer).
+- [ ] **Legal items that need Mirjana's green light** — full list with ready-to-paste Slovenian drafts in `privacy-policy.md` ("Needs Mirjana's green light"); **a Slovenian briefing to read to her, with law and article for each point, is `mirjana-pregled-sl.md`**: ZIsRPS statement, withdrawal-right information, complaints handling + reply time, VAT wording, health warning next to the forms (5 languages), price wording / tips, cancellation fee, fixed retention periods, whole-page review (ideally by a lawyer).
 
 ## 3b. Web3Forms (you, before launch)
 
