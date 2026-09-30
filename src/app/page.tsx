@@ -389,13 +389,13 @@ export default function Home() {
       <section id="o-meni" className="py-20 lg:py-28 bg-white border-b border-[var(--color-border)]">
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1 relative rounded-2xl overflow-hidden shadow-lg aspect-[3/4] max-w-sm mx-auto w-full">
-            {/* TODO: replace with the original photo from Mirjana (3:4, min 1200x1600) in /public/images/brand, then drop unoptimized. Last external image host. */}
+            {/* TODO: this is only 547x365 (the old Google thumbnail). Replace with the original photo from Mirjana (3:4, min 1200x1600) at the same path. */}
             <Image
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpRMog5kCJ9ZBNxxvqxuysiEaWuQPOg0mx_iTUqF7r9fQLiSkCaUEO2QA&s=10"
+              src="/images/brand/mirjana-o-meni.jpg"
               alt={t.aboutSection.imageAlt}
               fill
               className="object-cover"
-              unoptimized
+              sizes="(min-width: 768px) 384px, 100vw"
             />
           </div>
           <div className="order-1 md:order-2 space-y-6">

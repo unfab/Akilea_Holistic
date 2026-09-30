@@ -13,7 +13,7 @@
 | /posvet form | name, email, phone, message | Web3Forms → inbox | `posvet/page.tsx` |
 | E-book / newsletter | whatever the MailerLite form asks | MailerLite (link to their hosted form) | `page.tsx`, `e-knjiga`, `Footer.tsx` |
 | Hosting / logs | IP address, user agent (server logs) | Netlify (US) | — |
-| About photo | visitor IP (image request) | Google (`encrypted-tbn0.gstatic.com`) — goes away when the photo is self-hosted | `page.tsx` |
+| About photo | — | self-hosted since 2026-09-30, no third-party request | `page.tsx` |
 | Online payment (currently OFF) | name, email, card data | Stripe | `api/checkout` |
 | Browser storage | `localStorage.akilea_lang`, cookie `app_lang` (language), `localStorage.cookieConsent` | visitor's browser only | `LanguageContext.tsx`, `CookieBanner.tsx` |
 

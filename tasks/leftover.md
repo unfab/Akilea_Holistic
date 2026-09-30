@@ -32,8 +32,8 @@ Then **me** (B7):
 
 ## 3. Content and decisions (you)
 
-- [ ] **About photo**: original file of Mirjana, 3:4, min 1200×1600 → put in `public/images/brand/`, swap in `src/app/page.tsx` (TODO comment there), drop `unoptimized`. This is the last external image host (Google thumbnail).
-- [ ] **Facebook / Instagram URLs** → `SOCIAL_LINKS` in `src/config/site.ts` (empty = hidden).
+- [x] Facebook / Instagram URLs set in `SOCIAL_LINKS` (`src/config/site.ts`).
+- [x] About photo self-hosted at `public/images/brand/mirjana-o-meni.jpg` — but it is only **547×365** (the old Google thumbnail), soft on retina. **you**: get the original file from Mirjana (3:4, min 1200×1600) and overwrite that path. No code change needed.
 - [ ] **DNS for www.akilea.si**: keep at Domenca (Webtasy d.o.o.) or move to Netlify. After cutover: add domain in Netlify, apex → www redirect, re-check canonicals.
 - [ ] **Privacy policy update** — see `privacy-policy.md`. Needs Mirjana's approval before any text changes on the site.
 - [ ] **Cookie banner copy** mentions "analitiko" but the site has no analytics. Mirjana to decide wording (copy is hers).

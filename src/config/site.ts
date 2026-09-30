@@ -3,10 +3,10 @@
 
 export const SITE_URL = "https://www.akilea.si";
 
-// TODO: fill in once Mirjana confirms the profile URLs. An empty URL hides the link.
+// An empty URL hides the link.
 export const SOCIAL_LINKS = {
-  facebook: "",
-  instagram: "",
+  facebook: "https://www.facebook.com/akileaholistic/",
+  instagram: "https://www.instagram.com/AKILEA_HOLISTIC/",
 } as const;
 
 export const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
