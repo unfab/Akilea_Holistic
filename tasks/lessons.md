@@ -18,6 +18,7 @@
 ## Testing without new dependencies
 
 - `node --test` runs `.ts` directly (Node ≥ 22 type stripping). Imports inside files used by tests need explicit `.ts` extensions (`allowImportingTsExtensions` is on) and `import type` for types. `@/` aliases do not work under node --test — keep testable logic free of them and inject deps (see `booking-service.ts`).
+- **Web3Forms cannot be tested by automation**: Cloudflare returns 403 to headless Chrome and curl, and it only allows client-side calls from real browsers. Mock it in Playwright; verify real delivery by hand in a normal browser.
 - Browser checks: `playwright-core` installed in a scratch directory (not the project) driving the installed Chrome (`channel: "chrome"`). Mock `api.web3forms.com` so no real emails are sent.
 - **Always read fetch response bodies**, even on error. An unread body on a 503 kept the request pending in Chrome (Playwright `networkidle` never fired).
 

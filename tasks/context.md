@@ -20,7 +20,7 @@ Replaces her old Wix site.
 
 ## Status
 
-- **Live since 2026-09-30** (deploy `6abd001ffcbeb02d04d52a1a`, commit `783354e`): Phase A + Phase B code. Verified live: headers, real 404s, robots, OG images, 22 pages load, booking falls back to email (Web3Forms mocked in the check).
+- **Live since 2026-09-30** (latest deploy `6abd068c56e4b76c171bf9fd`, commit `8eae483`; first deploy `6abd001ffcbeb02d04d52a1a`): Phase A + Phase B code. Verified live: headers, real 404s, robots, OG images, 22 pages load, booking falls back to email (Web3Forms mocked in the check).
 - **Phase A (launch prep): done** — A1–A11 from `plan.md`.
 - **Phase B (no double-booking): code done (B1–B6), B7 blocked** on the Google Cloud setup (see `leftover.md`).
   Until `GOOGLE_*` env vars exist, the booking APIs answer 503 and the widget uses the old email-only flow.

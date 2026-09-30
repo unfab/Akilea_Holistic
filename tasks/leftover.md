@@ -5,7 +5,9 @@
 
 ## 1. Verify the 2026-09-30 production deploy (me, first thing)
 
-- [ ] Real Web3Forms submission from the live booking widget and from `/posvet` arrives in Mirjana's inbox (**you** confirm the email — my checks mocked Web3Forms so no email was sent).
+- [x] `/posvet` submission arrived by email (Aleksandar tested 2026-09-30, mail landed in aleksandar.bojic12@gmail.com).
+- [ ] **Booking widget → email** on the live site: not verified yet. Web3Forms (Cloudflare) blocks automated Chrome, so **you** must submit one real booking in your own browser (a slot in the future) and confirm the email arrives.
+- [ ] **Where do Web3Forms emails go?** The test mail arrived in Aleksandar's Gmail, i.e. the access key is registered to that address. Decide with Mirjana: change the key's recipient in the Web3Forms dashboard to mirjana@akilea.si (or both) **before launch**, otherwise bookings never reach her.
 - [x] Security headers, 404s (`/ne-obstaja`, `/blog/xyz`, `/uspesno`), robots, OG images, all 22 sitemap pages — verified live 2026-09-30.
 - [x] `/api/availability` answers 503 (expected until Google is configured); booking falls back to email — verified live.
 - [ ] Optional: link GitHub repo in Netlify so pushes deploy automatically (**you**, dashboard).
