@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { WEB3FORMS_KEY } from "@/config/site";
 
 export default function BookingWidget() {
   const { t } = useLanguage();
@@ -119,7 +120,7 @@ export default function BookingWidget() {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            access_key: "4759ab0c-9911-4ee2-82c9-029bab9ab1b1",
+            access_key: WEB3FORMS_KEY,
             subject: `Nova rezervacija: ${svc.name}`,
             from_name: "Akilea Holistic - Sistem rezervacij",
             Ime_Priimek: formData.name,

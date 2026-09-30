@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { WEB3FORMS_KEY } from "@/config/site";
 
 export default function PosvetPage() {
   const { t } = useLanguage();
@@ -23,7 +24,7 @@ export default function PosvetPage() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "4759ab0c-9911-4ee2-82c9-029bab9ab1b1",
+          access_key: WEB3FORMS_KEY,
           subject: "Novo povpraševanje za posvet - Akilea Holistic",
           from_name: "Akilea Holistic - Spletna stran",
           Ime_Priimek: formData.name,
