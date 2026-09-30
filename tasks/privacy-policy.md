@@ -37,3 +37,22 @@ No analytics, no tracking pixels, no third-party fonts or images (all self-hoste
 - [ ] Terms section 3 still says prices are "informativne narave" (informational). Consumer law expects the displayed price to be the price charged. Business decision for Mirjana; suggested wording: "Cene storitev so navedene na spletni strani v evrih."
 - [ ] Have someone qualified check the consumer-law side of the terms (distance-contract information such as right of withdrawal for online bookings, cancellation fee of 50 %, complaints handling). Not covered by this rewrite.
 - [ ] Not done on purpose: a consent-choice cookie banner. Only functional storage is used, so a notice is enough. Add real consent choices only if analytics or marketing tools are ever added.
+
+## Research 2026-09-30 (AI-written checklist pasted by Aleksandar, then spot-checked online)
+
+Verified against sources (search results; primary sites ip-rs.si and web3forms.com block automated fetching, so read them by hand if it matters):
+- **Cookies:** ZEKom-2 Art. 225 — consent is not needed for cookies strictly necessary for a service the user asked for; if a site uses only exempt cookies, an information notice is enough (IP-RS). Our setup (language + notice acknowledgement) fits. The language cookie is only written when the user picks a language (`LanguageContext.setLanguage`), never on load.
+- **Withdrawal:** ZVPot-1 Art. 134 gives 14 days for distance contracts; Art. 135 lists exceptions incl. leisure services performed on a precisely fixed date/time. Whether Mirjana's services count as "storitve za prosti čas" is not settled (massage probably yes; consulting unclear).
+- **Out-of-court dispute resolution:** ZIsRPS Art. 32 — a business that recognises no IRPS provider must say so on its website / terms. Every online seller must also link the EU ODR platform (4th paragraph) — **check first**: the EU ODR platform was, to my knowledge, shut down in 2025, so a link may now be wrong.
+- **Web3Forms** (per its DPA/privacy pages via search): company operates from India, infrastructure on AWS, Cloudflare, Hetzner; DPA with SCCs exists; **it stores submissions on its servers up to 3 years**, shorter if set per form (free plan: down to 7 days).
+
+Not verified (article numbers and figures from the paste): retention numbers (10 years invoices, 3–5 years booking logs, 6–12 months inquiries), "8 working days" complaint deadline, ZDavP-2/ZDDV-1 article numbers, exact IP-RS guideline wording. Treat as leads, not as law.
+
+### Gaps found in what is live now (not yet changed)
+
+1. **Privacy policy omits the Web3Forms copy.** It says data goes by email; in fact Web3Forms keeps a copy (max 3 years) and is based in India. Fix the text and set a short retention in the Web3Forms dashboard for the key `NEXT_PUBLIC_WEB3FORMS_KEY`.
+2. **The Web3Forms account belongs to Aleksandar's email.** Mirjana's customers' data sits in his account. Move the key/account to Mirjana (or a shared AMS Solutions account with a DPA) before launch.
+3. **Terms lack:** withdrawal-right information (missing information can extend the withdrawal period by 12 months, per the paste — verify Art. 136), ZIsRPS statement, complaints contact and reply time, VAT wording ("nisem zavezanec za DDV" — current text says "nismo zavezanci").
+4. **Language cookie lives 1 year** and is redundant (localStorage already holds it). Shorten to ≤ 30 days or drop the cookie; then update section 5 of the policy.
+5. **Health data:** the policy asks people not to send health details; the paste additionally says the form itself should carry that instruction. Needs new visible text near the booking/posvet forms (Mirjana's approval).
+6. **Withdrawal consent at booking** (a checkbox for services not covered by the leisure exception) would be new UI text and a change to the booking flow — only if the legal check says so.
