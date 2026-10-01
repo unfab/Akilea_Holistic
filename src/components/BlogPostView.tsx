@@ -10,16 +10,12 @@ interface BlogPostViewProps {
   relatedPosts: BlogPost[];
 }
 
+const INLINE_PATTERN = /\*\*([\s\S]+?)\*\*|__([\s\S]+?)__|\[([^\]]+)\]\(([^)]+)\)/g;
+
 function renderFormattedText(text: string): React.ReactNode {
   if (!text || typeof text !== "string") return text;
 
-  // Regex to match markdown links: [label](url)
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
-  if (!regex.test(text)) {
-    return text;
-  }
-  regex.lastIndex = 0;
-
+  const regex = new RegExp(INLINE_PATTERN.source, "g");
   const parts: (string | React.ReactNode)[] = [];
   let lastIndex = 0;
   let match;
@@ -28,51 +24,63 @@ function renderFormattedText(text: string): React.ReactNode {
     if (match.index > lastIndex) {
       parts.push(text.slice(lastIndex, match.index));
     }
-    const label = match[1];
-    const url = match[2];
-    const isInternal = url.startsWith("/") || url.startsWith("#");
 
-    if (isInternal) {
+    if (match[1] !== undefined) {
       parts.push(
-        <Link
-          key={match.index}
-          href={url}
-          className="text-[#6a882a] font-semibold underline underline-offset-4 hover:text-[var(--color-primary)] transition-colors inline-flex items-baseline"
-        >
-          {label}
-        </Link>
+        <strong key={match.index} className="font-semibold">
+          {renderFormattedText(match[1])}
+        </strong>
       );
+    } else if (match[2] !== undefined) {
+      parts.push(<em key={match.index}>{renderFormattedText(match[2])}</em>);
     } else {
-      parts.push(
-        <a
-          key={match.index}
-          href={url}
-          target={url.startsWith("http") ? "_blank" : undefined}
-          rel={url.startsWith("http") ? "noopener noreferrer" : undefined}
-          className="text-[#6a882a] font-semibold underline underline-offset-4 hover:text-[var(--color-primary)] transition-colors inline-flex items-baseline gap-1"
-        >
-          <span>{label}</span>
-          {url.startsWith("http") && (
-            <svg
-              className="w-3.5 h-3.5 inline-block self-center opacity-80"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
-          )}
-        </a>
-      );
+      const label = match[3];
+      const url = match[4];
+      const isInternal = url.startsWith("/") || url.startsWith("#");
+
+      if (isInternal) {
+        parts.push(
+          <Link
+            key={match.index}
+            href={url}
+            className="text-[#6a882a] font-semibold underline underline-offset-4 hover:text-[var(--color-primary)] transition-colors inline-flex items-baseline"
+          >
+            {label}
+          </Link>
+        );
+      } else {
+        parts.push(
+          <a
+            key={match.index}
+            href={url}
+            target={url.startsWith("http") ? "_blank" : undefined}
+            rel={url.startsWith("http") ? "noopener noreferrer" : undefined}
+            className="text-[#6a882a] font-semibold underline underline-offset-4 hover:text-[var(--color-primary)] transition-colors inline-flex items-baseline gap-1"
+          >
+            <span>{label}</span>
+            {url.startsWith("http") && (
+              <svg
+                className="w-3.5 h-3.5 inline-block self-center opacity-80"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            )}
+          </a>
+        );
+      }
     }
     lastIndex = regex.lastIndex;
   }
 
+  if (parts.length === 0) return text;
   if (lastIndex < text.length) {
     parts.push(text.slice(lastIndex));
   }
@@ -163,6 +171,30 @@ export default function BlogPostView({ post, relatedPosts }: BlogPostViewProps) 
                 >
                   {typeof block.content === "string" ? renderFormattedText(block.content) : block.content}
                 </h3>
+              );
+            }
+
+            if (block.type === "image") {
+              return (
+                <div key={idx} className="my-10 space-y-4">
+                  {block.images?.map((img, imgIdx) => (
+                    <figure key={imgIdx} className="max-w-md mx-auto">
+                      <Image
+                        src={img.src}
+                        alt={img.caption || post.title}
+                        width={img.width ?? 1200}
+                        height={img.height ?? 900}
+                        className="w-full h-auto rounded-xl shadow-sm border border-[var(--color-border)]"
+                        sizes="(min-width: 448px) 448px, 100vw"
+                      />
+                      {img.caption && (
+                        <figcaption className="pt-3 text-xs text-[var(--color-muted)] leading-relaxed italic text-center">
+                          {img.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  ))}
+                </div>
               );
             }
 

@@ -56,7 +56,16 @@ export default function CajankaPage() {
 
       <div className="max-w-4xl mx-auto px-6 -mt-16 relative z-10">
         <div className="bg-white rounded-2xl shadow-xl border border-[var(--color-border)] p-8 lg:p-12">
-          
+
+          <Image
+            src="/images/delavnice/cajanka-balon-med-kaktusi.png"
+            alt="Če se počutiš kot balon med kaktusi, ne pozabi, balon lahko leti visoko in kamor želi"
+            width={1640}
+            height={924}
+            className="w-full h-auto rounded-xl border border-[var(--color-border)] mb-10"
+            sizes="(min-width: 896px) 800px, 100vw"
+          />
+
           {/* Details Bar */}
           <div className="flex flex-wrap items-center justify-between gap-6 mb-10 pb-8 border-b border-[var(--color-border)]">
             <div className="flex items-center gap-4">

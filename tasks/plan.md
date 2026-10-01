@@ -24,7 +24,7 @@ Before writing code, read the relevant guides in `node_modules/next/dist/docs/` 
 | Booking date bug | Fix only (Task A4). No Sunday blocking, no other Phase A widget changes |
 | Next.js upgrade | Approved (16.3.0 to 16.3.7 plus `npm audit fix`) |
 | Logo | Use `public/images/brand/akilea-emblem.png` (confirmed correct) |
-| Domain / DNS | Later. Wix DNS currently sits at Domenca (Webtasy d.o.o.). No redirect config until decided |
+| Domain / DNS | Later. Registrar is Domenca (Webtasy d.o.o.) but the nameservers are Wix's (corrected 2026-09-30, see `context.md` → "Domain and DNS"). No redirect config until cutover |
 | Web3Forms | User tests the real submission |
 | OG image | Built in code from the emblem plus existing site text only (see A7) |
 | About photo | See A5c |
@@ -164,7 +164,7 @@ All Phase B decisions are recorded in the table at the top. Still open:
 
 1. About photo: original file from Mirjana (recommended). Alt text names her ("Mirjana Groznik - Akilea Holistični center").
 2. Facebook and Instagram URLs.
-3. DNS: Domenca or Netlify (tomorrow).
+3. DNS: move the zone from Wix to Domenca FreeDNS (fallback Netlify DNS); steps in `context.md` → "Domain and DNS".
 4. Whether the Google setup is done before Phase B starts (B3 onwards needs a real test calendar).
 
 ## Netlify environment variables

@@ -35,9 +35,24 @@
 - Set required env vars on Netlify **before** the first build that needs them (`NEXT_PUBLIC_*` is baked in at build time). The site had no env vars at all before 2026-09-30.
 - Wix image URLs: strip `/v1/fill/...` to get the original. Originals can be 15 MB; cap at 2400 px (`sips -Z 2400`).
 
+## DNS cutover (2026-09-30)
+
+- **Check who the nameservers are before assuming where DNS lives.** `dig NS akilea.si` showed Wix (`wixdns.net`) although the registrar is Domenca. The earlier notes said "DNS at Domenca" and were wrong; all mail records were in Wix's panel.
+- Before moving nameservers, copy the **whole** zone (A, CNAME, TXT, MX, SRV, "other MX") from the old DNS host. Easy to forget: MailerLite DKIM CNAME `litesrv._domainkey`. Create the complete zone at the new host first, verify it with `dig @nsX.freedns.si ... +norecurse` on every nameserver, only then switch.
+- Domenca FreeDNS record form: the "Naslov" field is a **prefix** and `.akilea.si` is appended. Apex = empty or `@`; typing `akilea.si` would create `akilea.si.akilea.si`. Priority is only editable for MX.
+- Plain `dig @nsX` (recursion desired) on a FreeDNS server can return a stale partial answer; use `+norecurse` or `+tcp` to read the authoritative data.
+- The `.si` registry updates slowly: check `dig @b.dns.si akilea.si NS +norecurse` (not just public resolvers) to see whether the delegation changed. Domenca's panel shows the new nameservers before the registry does.
+- Netlify: adding the apex first makes the apex primary. "Set primary domain" is blocked while a certificate is being provisioned; set `www.akilea.si` as primary after DNS verifies (canonical in code is `www`).
+
 ## Booking widget fallback (found live 2026-09-30)
 
 - When Google is unavailable the widget used to offer **all** slots. The server still applies its rules (future only, 90-day horizon) and answered 400 for e.g. today's 11:00 at 14:48 → generic error alert, booking lost. The widget now applies the same rules locally (`freeTimesForDay` with no busy times) whenever it has no calendar data. Keep client and server rules in sync (`src/lib/slots.ts` is shared).
 - Test time-dependent UI with Playwright `ctx.clock.setFixedTime(...)` (see the scenario approach in earlier sessions) instead of hoping the real clock hits the case.
 
 - **Right after a deploy, `/_next/image` URLs are cold** (~1 s each, many at once). A live browser check may flag some images as broken on the first run; curl one URL and re-run before assuming a real problem.
+
+## Blog content (2026-10-01)
+
+- **The posts on the new site were summaries, not Mirjana's text** — readers noticed. Before calling any content "migrated", diff it word-for-word against the source. Script used: extract `<article>` from the Wix page, normalise (`**`/`__` markup, links), multiset word diff against `BLOG_POSTS`.
+- Wix `<article>` text is hard-wrapped mid-sentence and adjacent blocks glue together without a space (`TIPFizične`, `kovinokovina`). Rejoin by hand; never trust the raw extraction.
+- Wix blog slugs can differ from the title (`globoka-sprostitev…` is the dermatitis post). The alias map in `getBlogPost` handles `/blog/…` only; `/post/…` has no route.
