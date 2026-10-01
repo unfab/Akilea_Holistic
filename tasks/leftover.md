@@ -3,6 +3,32 @@
 > Ordered by priority. Tick items off here and move finished context into `context.md`.
 > Owner: **me** = can be done by Claude in the repo, **you** = needs Aleksandar / Mirjana.
 
+## 0. NEXT SESSION FIRST: DNS cutover recheck (me, then you)
+
+State at end of 2026-09-30: nameserver change to FreeDNS.si submitted at Domenca and shown there; the `.si` registry still listed Wix (`ns2/ns3.wixdns.net`). FreeDNS zone is complete and verified. Full details and the record table: `context.md` → "Domain and DNS".
+
+Recheck (me):
+- [ ] `dig @b.dns.si akilea.si NS +norecurse +noall +authority +answer` → expect `ns1/2/3.freedns.si`. Then `dig @8.8.8.8` and `@1.1.1.1` for `NS`, `A` (expect `75.2.60.5`), `MX` (5 Google), `TXT` (SPF, MailerLite, Google verification), `www` CNAME (expect `akilea.netlify.app`), `litesrv._domainkey` CNAME.
+- [ ] `curl -I https://akilea.si` → 301 to `https://www.akilea.si/` served by Netlify (not Wix: no `x-wix-*` / `x-meta-site-id` headers); `curl -I https://www.akilea.si` → 200; cert issued.
+- [ ] If still Wix after ~24 h: check Domenca panel still shows FreeDNS, then contact Domenca support (04 58 35 444).
+
+Then you:
+- [ ] Netlify → Domain management: both domains verified, then **set `www.akilea.si` as primary** (apex redirects to it). Retry HTTPS certificate if it shows an error.
+- [ ] Mail test both ways with `mirjana@akilea.si`; MailerLite → domain authentication check.
+- [ ] **2–3 days after the flip:** cancel the Wix Premium plan (and check nothing else is still attached to the Wix account that she needs: contacts, inbox, blog export).
+- [ ] Before/at launch: Web3Forms recipient → `mirjana@akilea.si` (section 1 below).
+- [ ] Optional hardening: DMARC TXT and Google DKIM (neither exists today).
+
+## 0b. A1 Protekt blocks akilea.si (you, urgent)
+
+- [ ] A1 customers with A1 Protekt get a certificate error instead of the site (A1's DNS sinkholes the domain as "malware, phishing"; details in `context.md` → Domain and DNS). Report the false positive to A1 (A1 Protekt page https://www.a1.si/a1-protekt / A1 support) and ask them to unlist `akilea.si` and `www.akilea.si`. Recheck: on A1 mobile data, `dig +short akilea.si` must give `75.2.60.5`, not `109.239.187.96`.
+- [ ] DNS flip itself is done (2026-10-01). Remaining from section 0: set `www.akilea.si` primary in Netlify, mail test, MailerLite check, cancel Wix after 2–3 days.
+
+## 0c. Open slots (me, every ~2 weeks)
+
+- [ ] When Mirjana sends new free slots, replace `OPEN_SLOTS` in `src/config/booking.ts` and deploy. Current list ends 16.10.2026; after that the calendar shows no free day.
+- [ ] Until B7 (Google) is live, a booked slot is not removed automatically: remove it from `OPEN_SLOTS` when a booking email arrives, or the next person can book the same time.
+
 ## 1. Verify the 2026-09-30 production deploy (me, first thing)
 
 - [x] `/posvet` submission arrived by email (Aleksandar tested 2026-09-30, mail landed in aleksandar.bojic12@gmail.com).
@@ -10,7 +36,7 @@
 - [ ] **Where do Web3Forms emails go?** The test mail arrived in Aleksandar's Gmail, i.e. the access key is registered to that address. Decide with Mirjana: change the key's recipient in the Web3Forms dashboard to mirjana@akilea.si (or both) **before launch**, otherwise bookings never reach her.
 - [x] Security headers, 404s (`/ne-obstaja`, `/blog/xyz`, `/uspesno`), robots, OG images, all 22 sitemap pages — verified live 2026-09-30.
 - [x] `/api/availability` answers 503 (expected until Google is configured); booking falls back to email — verified live.
-- [ ] Optional: link GitHub repo in Netlify so pushes deploy automatically (**you**, dashboard).
+- [ ] Netlify dashboard now shows "Deploys from GitHub" (seen 2026-09-30 evening), so the repo looks linked. Verify that a push to `main` really triggers a deploy and that the build has `NEXT_PUBLIC_WEB3FORMS_KEY`; then update the Deploying section in `context.md`.
 
 ## 2. Phase B7 — Google Calendar go-live (you, then me)
 
@@ -34,7 +60,7 @@ Then **me** (B7):
 
 - [x] Facebook / Instagram URLs set in `SOCIAL_LINKS` (`src/config/site.ts`).
 - [x] About photo self-hosted at `public/images/brand/mirjana-o-meni.jpg` — but it is only **547×365** (the old Google thumbnail), soft on retina. **you**: get the original file from Mirjana (3:4, min 1200×1600) and overwrite that path. No code change needed.
-- [ ] **DNS for www.akilea.si**: keep at Domenca (Webtasy d.o.o.) or move to Netlify. After cutover: add domain in Netlify, apex → www redirect, re-check canonicals.
+- [ ] **DNS for www.akilea.si** (**you**): registrar is Domenca, but the nameservers are at **Wix**, which also hosts her Google mail records. Decided direction: recreate the zone in Domenca's FreeDNS, then switch the nameservers away from Wix, then cancel Wix. Full record table, target zone and cutover steps are in `context.md` → "Domain and DNS". Canonicals already use `https://www.akilea.si`.
 - [ ] **Legal items that need Mirjana's green light** — full list with ready-to-paste Slovenian drafts in `privacy-policy.md` ("Needs Mirjana's green light"); **a Slovenian briefing to read to her, with law and article for each point, is `mirjana-pregled-sl.md`**: ZIsRPS statement, withdrawal-right information, complaints handling + reply time, VAT wording, health warning next to the forms (5 languages), price wording / tips, cancellation fee, fixed retention periods, whole-page review (ideally by a lawyer).
 
 ## 3b. Web3Forms (you, before launch)
@@ -42,6 +68,14 @@ Then **me** (B7):
 - [ ] In the Web3Forms dashboard set the **retention of stored submissions** for the form key to a short period (e.g. 30 days — Mirjana gets each submission by email anyway). Then update the sentence in `/pravilnik-o-zasebnosti` section 4 ("največ tri leta oziroma krajše…") to the exact period.
 - [ ] **Move the Web3Forms account to Mirjana** (her email as owner/recipient), create a new access key, set `NEXT_PUBLIC_WEB3FORMS_KEY` on Netlify (redeploy) and in `.env.local`. Until then customer data goes to your Gmail.
 - [ ] Optionally save Web3Forms' DPA (https://web3forms.com/dpa) with the business records.
+
+## 3c. Blog text restore (2026-10-01)
+
+- [ ] **Deploy** branch `fix/blog-full-text` (Aleksandar approves; steps in `context.md` → Deploying) and check the nine posts + `/delavnice/cajanka-o-custvih` live.
+- [ ] Mirjana said she will email corrected texts; apply them on top. The restored text is verbatim from Wix and **keeps her typos** (e.g. "odnosda", "doseglji", "stiuacijah", "Terorijo", "sde umaknejo", "13let"). Ask her whether to fix them.
+- [ ] **Old Wix URLs `/post/<slug>` have no redirect to `/blog/<slug>`.** After the DNS cutover every old link (Facebook, Google) would 404. Add redirects in `next.config.ts` for the 9 posts (Wix slugs differ for two: `globoka-sprostitev-telesa-z-intuitivno-masažo-v-koper` → dermatitis, `odkrijte-prednosti-intuitivne-masaže-z-akileo-v-sloveniji` → 5 tipov). Do this **before** the nameserver flip completes.
+- [ ] Post 8 omitted the 19.03.2026 tea party paragraphs (event is past). Add back only if she wants them.
+- [ ] Dermatitis post: the invented image captions were removed (photos now sit inline in the original order; first photo is the cover).
 
 ## 4. Engineering follow-ups (me, after approval)
 

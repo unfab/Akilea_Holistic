@@ -283,8 +283,8 @@ export default function Home() {
             <div className="bg-white rounded-2xl border border-[var(--color-border)] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
               <div className="aspect-[16/10] overflow-hidden relative bg-[var(--color-surface)]">
                 <Image
-                  src="/images/storitve/masaza-ramen-svece.jpg"
-                  alt="Čajanka s sporočilom"
+                  src="/images/delavnice/cajanka-balon-med-kaktusi.png"
+                  alt="Če se počutiš kot balon med kaktusi, ne pozabi, balon lahko leti visoko in kamor želi"
                   fill
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(min-width: 1024px) 33vw, 100vw"

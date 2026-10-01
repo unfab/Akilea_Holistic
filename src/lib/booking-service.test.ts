@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { getAvailability, createBooking, contactKeys, type BookingDeps } from "./booking-service.ts";
 import { GoogleCalendarError, type CalendarClient, type CalendarEvent, type NewEvent } from "./google-calendar.ts";
 import type { Interval } from "./slots.ts";
+import { TEST_GRID } from "./slots.fixture.ts";
 
 const services = [
   { name: "Intuitivna masaža telesa", price: 85 },
@@ -59,7 +60,7 @@ function fakeCalendar(primaryBusy: Interval[] = []) {
   return { client, events, fail: (err: Error | null) => (failWith = err) };
 }
 
-const deps = (client: CalendarClient | null): BookingDeps => ({ client, now, services, otherBusyCalendarIds: ["mirjana@akilea.si"] });
+const deps = (client: CalendarClient | null): BookingDeps => ({ client, now, services, otherBusyCalendarIds: ["mirjana@akilea.si"], openSlots: TEST_GRID });
 
 const validBooking = {
   serviceId: 2,
@@ -117,6 +118,25 @@ test("availability returns 503 when Google fails", async () => {
   assert.equal((await getAvailability({ month: "2026-10", service: "2" }, deps(cal.client))).status, 503);
 });
 
+test("availability offers only the open slots", async () => {
+  const cal = fakeCalendar();
+  const openSlots = { "2026-10-05": ["18:00"], "2026-10-16": ["15:00", "09:00"] };
+  const res = await getAvailability({ month: "2026-10", service: "1" }, { ...deps(cal.client), openSlots });
+  assert.ok(res.status === 200);
+  const open = Object.entries(res.body.days).filter(([, times]) => times.length > 0);
+  assert.deepEqual(open, [["2026-10-05", ["18:00"]], ["2026-10-16", ["09:00", "15:00"]]]);
+});
+
+test("a booking outside the open slots is rejected", async () => {
+  const cal = fakeCalendar();
+  const openSlots = { "2026-10-05": ["18:00"] };
+  const closed = await createBooking({ ...validBooking, date: "2026-10-05", time: "09:00" }, { ...deps(cal.client), openSlots });
+  assert.equal(closed.status, 400);
+  const open = await createBooking({ ...validBooking, date: "2026-10-05", time: "18:00" }, { ...deps(cal.client), openSlots });
+  assert.equal(open.status, 200);
+  assert.equal(cal.events.length, 1);
+});
+
 // ---------- bookings ----------
 
 test("a valid booking creates one calendar event with the contact details", async () => {
@@ -148,7 +168,8 @@ test("invalid input is rejected with 400", async () => {
     "nope",
     { ...validBooking, serviceId: 7 },
     { ...validBooking, date: "2026-02-30" },
-    { ...validBooking, time: "12:00" },
+    { ...validBooking, time: "12:00" }, // not an open slot
+    { ...validBooking, time: "9am" },
     { ...validBooking, name: "   " },
     { ...validBooking, name: "x".repeat(51) },
     { ...validBooking, email: "", phone: "" },

@@ -2,8 +2,16 @@
 
 export const TIME_ZONE = "Europe/Ljubljana";
 
-// Fixed start times offered every day.
-export const SLOT_TIMES = ["09:00", "11:00", "13:30", "16:00", "18:00"] as const;
+// The only bookable start times, by Ljubljana date. Mirjana sends her free
+// slots for the next two weeks; every other date and time is closed.
+// Past dates are ignored, so old entries can stay until the next update.
+export const OPEN_SLOTS: Readonly<Record<string, readonly string[]>> = {
+  "2026-10-05": ["18:00"],
+  "2026-10-08": ["18:00"],
+  "2026-10-10": ["08:00"],
+  "2026-10-14": ["18:00"],
+  "2026-10-16": ["09:00", "12:00", "15:00"],
+};
 
 // Minutes per service, in the order of servicesPage.items (service id = index + 1).
 // 1: Intuitivna masaža telesa (1 h 45 min), 2: hrbta (50 min), 3: trebuha (50 min).

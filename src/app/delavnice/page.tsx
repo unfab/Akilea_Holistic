@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -68,6 +69,16 @@ export default function DelavnicePage() {
                 </a>
               </div>
             </div>
+            <Link href="/delavnice/cajanka-o-custvih" className="md:w-1/3 w-full block" tabIndex={-1} aria-hidden="true">
+              <Image
+                src="/images/delavnice/cajanka-balon-med-kaktusi.png"
+                alt=""
+                width={1640}
+                height={924}
+                className="w-full h-auto rounded-lg border border-[var(--color-border)]"
+                sizes="(min-width: 768px) 280px, 100vw"
+              />
+            </Link>
           </div>
 
           {/* Planned Event */}

@@ -5,8 +5,8 @@ import {
   BOOKING_HORIZON_DAYS,
   BUFFER_MINUTES,
   MIN_LEAD_MINUTES,
+  OPEN_SLOTS,
   SERVICE_DURATIONS_MIN,
-  SLOT_TIMES,
   TIME_ZONE,
 } from "../config/booking.ts";
 
@@ -15,10 +15,14 @@ export interface Interval {
   end: number;
 }
 
+// Bookable start times by Ljubljana date ("YYYY-MM-DD" -> ["HH:MM", ...]).
+export type OpenSlots = Readonly<Record<string, readonly string[]>>;
+
 export interface SlotRules {
   leadMin?: number;
   horizonDays?: number;
   bufferMin?: number;
+  openSlots?: OpenSlots;
 }
 
 const MINUTE_MS = 60_000;
@@ -90,7 +94,9 @@ export function isSlotBookable({
   leadMin = MIN_LEAD_MINUTES,
   horizonDays = BOOKING_HORIZON_DAYS,
   bufferMin = BUFFER_MINUTES,
+  openSlots = OPEN_SLOTS,
 }: SlotCheck): boolean {
+  if (!isOpenSlot(date, time, openSlots)) return false;
   const slot = slotInterval(date, time, durationMin, bufferMin);
   const nowMs = now.getTime();
   if (slot.start < nowMs + leadMin * MINUTE_MS) return false;
@@ -105,7 +111,8 @@ export function freeTimesForDay(
   now: Date,
   rules: SlotRules = {},
 ): string[] {
-  return SLOT_TIMES.filter((time) => isSlotBookable({ date, time, durationMin, busy, now, ...rules }));
+  const times = (rules.openSlots ?? OPEN_SLOTS)[date] ?? [];
+  return [...times].sort().filter((time) => isSlotBookable({ date, time, durationMin, busy, now, ...rules }));
 }
 
 function daysInMonth(month: string): number {
@@ -157,6 +164,10 @@ export function isValidMonth(value: string): boolean {
   return /^\d{4}-(0[1-9]|1[0-2])$/.test(value);
 }
 
-export function isSlotTime(value: string): boolean {
-  return (SLOT_TIMES as readonly string[]).includes(value);
+export function isValidTime(value: string): boolean {
+  return /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+}
+
+export function isOpenSlot(date: string, time: string, openSlots: OpenSlots = OPEN_SLOTS): boolean {
+  return Object.hasOwn(openSlots, date) && openSlots[date].includes(time);
 }

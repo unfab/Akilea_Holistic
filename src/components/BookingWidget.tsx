@@ -40,7 +40,7 @@ export default function BookingWidget() {
   }, [t]);
 
   // Availability from Google Calendar. null days = unknown (loading or
-  // unavailable): every slot is shown, as before the calendar integration.
+  // unavailable): Mirjana's open slots are shown without the busy check.
   const monthKey = `${currentMonthStart.getFullYear()}-${String(currentMonthStart.getMonth() + 1).padStart(2, "0")}`;
   const [refreshCount, setRefreshCount] = useState(0);
   const availabilityKey = `${monthKey}|${selectedService ?? ""}|${refreshCount}`;
@@ -64,14 +64,14 @@ export default function BookingWidget() {
   }, [availabilityKey, monthKey, selectedService]);
 
   const freeDays = availability?.key === availabilityKey ? availability.days : null;
-  const isDayFull = (dateStr: string) => freeDays?.[dateStr]?.length === 0;
-  const selectedDate = pickedDate && !isDayFull(pickedDate) ? pickedDate : null;
-  // Without calendar data every slot would be offered, including past ones and
-  // dates beyond the booking horizon that the server rejects. Apply the same
-  // rules locally so the customer only sees times the server accepts.
+  // Without calendar data, apply the open slots and the past/horizon rules
+  // locally so the customer only sees times the server accepts.
   const localTimesFor = (dateStr: string): string[] =>
     freeTimesForDay(dateStr, serviceDuration(selectedService ?? 0) ?? Math.min(...SERVICE_DURATIONS_MIN), [], new Date());
-  const availableTimes: readonly string[] = selectedDate ? (freeDays?.[selectedDate] ?? localTimesFor(selectedDate)) : [];
+  const timesFor = (dateStr: string): readonly string[] => freeDays?.[dateStr] ?? localTimesFor(dateStr);
+  const isDayFull = (dateStr: string) => timesFor(dateStr).length === 0;
+  const selectedDate = pickedDate && !isDayFull(pickedDate) ? pickedDate : null;
+  const availableTimes: readonly string[] = selectedDate ? timesFor(selectedDate) : [];
   const selectedTime = pickedTime && availableTimes.includes(pickedTime) ? pickedTime : null;
 
   // Calendar generation logic
@@ -108,7 +108,6 @@ export default function BookingWidget() {
     if (date < today) return;
     const dateStr = toLocalDateString(date);
     if (isDayFull(dateStr)) return;
-    if (!freeDays && localTimesFor(dateStr).length === 0) return;
     setSelectedDate(dateStr);
     setSelectedTime(null);
   };

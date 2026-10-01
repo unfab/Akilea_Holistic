@@ -12,8 +12,8 @@ import {
 import { GoogleCalendarError, type CalendarClient, type CalendarEvent } from "./google-calendar.ts";
 import {
   isSlotBookable,
-  isSlotTime,
   isValidDate,
+  isValidTime,
   isValidMonth,
   monthAvailability,
   monthBounds,
@@ -21,6 +21,7 @@ import {
   serviceDuration,
   slotInterval,
   type Interval,
+  type OpenSlots,
 } from "./slots.ts";
 
 export interface ServiceInfo {
@@ -35,6 +36,8 @@ export interface BookingDeps {
   // Busy calendars other than the booking calendar (e.g. Mirjana's primary).
   // Only free/busy is visible there, and our own inserts never land there.
   otherBusyCalendarIds?: readonly string[];
+  // Defaults to OPEN_SLOTS from the booking config.
+  openSlots?: OpenSlots;
 }
 
 type Result<T> = { status: 200; body: T } | { status: 400 | 409 | 429 | 503; body: { error: string } };
@@ -82,7 +85,7 @@ export async function getAvailability(
       return unavailable;
     }
   }
-  return { status: 200, body: { month, days: monthAvailability(month, durationMin, busy, deps.now) } };
+  return { status: 200, body: { month, days: monthAvailability(month, durationMin, busy, deps.now, { openSlots: deps.openSlots }) } };
 }
 
 // ---------- bookings ----------
@@ -114,7 +117,7 @@ function parseBooking(input: unknown): BookingRequest | null {
     honeypot: str(o.honeypot),
   };
   if (serviceDuration(req.serviceId) === null) return null;
-  if (!isValidDate(req.date) || !isSlotTime(req.time)) return null;
+  if (!isValidDate(req.date) || !isValidTime(req.time)) return null;
   if (!req.name || req.name.length > NAME_MAX) return null;
   if (!req.email && !req.phone) return null;
   if (req.email && (req.email.length > EMAIL_MAX || !EMAIL_RE.test(req.email))) return null;
@@ -181,7 +184,7 @@ export async function createBooking(input: unknown, deps: BookingDeps): Promise<
   const service = deps.services[req.serviceId - 1];
   const durationMin = serviceDuration(req.serviceId)!;
   if (!service) return invalid;
-  if (!isSlotBookable({ date: req.date, time: req.time, durationMin, busy: [], now: deps.now })) return invalid;
+  if (!isSlotBookable({ date: req.date, time: req.time, durationMin, busy: [], now: deps.now, openSlots: deps.openSlots })) return invalid;
   const { client } = deps;
   if (!client) return unavailable;
 
