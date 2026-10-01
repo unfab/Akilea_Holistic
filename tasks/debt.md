@@ -18,3 +18,5 @@
 | D12 | LOW | `npm test` | Node prints `MODULE_TYPELESS_PACKAGE_JSON` warning (no `"type"` in package.json). Harmless. | Leave, or set `"type": "module"` after checking config files. |
 | D13 | LOW | security | No CSP (inline JSON-LD, Web3Forms, MailerLite). | Nonce-based CSP if the site ever handles logins/payments. |
 | D14 | LOW | `generateStaticParams` in `blog/[slug]/page.tsx` | Contains hand-written alias slugs (`maternica`, `dam-tebi`, …) that duplicate `getBlogPost` logic. | Derive from the alias map (see D6). |
+| D15 | MED | `src/config/booking.ts` `OPEN_SLOTS` | Free slots are hand-edited from Mirjana's messages and need a deploy each time; until B7 a booked slot stays bookable (accepted 2026-10-01: Mirjana confirms every booking). | After B7, read open slots from her calendar (e.g. "Prosto" events) instead of the config list. |
+| D16 | LOW | `TestimonialsCarousel.tsx` | Auto-rotates every 2 s (hard to read a whole review) and ignores `prefers-reduced-motion`. | 6–8 s interval, pause on reduced motion. Needs Aleksandar's OK (changes the feel). |

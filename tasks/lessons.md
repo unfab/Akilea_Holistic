@@ -31,7 +31,7 @@
 
 - The `block-no-verify` hook rejects any Bash command that contains `git commit` together with a `-n` flag anywhere (e.g. `grep -n`). Run commits as their own command.
 - zsh: `echo =====` fails (`=` expansion). Use quotes.
-- **Netlify is not linked to GitHub.** A push to `main` deployed nothing (previous deploys have `deploy_source: api`). Deploy with the connector's `deploy-site` command from a `git archive` export: running it in the working tree tried to upload ~900 MB (`.next`) plus `.env.local` and failed with `fetch failed`.
+- ~~Netlify is not linked to GitHub.~~ **Outdated since 2026-10-01: the site is linked, and a push to `main` deploys production within ~20 s** (`manual_deploy: false`, `branch: main`). Never push `main` with anything that should not go live. If the connector fallback is ever needed: deploy from a `git archive` export, never the working tree (it tried to upload ~900 MB `.next` plus `.env.local` and failed with `fetch failed`).
 - Set required env vars on Netlify **before** the first build that needs them (`NEXT_PUBLIC_*` is baked in at build time). The site had no env vars at all before 2026-09-30.
 - Wix image URLs: strip `/v1/fill/...` to get the original. Originals can be 15 MB; cap at 2400 px (`sips -Z 2400`).
 
@@ -56,3 +56,16 @@
 - **The posts on the new site were summaries, not Mirjana's text** — readers noticed. Before calling any content "migrated", diff it word-for-word against the source. Script used: extract `<article>` from the Wix page, normalise (`**`/`__` markup, links), multiset word diff against `BLOG_POSTS`.
 - Wix `<article>` text is hard-wrapped mid-sentence and adjacent blocks glue together without a space (`TIPFizične`, `kovinokovina`). Rejoin by hand; never trust the raw extraction.
 - Wix blog slugs can differ from the title (`globoka-sprostitev…` is the dermatitis post). The alias map in `getBlogPost` handles `/blog/…` only; `/post/…` has no route.
+
+## DNS filter block after the cutover (2026-10-01)
+
+- **Moving nameservers, IP and certificate in one evening can get a domain flagged as hijacked/phishing** by ISP DNS filters. A1 Protekt (Whalebone) sinkholed `akilea.si` the next day; Chrome showed `NET::ERR_CERT_AUTHORITY_INVALID` and HSTS blocked click-through. It looked like a broken certificate but the site was fine.
+- Diagnose "certificate invalid" by checking **which resolver** answered: `scutil --dns`, `dig +short <domain>` vs `dig @1.1.1.1`, and the cert issuer at the IP returned (`openssl s_client -connect <ip>:443 -servername <domain>`). A "Sinkhole" issuer means a DNS filter.
+- Test the live site from a blocked network with `curl --resolve www.akilea.si:443:75.2.60.5` or `main--akilea.netlify.app`.
+- After any future domain move, check the site on Slovenian mobile networks (A1, Telekom, Telemach) the next day.
+
+## Layout shift checks (2026-10-01)
+
+- **Test layout stability at several widths, not one.** The reviews carousel was stable at exactly 390 px (all cards 296 px) but jumped 15–60 px per rotation at 320/360/375/393/414/430. Measure the next section's `offsetTop` over a few rotations at each width.
+- Rotating content of different heights: stack all items in one grid cell (`[grid-area:1/1]`) and toggle opacity, instead of swapping the content.
+

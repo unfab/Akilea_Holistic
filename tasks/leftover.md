@@ -21,8 +21,14 @@ Then you:
 
 ## 0b. A1 Protekt blocks akilea.si (you, urgent)
 
-- [ ] A1 customers with A1 Protekt get a certificate error instead of the site (A1's DNS sinkholes the domain as "malware, phishing"; details in `context.md` → Domain and DNS). Report the false positive to A1 (A1 Protekt page https://www.a1.si/a1-protekt / A1 support) and ask them to unlist `akilea.si` and `www.akilea.si`. Recheck: on A1 mobile data, `dig +short akilea.si` must give `75.2.60.5`, not `109.239.187.96`.
+- [x] False-positive report sent to A1 2026-10-01 21:08 (a1.si contact form; copy in info@amssolutions.biz).
+- [ ] **Recheck daily until fixed** (on A1 mobile data / hotspot: `dig +short akilea.si` → must be `75.2.60.5`, not `109.239.187.96`). If no answer in ~3 working days, call A1 support and quote SinkholeID 3832.
+- Background: A1 customers with A1 Protekt get a certificate error instead of the site (A1's DNS sinkholes the domain as "malware, phishing"; details in `context.md` → Domain and DNS). Report the false positive to A1 (A1 Protekt page https://www.a1.si/a1-protekt / A1 support) and ask them to unlist `akilea.si` and `www.akilea.si`. Recheck: on A1 mobile data, `dig +short akilea.si` must give `75.2.60.5`, not `109.239.187.96`.
 - [x] DNS flip done, `www.akilea.si` primary (2026-10-01). Remaining from section 0: mail test, MailerLite check, cancel Wix after 2–3 days.
+
+## 0d. Legal answers from Mirjana (next session)
+
+- [ ] Aleksandar has Mirjana's answers on the legal items (pravna podlaga, see section 3 and `mirjana-pregled-sl.md`). Handled in a separate session: apply them to `privacy-policy.md`, `/pravilnik-o-zasebnosti`, `/pogoji-poslovanja` and the forms.
 
 ## 0c. Open slots (me, every ~2 weeks)
 

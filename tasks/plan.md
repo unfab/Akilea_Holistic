@@ -29,7 +29,7 @@ Before writing code, read the relevant guides in `node_modules/next/dist/docs/` 
 | OG image | Built in code from the emblem plus existing site text only (see A7) |
 | About photo | See A5c |
 | Phase B outage behaviour | If Google is unreachable, fall back to email-only booking (no lost bookings) |
-| Buffer between appointments | None extra. The fixed slots (09:00, 11:00, 13:30, 16:00, 18:00) are already 2 to 2.5 h apart, so even the longest service (1 h 45 min at 09:00, ends 10:45) leaves a 15 min gap before the next slot |
+| Buffer between appointments | *(Superseded 2026-10-01: slots are now Mirjana's explicit `OPEN_SLOTS` list, see `context.md`.)* None extra. The fixed slots (09:00, 11:00, 13:30, 16:00, 18:00) are already 2 to 2.5 h apart, so even the longest service (1 h 45 min at 09:00, ends 10:45) leaves a 15 min gap before the next slot |
 | Minimum lead time | Slots must simply be in the future. Kept as one constant (`MIN_LEAD_MINUTES`, default 0) so it can be raised later |
 | "Slot taken" message (new copy, approved) | "Ta termin je zaseden. Prosimo, izberite drug termin." (period added to match the other messages) |
 | Booking calendar | Dedicated calendar named "Akilea rezervacije". Busy times are read from her primary calendar and this one |
@@ -121,13 +121,13 @@ Widget                     Site server (Next route handlers)            Google C
   |  then Web3Forms email to Mirjana (client-side, as today)
 ```
 
-- The five fixed times (09:00, 11:00, 13:30, 16:00, 18:00) stay. A slot is free if `[start, start + service duration + buffer)` does not overlap any busy event on her calendar, and the start is in the future. Because every event counts as busy, Mirjana can also block time (holiday, appointment) simply by adding an event.
+- *(Superseded 2026-10-01: only the dates/times in `OPEN_SLOTS` are offered.)* The five fixed times (09:00, 11:00, 13:30, 16:00, 18:00) stay. A slot is free if `[start, start + service duration + buffer)` does not overlap any busy event on her calendar, and the start is in the future. Because every event counts as busy, Mirjana can also block time (holiday, appointment) simply by adding an event.
 - A fully booked day is greyed out like a past day. No new text.
 - Service durations become a numeric config (the site has "1 h 45 min" as text). Confirm against the `servicesPage.items` order in `sl.ts`.
 - **Auth without dependencies:** Google service account, signed JWT (RS256 via `node:crypto`), REST calls with `fetch`. No `googleapis` package.
 - Web3Forms email stays client-side (its free plan blocks server-side calls) and is sent only after the server confirms the slot.
 - **Failure mode (decided):** if Google is unreachable, the widget falls back to today's behaviour (all slots shown, email only). Double-booking protection is off during the outage, but Mirjana never loses a booking.
-- **Booking hours:** only the five fixed slots are offered, on every day of the week, as today. No new business-hours rules.
+- **Booking hours:** *(superseded 2026-10-01 by `OPEN_SLOTS`)* only the five fixed slots are offered, on every day of the week, as today. No new business-hours rules.
 - **New copy:** on a 409 the widget shows "Ta termin je zaseden. Prosimo, izberite drug termin." (approved), refreshes availability and keeps the customer's details.
 - **Race condition:** two people confirming the same slot at the same moment. The server re-checks freebusy immediately before inserting. After inserting, it re-checks once more and removes its own event if another one overlaps, and returns 409. This is not perfectly atomic but is good enough for this traffic.
 - **Abuse:** a public form that writes to a calendar can be spammed. Mitigations: server-side validation and honeypot check, slot must be on the allowed list within a booking horizon (default 90 days), and a maximum of 3 upcoming bookings per email or phone. Residual risk: someone can still fill slots with fake bookings. Mirjana would delete the events. Cloudflare Turnstile is the next step if this happens.

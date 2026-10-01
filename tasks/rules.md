@@ -30,6 +30,6 @@
 - **Secrets never in the repo** (it is public). Keys live in Netlify env vars and `.env.local` (git-ignored). `.env.example` documents every variable with empty values.
 - `NEXT_PUBLIC_WEB3FORMS_KEY` must exist on Netlify before any production build, or both forms break.
 - Keep the Stripe flag **off** until the items in `debt.md` D2 are done.
-- Booking constants live in `src/config/booking.ts`; site constants in `src/config/site.ts`. Do not hardcode them elsewhere.
+- Booking constants live in `src/config/booking.ts`, including `OPEN_SLOTS` (the only bookable dates/times; update when Mirjana sends new ones); site constants in `src/config/site.ts`. Do not hardcode them elsewhere.
 - Testable logic stays framework-free with injected deps and relative `.ts` imports (see `lessons.md`).
-- Production deploys only when Aleksandar says so. Push `main` first, then deploy a clean `git archive` export via the Netlify connector (steps in `context.md` → Deploying), then verify the live site.
+- Production deploys only when Aleksandar says so. **Pushing `main` is a production deploy** (Netlify is linked to GitHub since 2026-10-01), so work on a branch and merge/push only after his OK; then verify the live site (steps in `context.md` → Deploying).
