@@ -26,8 +26,8 @@ Replaces her old Wix site.
   Until `GOOGLE_*` env vars exist, the booking APIs answer 503 and the widget uses the old email-only flow.
 - Homepage "latest blog" card now reads `BLOG_POSTS[0]` (newest post first in `src/data/blogs.ts`).
 - Online payment (Stripe) is **off** behind `NEXT_PUBLIC_ENABLE_ONLINE_PAYMENT`.
-- **2026-10-01, branch `fix/blog-full-text` (not yet deployed):** nine blog posts restored to Mirjana's full original Wix text (the earlier versions were shortened summaries). Verified by a word-level diff against the Wix pages. Post 8 (notranji otrok) deliberately omits the paragraphs announcing the 19.03.2026 tea party (past event). Inline photos restored (`dermatitis/`, new `moja-izkusnja-z-bolecinami-v-krizu/`). Blog text supports `**bold**` and `__italic__`, and a new `image` block type exists (`BlogPostView.tsx`). Čajanka 15.10 page now shows the poster (`public/images/delavnice/cajanka-balon-med-kaktusi.png`).
-- **2026-10-01, same branch:** Mirjana now sends her free slots for the next two weeks and everything else is closed. The daily grid `SLOT_TIMES` is replaced by `OPEN_SLOTS` (date → times) in `src/config/booking.ts`; the widget greys out every other day and `/api/bookings` rejects any other date/time. Poster also on the homepage Delavnice card and the `/delavnice` list card.
+- **2026-10-01, deployed (commit `53ab16f`, pushed to `main` 2026-10-01 ~20:10, verified live):** nine blog posts restored to Mirjana's full original Wix text (the earlier versions were shortened summaries). Verified by a word-level diff against the Wix pages. Post 8 (notranji otrok) deliberately omits the paragraphs announcing the 19.03.2026 tea party (past event). Inline photos restored (`dermatitis/`, new `moja-izkusnja-z-bolecinami-v-krizu/`). Blog text supports `**bold**` and `__italic__`, and a new `image` block type exists (`BlogPostView.tsx`). Čajanka 15.10 page now shows the poster (`public/images/delavnice/cajanka-balon-med-kaktusi.png`).
+- **2026-10-01, same deploy:** Mirjana now sends her free slots for the next two weeks and everything else is closed. The daily grid `SLOT_TIMES` is replaced by `OPEN_SLOTS` (date → times) in `src/config/booking.ts`; the widget greys out every other day and `/api/bookings` rejects any other date/time. Poster also on the homepage Delavnice card and the `/delavnice` list card.
 
 Work history: `git log --oneline` (conventional commits, one per plan task).
 
@@ -89,7 +89,7 @@ Registrar panel (Domenca → domain row → "Uredi DNS strežnike") offers: (1) 
 
 - **23:15** FreeDNS zone complete and verified with `dig` on ns1/ns2/ns3.freedns.si (A `75.2.60.5`, www CNAME, litesrv DKIM CNAME, SPF + MailerLite + Google TXT, 5 MX). No DNSSEC/DS at the registry.
 - **23:25** Nameserver change to FreeDNS.si submitted: Domenca shows `ns1/ns2/ns3.freedns.si` as current. `.si` registry (`b.dns.si`) and public resolvers still return `ns2/ns3.wixdns.net` (TTL 7200) — waiting for propagation. Old Wix site still served meanwhile.
-- **2026-10-01 17:35** Flip complete: registry and 1.1.1.1/8.8.8.8/Quad9/OpenDNS/AdGuard return FreeDNS NS, A `75.2.60.5`, www CNAME `akilea.netlify.app`, 5 Google MX. Netlify serves a Let's Encrypt cert (issued 2026-09-30 21:25 UTC) for `akilea.si` + `www.akilea.si`. Apex is still primary (`www` 301 → apex).
+- **2026-10-01 17:35** Flip complete: registry and 1.1.1.1/8.8.8.8/Quad9/OpenDNS/AdGuard return FreeDNS NS, A `75.2.60.5`, www CNAME `akilea.netlify.app`, 5 Google MX. Netlify serves a Let's Encrypt cert (issued 2026-09-30 21:25 UTC) for `akilea.si` + `www.akilea.si`. By the evening `www.akilea.si` is primary (apex 301 → www).
 - **A1 Protekt blocks the domain** (found 2026-10-01): A1's resolver (Whalebone) sinkholes `akilea.si` as "malware, phishing" to `109.239.187.96` (`blockpage.a1.si`), which presents a "Whalebone Sinkhole" cert → Chrome shows `NET::ERR_CERT_AUTHORITY_INVALID`, and HSTS blocks click-through. Affects A1 customers with A1 Protekt (seen on an iPhone hotspot, resolver 172.20.10.1). Not a site problem; needs a false-positive report to A1.
 - **Still to do after propagation:** verify `dig NS/A/MX/TXT akilea.si` via 8.8.8.8 and 1.1.1.1; Netlify "Pending DNS verification" clears and certificate issues; set `www.akilea.si` as primary in Netlify; mail test both directions; MailerLite domain check; cancel Wix Premium after 2–3 days.
 
@@ -146,12 +146,15 @@ Local: `.env.local` (git-ignored) holds the Web3Forms key.
 
 ## Deploying
 
+**Since 2026-10-01 the Netlify site is linked to GitHub: pushing `main` deploys production automatically** (verified: push of `53ab16f` was live ~20 s later; deploys show `manual_deploy: false`, `branch: main`). Push only what should go live. Then verify live (step 4).
+
+Fallback (manual connector deploy), only if the GitHub link breaks:
+
 1. Commit and push `main` to GitHub (source of truth).
 2. Export only committed files: `git archive main | tar -x -C <empty dir>` — never deploy the working tree (the tool zips everything except `node_modules`/`.git`, including the ~900 MB `.next` cache and `.env.local`).
 3. Netlify connector `deploy-site` with the site id → run the returned `npx @netlify/mcp … --site-id … --proxy-path …` command **inside the export dir**. It builds on Netlify and waits until ready.
 4. Verify live: `curl -I https://akilea.netlify.app`, 404s, and a browser pass (see `lessons.md`).
 
-Optional improvement: link the GitHub repo in Netlify (Site configuration → Build & deploy) so pushes to `main` deploy automatically.
 
 ## Commands
 

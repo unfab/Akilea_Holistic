@@ -22,12 +22,12 @@ Then you:
 ## 0b. A1 Protekt blocks akilea.si (you, urgent)
 
 - [ ] A1 customers with A1 Protekt get a certificate error instead of the site (A1's DNS sinkholes the domain as "malware, phishing"; details in `context.md` → Domain and DNS). Report the false positive to A1 (A1 Protekt page https://www.a1.si/a1-protekt / A1 support) and ask them to unlist `akilea.si` and `www.akilea.si`. Recheck: on A1 mobile data, `dig +short akilea.si` must give `75.2.60.5`, not `109.239.187.96`.
-- [ ] DNS flip itself is done (2026-10-01). Remaining from section 0: set `www.akilea.si` primary in Netlify, mail test, MailerLite check, cancel Wix after 2–3 days.
+- [x] DNS flip done, `www.akilea.si` primary (2026-10-01). Remaining from section 0: mail test, MailerLite check, cancel Wix after 2–3 days.
 
 ## 0c. Open slots (me, every ~2 weeks)
 
 - [ ] When Mirjana sends new free slots, replace `OPEN_SLOTS` in `src/config/booking.ts` and deploy. Current list ends 16.10.2026; after that the calendar shows no free day.
-- [ ] Until B7 (Google) is live, a booked slot is not removed automatically: remove it from `OPEN_SLOTS` when a booking email arrives, or the next person can book the same time.
+- Until B7 (Google) is live, a booked slot stays bookable. Aleksandar decided 2026-10-01 this is fine: Mirjana confirms every booking herself.
 
 ## 1. Verify the 2026-09-30 production deploy (me, first thing)
 
@@ -36,7 +36,7 @@ Then you:
 - [ ] **Where do Web3Forms emails go?** The test mail arrived in Aleksandar's Gmail, i.e. the access key is registered to that address. Decide with Mirjana: change the key's recipient in the Web3Forms dashboard to mirjana@akilea.si (or both) **before launch**, otherwise bookings never reach her.
 - [x] Security headers, 404s (`/ne-obstaja`, `/blog/xyz`, `/uspesno`), robots, OG images, all 22 sitemap pages — verified live 2026-09-30.
 - [x] `/api/availability` answers 503 (expected until Google is configured); booking falls back to email — verified live.
-- [ ] Netlify dashboard now shows "Deploys from GitHub" (seen 2026-09-30 evening), so the repo looks linked. Verify that a push to `main` really triggers a deploy and that the build has `NEXT_PUBLIC_WEB3FORMS_KEY`; then update the Deploying section in `context.md`.
+- [x] Push to `main` deploys automatically (verified 2026-10-01). Was: Netlify dashboard now shows "Deploys from GitHub" (seen 2026-09-30 evening), so the repo looks linked. Verify that a push to `main` really triggers a deploy and that the build has `NEXT_PUBLIC_WEB3FORMS_KEY`; then update the Deploying section in `context.md`.
 
 ## 2. Phase B7 — Google Calendar go-live (you, then me)
 
@@ -71,7 +71,7 @@ Then **me** (B7):
 
 ## 3c. Blog text restore (2026-10-01)
 
-- [ ] **Deploy** branch `fix/blog-full-text` (Aleksandar approves; steps in `context.md` → Deploying) and check the nine posts + `/delavnice/cajanka-o-custvih` live.
+- [x] **Deployed** 2026-10-01 (`53ab16f`), nine posts + čajanka page verified live. Was: deploy branch `fix/blog-full-text` (Aleksandar approves; steps in `context.md` → Deploying) and check the nine posts + `/delavnice/cajanka-o-custvih` live.
 - [ ] Mirjana said she will email corrected texts; apply them on top. The restored text is verbatim from Wix and **keeps her typos** (e.g. "odnosda", "doseglji", "stiuacijah", "Terorijo", "sde umaknejo", "13let"). Ask her whether to fix them.
 - [ ] **Old Wix URLs `/post/<slug>` have no redirect to `/blog/<slug>`.** After the DNS cutover every old link (Facebook, Google) would 404. Add redirects in `next.config.ts` for the 9 posts (Wix slugs differ for two: `globoka-sprostitev-telesa-z-intuitivno-masažo-v-koper` → dermatitis, `odkrijte-prednosti-intuitivne-masaže-z-akileo-v-sloveniji` → 5 tipov). Do this **before** the nameserver flip completes.
 - [ ] Post 8 omitted the 19.03.2026 tea party paragraphs (event is past). Add back only if she wants them.
