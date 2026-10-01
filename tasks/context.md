@@ -1,6 +1,6 @@
 # Context — Akilea Holistični center
 
-> Last updated: 2026-09-30 23:30. Read this first, then `leftover.md` (section 0 = DNS recheck), then `rules.md`.
+> Last updated: 2026-10-01 night. Read this first, then `leftover.md` (0b A1 block, 0d legal answers), then `rules.md`.
 > This repo is **public** on GitHub. Never put secrets, keys or customer data in `tasks/`.
 
 ## What this is

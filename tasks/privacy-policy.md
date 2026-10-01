@@ -34,7 +34,7 @@ No analytics, no tracking pixels, no third-party fonts or images (all self-hoste
 
 - [ ] Mirjana reads both pages and confirms they describe how she works. Ask her whether she wants a **fixed retention period** for bookings (now: "until no longer needed, unless law requires longer, e.g. accounting records").
 - [ ] Web3Forms currently delivers to Aleksandar's Gmail. Change the recipient to Mirjana **before launch**, otherwise the policy ("we receive it by email") describes a mailbox that is not hers.
-- [ ] Terms section 3 still says prices are "informativne narave" (informational). Consumer law expects the displayed price to be the price charged. Business decision for Mirjana; suggested wording: "Cene storitev so navedene na spletni strani v evrih."
+- [x] Prices wording done 2026-10-01 (terms section 3: "Cene storitev so navedene v evrih. Storitve so oproščene DDV.").
 - [ ] Have someone qualified check the consumer-law side of the terms (distance-contract information such as right of withdrawal for online bookings, cancellation fee of 50 %, complaints handling). Not covered by this rewrite.
 - [ ] Not done on purpose: a consent-choice cookie banner. Only functional storage is used, so a notice is enough. Add real consent choices only if analytics or marketing tools are ever added.
 
@@ -54,13 +54,15 @@ Corrections after checking: tax-document retention is **ZDavP-2 Art. 32** (until
 |---|---|---|
 | 1 | Policy omitted the Web3Forms copy (India, up to 3 years) | **Fixed 2026-09-30** (sections 3 and 4). After the dashboard retention is set (leftover.md), replace "največ tri leta oziroma krajše…" with the exact period. |
 | 2 | Web3Forms account belongs to Aleksandar's email | **Open — Aleksandar** (leftover.md) |
-| 3 | Terms lack withdrawal info, ZIsRPS statement, complaints handling, VAT wording | **Needs Mirjana** — drafts below |
+| 3 | Terms lack withdrawal info, ZIsRPS statement, complaints handling, VAT wording | **Partly live 2026-10-01:** complaints (8 days) and VAT wording are live. **ZIsRPS and withdrawal waiting for Mirjana** (draft on branch `feat/legal-terms-mirjana`) |
 | 4 | Language cookie lasted 1 year | **Fixed 2026-09-30** (30 days; policy section 5 updated). Set only after the user picks a language. |
-| 5 | Health-data warning next to the forms | **Needs Mirjana** — draft below |
+| 5 | Health-data warning next to the forms | **Live 2026-10-01** (booking + /posvet, 5 languages; key `healthNote` in `src/i18n`) |
 | 6 | Withdrawal consent checkbox at booking | **Needs Mirjana + legal check** — draft below |
 | — | Invoicing / accounting purpose (Art. 6(1)(c)) missing | **Added 2026-09-30** ("Računi in računovodstvo") |
 
 ## Needs Mirjana's green light — draft wording
+
+> **Status 2026-10-01:** items 3 (complaints), 4 (VAT), the price wording and the health note are **live**. Items 1 (ZIsRPS) and 2 (withdrawal) and the cancellation-fee rewrite are **not live**; see `leftover.md` 0d.
 
 All drafts are Slovenian, unpublished, and **must be checked by someone qualified** before use. Article numbers come from the pasted checklist plus search; verify them. Once approved: paste into `src/app/pogoji-poslovanja/page.tsx` (and the forms), keep `Zadnja posodobitev/Veljavnost od` dates current, translate any new *form* text into en/hr/it/sr (`src/i18n/locales/*.ts`), deploy.
 

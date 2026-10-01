@@ -69,3 +69,10 @@
 - **Test layout stability at several widths, not one.** The reviews carousel was stable at exactly 390 px (all cards 296 px) but jumped 15–60 px per rotation at 320/360/375/393/414/430. Measure the next section's `offsetTop` over a few rotations at each width.
 - Rotating content of different heights: stack all items in one grid cell (`[grid-area:1/1]`) and toggle opacity, instead of swapping the content.
 
+
+## Legal text changes (2026-10-01)
+
+- **Publish only what the owner explicitly approved, nothing else.** Mirjana confirmed 4 of 7 points; the other 3 stayed on a separate branch and only the approved ones went to `main`. Build the "approved only" branch fresh from `main` and bring in files from the draft branch (`git checkout <draft> -- <paths>`), rather than deleting from the draft.
+- **Use her approved wording verbatim.** My own improvement ("DDV ni obračunan") differed from what she agreed to ("Storitve so oproščene DDV"); the live text is hers. Unapproved copy tweaks (e.g. the `/posvet` placeholder) stay out until she says yes.
+- **Her questions can come from a word that has two meanings** ("računi" = invoices vs. Web3Forms user account). Answer in plain words with the two meanings spelled out.
+- A late-cancel fee of 70 % must not apply to cancellations made well ahead (OZ 252 lets a court cut disproportionate penalties); the first late cancel being free is in her favour legally. Keep the distinction "late cancel / no-show" vs. "cancel in time".

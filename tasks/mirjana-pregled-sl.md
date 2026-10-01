@@ -92,3 +92,16 @@ Mirjana prebere pravilnik o zasebnosti, pogoje poslovanja in obvestilo o piškot
 - OZ, 247.–254. člen: https://zakonodaja.com/zakon/oz/ii-skupina-pogodbena-kazen
 - Konec evropske platforme ODR: https://www.twobirds.com/en/insights/2025/global/the-end-of-the-european-online-dispute-resolution-platform
 - Web3Forms DPA in politika zasebnosti: https://web3forms.com/dpa, https://web3forms.com/privacy
+
+## Mirjanini odgovori (e-pošta 30. 9. 2026) in stanje 1. 10. 2026
+
+| Točka | Njen odgovor | Stanje |
+|---|---|---|
+| 1 Izvensodno reševanje | vprašala, kako se potem rešujejo spori | odgovor poslan (direktno, sicer sodišče / tržni inšpektorat); **čakamo potrditev**, na strani ni |
+| 2 Odstop | vprašala, kdo nima pravice (odgovor: potrošnik); želi, da lahko vsaka stran odpove/prestavi, ob prvi odpovedi stranke nov termin ali vračilo | **čakamo potrditev**, na strani ni |
+| 3 Pritožbe | se strinja | **objavljeno** 1. 10. (8 dni) |
+| 4 DDV | se strinja | **objavljeno** 1. 10. |
+| 5 Zdravje ob obrazcih | se strinja | **objavljeno** 1. 10. (5 jezikov) |
+| 6 Cene | se strinja | **objavljeno** 1. 10. |
+| 7 Odpoved/neudeležba | prvič nov termin ali vračilo; drugič in vsakič naslednjič „čakalna ura“ 70 % (ali 50 %) | osnutek na veji `feat/legal-terms-mirjana`; **čakamo potrditev** (24 h brezplačna odpoved ostane? 70 % samo za pozno odpoved/neudeležbo?). Na strani še velja staro besedilo (50 %) |
+| 8, 9 Web3Forms | ni razumela vloge; „račun“ je pomenil uporabniški račun, ne izdanega računa | pojasnjeno v odgovoru; prenos računa nanjo še odprt |
