@@ -135,6 +135,7 @@ export default function PosvetPage() {
                   className="w-full px-4 py-3 border border-[var(--color-border)] rounded focus:outline-none focus:border-[var(--color-primary)] text-[16px] resize-none"
                   placeholder={c.messagePlaceholder}
                 />
+                <p className="text-[11px] text-[var(--color-muted)] leading-relaxed mt-2">{c.healthNote}</p>
               </div>
               
               <button 

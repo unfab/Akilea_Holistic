@@ -158,6 +158,7 @@ export const it: TranslationDictionary = {
     successTitle: "Appuntamento confermato con successo!",
     successDesc: "Grazie per la vostra fiducia. Abbiamo inviato un'e-mail di conferma al vostro indirizzo.",
     bookAnother: "Prenota un altro appuntamento",
+    healthNote: "Per favore, non inserire dati sul tuo stato di salute; ne parleremo di persona.",
   },
   servicesPage: {
     badge: "La nostra proposta",
@@ -297,6 +298,7 @@ export const it: TranslationDictionary = {
     newMsgBtn: "Invia un altro messaggio",
     errorMsg: "Errore durante l'invio. Si prega di riprovare più tardi.",
     networkError: "Errore di rete. Controlla la connessione e riprova.",
+    healthNote: "Per favore, non inserire dati sul tuo stato di salute; ne parleremo di persona.",
   },
   ebookPage: {
     badge: "In Arrivo",

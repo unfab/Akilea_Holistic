@@ -16,7 +16,7 @@ export default function PogojiPoslovanjaPage() {
         <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-8">Pogoji poslovanja</h1>
         
         <div className="prose prose-sm md:prose-base max-w-none text-[var(--color-muted)] font-light leading-relaxed [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mb-2 [&_a]:text-[var(--color-primary)] [&_a]:underline">
-          <p className="font-bold mb-4">Veljavnost od: 30. september 2026</p>
+          <p className="font-bold mb-4">Veljavnost od: 1. oktober 2026</p>
           
           <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">1. Splošne določbe</h2>
           <p>
@@ -24,7 +24,7 @@ export default function PogojiPoslovanjaPage() {
           </p>
           <p>
             Podatki o ponudniku: AKILEA, Mirjana Groznik s.p., Šmarska cesta 5B, 6000 Koper, matična številka 9489983000, davčna številka 28773977.
-            Nismo zavezanci za DDV. Kontakt: telefon 040 863 594, e-pošta <a href="mailto:mirjana@akilea.si">mirjana@akilea.si</a>.
+            Nisem zavezanka za DDV na podlagi 1. odstavka 94. člena ZDDV-1. Kontakt: telefon 040 863 594, e-pošta <a href="mailto:mirjana@akilea.si">mirjana@akilea.si</a>.
           </p>
 
           <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">2. Rezervacije in odpovedi</h2>
@@ -37,7 +37,7 @@ export default function PogojiPoslovanjaPage() {
 
           <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">3. Plačila in cene</h2>
           <p>
-            Cene storitev so navedene na spletni strani in so informativne narave. Storitve so oproščene DDV (nismo zavezanci). Plačilo se opravi na lokaciji.
+            Cene storitev so navedene v evrih. Storitve so oproščene DDV. Plačilo se opravi na lokaciji.
           </p>
 
           <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">4. Zdravstveno stanje</h2>
@@ -50,7 +50,12 @@ export default function PogojiPoslovanjaPage() {
             Ponudnik storitev ne prevzema odgovornosti za morebitne poškodbe ali poslabšanje zdravstvenega stanja, če stranka izvajalca ni predhodno seznanila z relevantnimi zdravstvenimi informacijami, oziroma če je ravnala v nasprotju z navodili izvajalca.
           </p>
         
-          <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">6. Varstvo osebnih podatkov</h2>
+          <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">6. Pritožbe</h2>
+          <p>
+            Pritožbe pošljite na <a href="mailto:mirjana@akilea.si">mirjana@akilea.si</a> ali na naslov AKILEA, Šmarska cesta 5B, 6000 Koper. Odgovorimo v 8 dneh.
+          </p>
+
+          <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">7. Varstvo osebnih podatkov</h2>
           <p>
             Kako ravnamo z osebnimi podatki, ki jih vnesete pri rezervaciji ali povpraševanju, je opisano v{" "}
             <Link href="/pravilnik-o-zasebnosti">pravilniku o zasebnosti</Link>.

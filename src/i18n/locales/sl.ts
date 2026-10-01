@@ -158,6 +158,7 @@ export const sl: TranslationDictionary = {
     successTitle: "Hvala za povpraševanje!",
     successDesc: "Vaš termin smo uspešno zabeležili. Kmalu boste prejeli potrditveno e-poštno sporočilo.",
     bookAnother: "Nova rezervacija",
+    healthNote: "Prosimo, ne vpisujte podatkov o svojem zdravstvenem stanju; o tem se pogovoriva osebno.",
   },
   servicesPage: {
     badge: "Naša ponudba",
@@ -297,6 +298,7 @@ export const sl: TranslationDictionary = {
     newMsgBtn: "Pošlji novo sporočilo",
     errorMsg: "Napaka pri pošiljanju. Prosimo, poskusite kasneje.",
     networkError: "Napaka na omrežju. Prosimo, preverite povezavo in poskusite znova.",
+    healthNote: "Prosimo, ne vpisujte podatkov o svojem zdravstvenem stanju; o tem se pogovoriva osebno.",
   },
   ebookPage: {
     badge: "Prihaja Kmalu",

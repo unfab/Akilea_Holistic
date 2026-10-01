@@ -158,6 +158,7 @@ export const hr: TranslationDictionary = {
     successTitle: "Rezervacija je uspješno poslana!",
     successDesc: "Hvala vam na povjerenju. Na vašu e-mail adresu poslali smo potvrdu termina.",
     bookAnother: "Rezervirajte novi termin",
+    healthNote: "Molimo, ne upisujte podatke o svom zdravstvenom stanju; o tome ćemo razgovarati osobno.",
   },
   servicesPage: {
     badge: "Naša ponuda",
@@ -297,6 +298,7 @@ export const hr: TranslationDictionary = {
     newMsgBtn: "Pošalji novu poruku",
     errorMsg: "Pogreška pri slanju. Molimo pokušajte ponovno kasnije.",
     networkError: "Mrežna pogreška. Molimo provjerite vezu i pokušajte ponovno.",
+    healthNote: "Molimo, ne upisujte podatke o svom zdravstvenom stanju; o tome ćemo razgovarati osobno.",
   },
   ebookPage: {
     badge: "Uskoro",

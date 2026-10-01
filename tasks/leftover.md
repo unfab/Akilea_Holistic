@@ -26,9 +26,17 @@ Then you:
 - Background: A1 customers with A1 Protekt get a certificate error instead of the site (A1's DNS sinkholes the domain as "malware, phishing"; details in `context.md` → Domain and DNS). Report the false positive to A1 (A1 Protekt page https://www.a1.si/a1-protekt / A1 support) and ask them to unlist `akilea.si` and `www.akilea.si`. Recheck: on A1 mobile data, `dig +short akilea.si` must give `75.2.60.5`, not `109.239.187.96`.
 - [x] DNS flip done, `www.akilea.si` primary (2026-10-01). Remaining from section 0: mail test, MailerLite check, cancel Wix after 2–3 days.
 
-## 0d. Legal answers from Mirjana (next session)
+## 0d. Legal answers from Mirjana (email 30. 9. 2026)
 
-- [ ] Aleksandar has Mirjana's answers on the legal items (pravna podlaga, see section 3 and `mirjana-pregled-sl.md`). Handled in a separate session: apply them to `privacy-policy.md`, `/pravilnik-o-zasebnosti`, `/pogoji-poslovanja` and the forms.
+**Live 2026-10-01 (branch `feat/legal-approved`, merged to `main`):** only what she agreed to: complaints (mirjana@akilea.si / post, 8 days), VAT wording ("Nisem zavezanka za DDV na podlagi 1. odstavka 94. člena ZDDV-1", ZDDV-1), prices "v evrih" + "Storitve so oproščene DDV", health note under both forms (5 languages), "Veljavnost od: 1. oktober 2026".
+
+**Waiting, NOT live — branch `feat/legal-terms-mirjana`** (has a draft of all three; merge/cherry-pick only after Mirjana confirms):
+- [ ] **ZIsRPS statement** ("ne priznava nobenega izvajalca…"): she asked how disputes get solved without one (answered in the email). Wait for her OK.
+- [ ] **Withdrawal-right section** (135. člen: no withdrawal for leisure services at a fixed date): she asked who has no right (the consumer). Wait for OK. Risk for a lawyer: whether massage is a "leisure service". Optional tick box at booking not built (`mirjana-pregled-sl.md` §2).
+- [ ] **Cancellation rules:** her wish: free up to 24 h before; first late cancel / no-show → free new term (or full refund if prepaid); second and later → 70 % "nadomestilo za rezerviran termin"; if she cancels → new term or full refund. Confirm that 24 h free stays and 70 % applies only to late cancels / no-shows. Until then the live terms keep the old 50 % wording.
+- [ ] The branch also reworded the `/posvet` placeholder (dropped "morebitne težave"); not live, needs her OK as copy.
+- [ ] After merging the waiting items, bump "Veljavnost od" again.
+- Still open: fixed retention periods (§8, with accountant) and moving the Web3Forms account to her (§9, see 3b).
 
 ## 0c. Open slots (me, every ~2 weeks)
 

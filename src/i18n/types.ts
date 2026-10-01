@@ -140,6 +140,7 @@ export interface TranslationDictionary {
     successTitle: string;
     successDesc: string;
     bookAnother: string;
+    healthNote: string;
   };
   servicesPage: {
     badge: string;
@@ -182,6 +183,7 @@ export interface TranslationDictionary {
     newMsgBtn: string;
     errorMsg: string;
     networkError: string;
+    healthNote: string;
   };
   ebookPage: {
     badge: string;

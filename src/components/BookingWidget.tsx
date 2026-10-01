@@ -427,6 +427,7 @@ export default function BookingWidget() {
                       />
                     </div>
                   </div>
+                  <p className="text-[11px] text-[var(--color-muted)] leading-relaxed mt-4">{t.bookingWidget.healthNote}</p>
                 </div>
               )}
 

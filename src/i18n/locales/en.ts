@@ -158,6 +158,7 @@ export const en: TranslationDictionary = {
     successTitle: "Appointment Successfully Booked!",
     successDesc: "Thank you for your trust. We have sent a confirmation email to your inbox.",
     bookAnother: "Book Another Appointment",
+    healthNote: "Please don't enter details about your health; we'll talk about it in person.",
   },
   servicesPage: {
     badge: "Our Offerings",
@@ -297,6 +298,7 @@ export const en: TranslationDictionary = {
     newMsgBtn: "Send Another Message",
     errorMsg: "Error sending message. Please try again later.",
     networkError: "Network error. Please check your connection and try again.",
+    healthNote: "Please don't enter details about your health; we'll talk about it in person.",
   },
   ebookPage: {
     badge: "Coming Soon",
