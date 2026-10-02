@@ -105,3 +105,9 @@ Mirjana prebere pravilnik o zasebnosti, pogoje poslovanja in obvestilo o piškot
 | 6 Cene | se strinja | **objavljeno** 1. 10. |
 | 7 Odpoved/neudeležba | prvič nov termin ali vračilo; drugič in vsakič naslednjič „čakalna ura“ 70 % (ali 50 %) | osnutek na veji `feat/legal-terms-mirjana`; **čakamo potrditev** (24 h brezplačna odpoved ostane? 70 % samo za pozno odpoved/neudeležbo?). Na strani še velja staro besedilo (50 %) |
 | 8, 9 Web3Forms | ni razumela vloge; „račun“ je pomenil uporabniški račun, ne izdanega računa | pojasnjeno v odgovoru; prenos računa nanjo še odprt |
+
+### Drugi krog (e-pošta 2. 10. 2026) — vse objavljeno 3. 10. 2026
+- 1 ZIsRPS: se strinja → objavljeno.
+- 2 Odstop: brez kljukice pri rezervaciji (spletna rezervacija le rezervira termin, plačilo je po obravnavi) → objavljeno.
+- 7 Odpoved: **prva** odpoved/prestavitev/neudeležba brezplačna brez roka; **vsaka naslednja** vsaj 24 ur prej, sicer 70 %; če je že plačano, zadrži 70 % in vrne 30 %; če odpove ona, nov termin ali ves denar nazaj. Velja za vse načine rezervacije → objavljeno.
+- Vprašanje o delavnicah, predavanjih, produktih: odprto (glej `leftover.md` 0d).

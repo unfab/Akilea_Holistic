@@ -1,6 +1,6 @@
 # Context — Akilea Holistični center
 
-> Last updated: 2026-10-01 night. Read this first, then `leftover.md` (0b A1 block, 0d legal answers), then `rules.md`.
+> Last updated: 2026-10-03. Read this first, then `leftover.md` (0b A1 block, 0d legal answers), then `rules.md`.
 > This repo is **public** on GitHub. Never put secrets, keys or customer data in `tasks/`.
 
 ## What this is
@@ -31,6 +31,8 @@ Replaces her old Wix site.
 - **2026-10-01 evening, branch `fix/testimonials-layout-shift` → `main`:** homepage reviews carousel no longer moves the page on mobile. The slides differed in height (e.g. 1080/1095/1052 px at 375 px wide), so every 2 s rotation pushed everything below (booking calendar) up and down by 15–60 px. All slides now share one grid cell (`TestimonialsCarousel.tsx`), so the section keeps the tallest slide's height; inactive slides are `opacity-0`, `aria-hidden`, `inert`. Verified at 320–1280 px: booking widget position constant while slides rotate.
 
 - **2026-10-01 night, branch `feat/legal-approved` → `main`:** Mirjana's approved legal points live: complaints section (8 days), VAT legal basis, prices in EUR / exempt from VAT, health note next to both forms (5 languages). The rest (ZIsRPS, withdrawal, new cancellation rules) is parked on `feat/legal-terms-mirjana` until she confirms; see `leftover.md` 0d.
+
+- **2026-10-03, branch `feat/legal-terms-final` → `main`:** rest of the legal terms live: new cancellation rules (first one free, then 24 h / 70 %), withdrawal-right section, ZIsRPS statement. Follow-ups (workshop conditions, Google Form processor, Web3Forms transfer) in `leftover.md` 0d.
 
 Work history: `git log --oneline` (conventional commits, one per plan task).
 

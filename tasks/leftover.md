@@ -26,17 +26,21 @@ Then you:
 - Background: A1 customers with A1 Protekt get a certificate error instead of the site (A1's DNS sinkholes the domain as "malware, phishing"; details in `context.md` → Domain and DNS). Report the false positive to A1 (A1 Protekt page https://www.a1.si/a1-protekt / A1 support) and ask them to unlist `akilea.si` and `www.akilea.si`. Recheck: on A1 mobile data, `dig +short akilea.si` must give `75.2.60.5`, not `109.239.187.96`.
 - [x] DNS flip done, `www.akilea.si` primary (2026-10-01). Remaining from section 0: mail test, MailerLite check, cancel Wix after 2–3 days.
 
-## 0d. Legal answers from Mirjana (email 30. 9. 2026)
+## 0d. Legal terms — done 2026-10-03; open follow-ups
 
-**Live 2026-10-01 (branch `feat/legal-approved`, merged to `main`):** only what she agreed to: complaints (mirjana@akilea.si / post, 8 days), VAT wording ("Nisem zavezanka za DDV na podlagi 1. odstavka 94. člena ZDDV-1", ZDDV-1), prices "v evrih" + "Storitve so oproščene DDV", health note under both forms (5 languages), "Veljavnost od: 1. oktober 2026".
+**All of Mirjana's legal answers are live** (2026-10-01 complaints/VAT/prices/health note; 2026-10-03 the rest, branch `feat/legal-terms-final`, terms "Veljavnost od: 3. oktober 2026"):
+- Cancellation (her final rule, email 2. 10.): **first** cancel / reschedule / no-show is free at any time (new term, or full refund if prepaid); every **later** one needs ≥ 24 h notice, otherwise **70 %** "nadomestilo za rezerviran termin" (if prepaid: keep 70 %, refund 30 %); if she cancels → new term or full refund. Applies to every booking channel (web, e-mail, phone, SMS).
+- Withdrawal section (ZVPot-1 134/135), no tick box at booking (she agreed: online booking only reserves, payment is after the treatment).
+- ZIsRPS "ne priznava nobenega izvajalca" statement in section 7.
+- Branch `feat/legal-terms-mirjana` is superseded (old drafts); can be deleted.
 
-**Waiting, NOT live — branch `feat/legal-terms-mirjana`** (has a draft of all three; merge/cherry-pick only after Mirjana confirms):
-- [ ] **ZIsRPS statement** ("ne priznava nobenega izvajalca…"): she asked how disputes get solved without one (answered in the email). Wait for her OK.
-- [ ] **Withdrawal-right section** (135. člen: no withdrawal for leisure services at a fixed date): she asked who has no right (the consumer). Wait for OK. Risk for a lawyer: whether massage is a "leisure service". Optional tick box at booking not built (`mirjana-pregled-sl.md` §2).
-- [ ] **Cancellation rules:** her wish: free up to 24 h before; first late cancel / no-show → free new term (or full refund if prepaid); second and later → 70 % "nadomestilo za rezerviran termin"; if she cancels → new term or full refund. Confirm that 24 h free stays and 70 % applies only to late cancels / no-shows. Until then the live terms keep the old 50 % wording.
-- [ ] The branch also reworded the `/posvet` placeholder (dropped "morebitne težave"); not live, needs her OK as copy.
-- [ ] After merging the waiting items, bump "Veljavnost od" again.
-- Still open: fixed retention periods (§8, with accountant) and moving the Web3Forms account to her (§9, see 3b).
+Open:
+- [ ] **Workshops / lectures / products** (her question 2. 10.): she wants conditions written under each paid workshop/lecture. Needs her rule for workshops (sign-off deadline, refund or transfer to another person / next date). Lectures are for companies (B2B, "po dogovoru") → conditions in the offer, not consumer law. E-book is "prihaja kmalu"; if it becomes paid, add a digital-content line (withdrawal lost on immediate download with consent). Currently no workshop on the site lists a price (čajanka = voluntary donations; others sign up via /posvet).
+- [ ] Čajanka sign-up uses a **Google Form** (`forms.gle/...`); Google Forms is not listed as a processor in `/pravilnik-o-zasebnosti`. Add it or move sign-up to the site form.
+- [ ] Mirjana will have someone check the terms; apply their remarks. Lawyer question still open: is massage a "leisure service" (ZVPot-1 135)?
+- [ ] `/posvet` placeholder "morebitne težave" next to the health note: ask her whether to drop those words (not approved yet).
+- [ ] Accountant: how to invoice the 70 % fee (and the 30 % refund when prepaid); fixed retention periods (§8).
+- [ ] Web3Forms account → Mirjana (3b). No meeting needed: Aleksandar requests a new access key for mirjana@akilea.si, she forwards the Web3Forms email with the key; then set `NEXT_PUBLIC_WEB3FORMS_KEY` on Netlify + `.env.local`, redeploy.
 
 ## 0c. Open slots (me, every ~2 weeks)
 
