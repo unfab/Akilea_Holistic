@@ -34,6 +34,8 @@ Replaces her old Wix site.
 
 - **2026-10-03, branch `feat/legal-terms-final` → `main`:** rest of the legal terms live: new cancellation rules (first one free, then 24 h / 70 %), withdrawal-right section, ZIsRPS statement. Follow-ups (workshop conditions, Google Form processor, Web3Forms transfer) in `leftover.md` 0d.
 
+- **2026-10-03, branch `fix/favicon` → `main`:** the tab icon was still the default Next.js triangle (from Create Next App). Now `src/app/favicon.ico` + `icon.png` = Akilea two-tone heart, `apple-icon.png` = full heart-and-hands symbol, cut from the original Wix logo (`static.wixstatic.com/media/dfaf38_813cc971e5e8455085e68fdb596e3ebc~mv2.png`, 1308×964).
+
 Work history: `git log --oneline` (conventional commits, one per plan task).
 
 ## Domain and DNS (cutover not done — snapshot taken 2026-09-30 ~22:50)

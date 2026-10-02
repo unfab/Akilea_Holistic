@@ -76,3 +76,8 @@
 - **Use her approved wording verbatim.** My own improvement ("DDV ni obračunan") differed from what she agreed to ("Storitve so oproščene DDV"); the live text is hers. Unapproved copy tweaks (e.g. the `/posvet` placeholder) stay out until she says yes.
 - **Her questions can come from a word that has two meanings** ("računi" = invoices vs. Web3Forms user account). Answer in plain words with the two meanings spelled out.
 - A late-cancel fee of 70 % must not apply to cancellations made well ahead (OZ 252 lets a court cut disproportionate penalties); the first late cancel being free is in her favour legally. Keep the distinction "late cancel / no-show" vs. "cancel in time".
+
+## Favicon (2026-10-03)
+
+- A `favicon.ico` existing is not the same as having one: it was the Create Next App default for days after launch. Look at the icon, not just the 200.
+- A wide logo symbol is unreadable at 16 px; use the most compact part (the heart) for the tab icon and the full symbol only for the 180 px Apple icon.
