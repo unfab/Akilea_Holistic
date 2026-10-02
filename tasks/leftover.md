@@ -36,7 +36,7 @@ Then you:
 
 Open:
 - [ ] **Workshops / lectures / products** (her question 2. 10.): she wants conditions written under each paid workshop/lecture. Needs her rule for workshops (sign-off deadline, refund or transfer to another person / next date). Lectures are for companies (B2B, "po dogovoru") → conditions in the offer, not consumer law. E-book is "prihaja kmalu"; if it becomes paid, add a digital-content line (withdrawal lost on immediate download with consent). Currently no workshop on the site lists a price (čajanka = voluntary donations; others sign up via /posvet).
-- [ ] Čajanka sign-up uses a **Google Form** (`forms.gle/...`); Google Forms is not listed as a processor in `/pravilnik-o-zasebnosti`. Add it or move sign-up to the site form.
+- [x] Google Forms (čajanka sign-up) added to `/pravilnik-o-zasebnosti` 2026-10-03 (section 2 purpose, section 3 processor, section 4 retention "do izvedbe dogodka"). **Tell Mirjana** she promises to delete sign-ups after each event (Google Forms → Odgovori → izbriši).
 - [ ] Mirjana will have someone check the terms; apply their remarks. Lawyer question still open: is massage a "leisure service" (ZVPot-1 135)?
 - [ ] `/posvet` placeholder "morebitne težave" next to the health note: ask her whether to drop those words (not approved yet).
 - [ ] Accountant: how to invoice the 70 % fee (and the 30 % refund when prepaid); fixed retention periods (§8).

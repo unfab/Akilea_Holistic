@@ -16,6 +16,7 @@
 |---|---|---|---|
 | Booking form | name, email and/or phone, service, date, time, payment method | Web3Forms → email; Google Workspace calendar "Akilea rezervacije" (after B7), plus hashed email/phone keys for the 3-per-contact limit | `BookingWidget.tsx`, `booking-service.ts` |
 | /posvet form | name, email, phone (optional), message | Web3Forms → email | `posvet/page.tsx` |
+| Event sign-up (čajanka) | name, email, "Kje ste slišali za Čajanko?", consent for event notices, optional newsletter opt-in | Google Forms (`forms.gle/hKdJKzi5bi2WGuEh7`, Mirjana's Google account) → she adds opt-ins to MailerLite | `delavnice/cajanka-o-custvih/page.tsx` |
 | E-book / newsletter | whatever the MailerLite form asks | MailerLite hosted form | `page.tsx`, `e-knjiga`, `Footer.tsx` |
 | Hosting | IP, user agent in server logs | Netlify | — |
 | Browser storage | cookie `app_lang` (1 year), localStorage `akilea_lang`, `cookieConsent` | visitor's browser only | `LanguageContext.tsx`, `CookieBanner.tsx` |

@@ -17,7 +17,7 @@ export default function PravilnikZasebnostiPage() {
         <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-8">Pravilnik o zasebnosti</h1>
 
         <div className="prose prose-sm md:prose-base max-w-none text-[var(--color-muted)] font-light leading-relaxed [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mb-2 [&_a]:text-[var(--color-primary)] [&_a]:underline">
-          <p className="font-bold mb-4">Zadnja posodobitev: 30. september 2026</p>
+          <p className="font-bold mb-4">Zadnja posodobitev: 3. oktober 2026</p>
 
           <h2 className={H2}>1. Kdo smo</h2>
           <p>
@@ -52,6 +52,13 @@ export default function PravilnikZasebnostiPage() {
             zahtevo pred sklenitvijo pogodbe (člen 6(1)(b) GDPR).
           </p>
           <p>
+            <strong>Prijava na delavnice in dogodke.</strong> Za prijavo na nekatere dogodke (na primer čajanko) uporabljamo obrazec
+            Google Obrazci. V njem vpišete ime in priimek ter e-poštni naslov in odgovorite na vprašanja v obrazcu (na primer, kje ste
+            slišali za dogodek). Podatke uporabimo za organizacijo dogodka in obveščanje o njem. Pravna podlaga: ukrepi na vašo zahtevo
+            pred sklenitvijo pogodbe (člen 6(1)(b) GDPR) in privolitev, ki jo date v obrazcu (člen 6(1)(a) GDPR). Če v obrazcu izberete
+            tudi prijavo na e-novice, vaš e-poštni naslov dodamo med prejemnike e-novic.
+          </p>
+          <p>
             <strong>E-novice in e-knjiga.</strong> Prijava poteka prek obrazca ponudnika MailerLite; podatke, ki jih tam vpišete (na
             primer e-pošto), prejme MailerLite in mi. Uporabimo jih za pošiljanje novic in obvestil o e-knjigi. Pravna podlaga: vaša
             privolitev (člen 6(1)(a) GDPR), ki jo lahko kadarkoli prekličete z odjavo ali sporočilom na naš e-poštni naslov.
@@ -81,6 +88,7 @@ export default function PravilnikZasebnostiPage() {
               to na strežnikih svojih infrastrukturnih ponudnikov hrani tudi kopijo poslanega obrazca (glejte točko 4);
             </li>
             <li>Google Workspace (Google LLC) – naš e-poštni predal in koledar, v katerem so zapisani termini;</li>
+            <li>Google Obrazci (Google LLC) – prijavni obrazci za delavnice in dogodke;</li>
             <li>MailerLite – prijava in pošiljanje e-novic.</li>
           </ul>
           <p>
@@ -99,6 +107,9 @@ export default function PravilnikZasebnostiPage() {
             <li>
               <strong>Kopija obrazca pri Web3Forms:</strong> največ tri leta od oddaje obrazca oziroma krajše, kot je nastavljeno v našem
               računu pri tem ponudniku.
+            </li>
+            <li>
+              <strong>Prijave na dogodke</strong> (Google Obrazci): do izvedbe dogodka, nato jih izbrišemo.
             </li>
             <li>
               <strong>E-novice:</strong> do vašega preklica privolitve oziroma odjave.
