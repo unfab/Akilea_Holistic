@@ -36,7 +36,7 @@ Then you:
 
 Open:
 - [x] **Workshops** live 2026-10-05 (branch `feat/legal-workshops`, terms section 3, "Veljavnost od: 5. oktober 2026"), from her email 4./5. 10.: free sign-off up to **3 days** before (she answered "DA" to the 3-day example) → full refund, transfer to the next workshop, or a substitute (name + surname); later / no-show → she **keeps 30 %, refunds 70 %**; if she cancels → full refund or next workshop (added by us, mirrors the massage rule). Massage points 2/3 reworded so "on time = free" vs "late = 70 % fee, 30 % back" is explicit (no rule change).
-- [ ] **Confirm with Mirjana** (reply email drafted 2026-10-05): (a) workshop late fee really 30 % kept (massage is the opposite, 70 % kept); (b) may a late canceller still send a substitute instead of paying 30 %? (c) "3 dni" correct. Lectures are B2B ("po dogovoru") → conditions in the offer. E-book: if it becomes paid, add a digital-content line. No workshop on the site lists a price yet (čajanka = voluntary donations).
+- [x] Mirjana confirmed 2026-10-05: 3 days, 30 % kept for workshops (70 % for massage), and a late canceller who sends a substitute pays nothing (added to terms). Lectures are B2B ("po dogovoru") → conditions in the offer. E-book: if it becomes paid, add a digital-content line.
 - [x] Google Forms (čajanka sign-up) added to `/pravilnik-o-zasebnosti` 2026-10-03 (section 2 purpose, section 3 processor, section 4 retention "do izvedbe dogodka"). **Tell Mirjana** she promises to delete sign-ups after each event (Google Forms → Odgovori → izbriši).
 - [ ] Mirjana will have someone check the terms; apply their remarks. Lawyer question still open: is massage a "leisure service" (ZVPot-1 135)?
 - [ ] `/posvet` placeholder "morebitne težave" next to the health note: ask her whether to drop those words (not approved yet).
@@ -45,7 +45,7 @@ Open:
 
 ## 0c. Open slots (me, every ~2 weeks)
 
-- [ ] When Mirjana sends new free slots, replace `OPEN_SLOTS` in `src/config/booking.ts` and deploy. Current list ends 16.10.2026; after that the calendar shows no free day.
+- [ ] When Mirjana sends new free slots, replace `OPEN_SLOTS` in `src/config/booking.ts` and deploy. Current list ends 16.10.2026 (14.10 18:00 removed 2026-10-05, she filled it by phone); after that the calendar shows no free day.
 - Until B7 (Google) is live, a booked slot stays bookable. Aleksandar decided 2026-10-01 this is fine: Mirjana confirms every booking herself.
 
 ## 1. Verify the 2026-09-30 production deploy (me, first thing)

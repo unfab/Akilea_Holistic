@@ -321,8 +321,9 @@ export default function BookingWidget() {
 
             {/* Right Col: Calendar */}
             <div className="lg:sticky lg:top-28">
-              <h3 className="text-xs uppercase font-bold tracking-widest text-[var(--color-primary)] mb-6">{t.bookingWidget.step2Title}</h3>
-              
+              <h3 className="text-xs uppercase font-bold tracking-widest text-[var(--color-primary)] mb-3">{t.bookingWidget.step2Title}</h3>
+              <p className="text-sm text-[var(--color-primary)] leading-relaxed mb-6">{t.bookingWidget.confirmationNote}</p>
+
               <div className="border border-[var(--color-border)] rounded p-6 mb-6">
                 <div className="flex justify-between items-center mb-6">
                   <button type="button" onClick={handlePrevMonth} className="text-[var(--color-muted)] hover:text-[var(--color-primary)] font-bold text-lg px-2">&larr;</button>

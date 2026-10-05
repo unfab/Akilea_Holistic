@@ -120,6 +120,7 @@ export interface TranslationDictionary {
     sectionDesc: string;
     step1Title: string;
     step2Title: string;
+    confirmationNote: string;
     step3Title: string;
     selectDatePrompt: string;
     noSlots: string;

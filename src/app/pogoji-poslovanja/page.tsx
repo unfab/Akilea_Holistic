@@ -47,7 +47,7 @@ export default function PogojiPoslovanjaPage() {
           </p>
           <ul>
             <li>Odjava je brezplačna, če jo udeleženec sporoči najpozneje 3 dni pred začetkom delavnice. Takrat lahko izbere: vračilo celotne kupnine, prenos prijave na naslednjo delavnico ali da namesto njega pride druga oseba (sporoči nam njeno ime in priimek).</li>
-            <li>Če se udeleženec odjavi pozneje kot 3 dni pred začetkom ali na delavnico ne pride, zadržimo 30 % cene delavnice in mu vrnemo preostalih 70 %.</li>
+            <li>Če se udeleženec odjavi pozneje kot 3 dni pred začetkom ali na delavnico ne pride, zadržimo 30 % cene delavnice in mu vrnemo preostalih 70 %. Če namesto njega pride druga oseba (sporoči nam njeno ime in priimek), mu ni treba plačati ničesar.</li>
             <li>Če delavnico odpovemo mi, udeležencu vrnemo celotno kupnino ali ga na njegovo željo prijavimo na naslednjo delavnico.</li>
           </ul>
 

@@ -38,6 +38,8 @@ Replaces her old Wix site.
 
 - **2026-10-05, branch `feat/legal-workshops` → `main`:** terms section 3 "Delavnice: prijava in odjava" (3 days free → refund / transfer / substitute; later or no-show → 30 % kept, 70 % refunded), massage cancellation bullets reworded for clarity, sections renumbered 4–9.
 
+- **2026-10-05, branch `feat/workshop-substitute-booking-note` → `main`:** workshop substitute rule (late canceller who sends someone pays nothing); booking widget shows "V 24 urah boste prejeli potrditev termina oziroma predlog za drug termin" above the calendar (5 languages), section description and success message no longer claim instant confirmation; slot 14.10 18:00 closed.
+
 Work history: `git log --oneline` (conventional commits, one per plan task).
 
 ## Domain and DNS (cutover not done — snapshot taken 2026-09-30 ~22:50)
