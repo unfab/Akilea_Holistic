@@ -1,6 +1,6 @@
 # Context — Akilea Holistični center
 
-> Last updated: 2026-10-03. Read this first, then `leftover.md` (0b A1 block, 0d legal answers), then `rules.md`.
+> Last updated: 2026-10-05. Read this first, then `leftover.md` (0b A1 block, 0d legal answers), then `rules.md`.
 > This repo is **public** on GitHub. Never put secrets, keys or customer data in `tasks/`.
 
 ## What this is
@@ -35,6 +35,8 @@ Replaces her old Wix site.
 - **2026-10-03, branch `feat/legal-terms-final` → `main`:** rest of the legal terms live: new cancellation rules (first one free, then 24 h / 70 %), withdrawal-right section, ZIsRPS statement. Follow-ups (workshop conditions, Google Form processor, Web3Forms transfer) in `leftover.md` 0d.
 
 - **2026-10-03, branch `fix/favicon` → `main`:** the tab icon was still the default Next.js triangle (from Create Next App). Now `src/app/favicon.ico` + `icon.png` = Akilea two-tone heart, `apple-icon.png` = full heart-and-hands symbol, cut from the original Wix logo (`static.wixstatic.com/media/dfaf38_813cc971e5e8455085e68fdb596e3ebc~mv2.png`, 1308×964).
+
+- **2026-10-05, branch `feat/legal-workshops` → `main`:** terms section 3 "Delavnice: prijava in odjava" (3 days free → refund / transfer / substitute; later or no-show → 30 % kept, 70 % refunded), massage cancellation bullets reworded for clarity, sections renumbered 4–9.
 
 Work history: `git log --oneline` (conventional commits, one per plan task).
 

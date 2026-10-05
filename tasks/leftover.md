@@ -35,12 +35,13 @@ Then you:
 - Branch `feat/legal-terms-mirjana` is superseded (old drafts); can be deleted.
 
 Open:
-- [ ] **Workshops / lectures / products** (her question 2. 10.): she wants conditions written under each paid workshop/lecture. Needs her rule for workshops (sign-off deadline, refund or transfer to another person / next date). Lectures are for companies (B2B, "po dogovoru") → conditions in the offer, not consumer law. E-book is "prihaja kmalu"; if it becomes paid, add a digital-content line (withdrawal lost on immediate download with consent). Currently no workshop on the site lists a price (čajanka = voluntary donations; others sign up via /posvet).
+- [x] **Workshops** live 2026-10-05 (branch `feat/legal-workshops`, terms section 3, "Veljavnost od: 5. oktober 2026"), from her email 4./5. 10.: free sign-off up to **3 days** before (she answered "DA" to the 3-day example) → full refund, transfer to the next workshop, or a substitute (name + surname); later / no-show → she **keeps 30 %, refunds 70 %**; if she cancels → full refund or next workshop (added by us, mirrors the massage rule). Massage points 2/3 reworded so "on time = free" vs "late = 70 % fee, 30 % back" is explicit (no rule change).
+- [ ] **Confirm with Mirjana** (reply email drafted 2026-10-05): (a) workshop late fee really 30 % kept (massage is the opposite, 70 % kept); (b) may a late canceller still send a substitute instead of paying 30 %? (c) "3 dni" correct. Lectures are B2B ("po dogovoru") → conditions in the offer. E-book: if it becomes paid, add a digital-content line. No workshop on the site lists a price yet (čajanka = voluntary donations).
 - [x] Google Forms (čajanka sign-up) added to `/pravilnik-o-zasebnosti` 2026-10-03 (section 2 purpose, section 3 processor, section 4 retention "do izvedbe dogodka"). **Tell Mirjana** she promises to delete sign-ups after each event (Google Forms → Odgovori → izbriši).
 - [ ] Mirjana will have someone check the terms; apply their remarks. Lawyer question still open: is massage a "leisure service" (ZVPot-1 135)?
 - [ ] `/posvet` placeholder "morebitne težave" next to the health note: ask her whether to drop those words (not approved yet).
 - [ ] Accountant: how to invoice the 70 % fee (and the 30 % refund when prepaid); fixed retention periods (§8).
-- [ ] Web3Forms account → Mirjana (3b). No meeting needed: Aleksandar requests a new access key for mirjana@akilea.si, she forwards the Web3Forms email with the key; then set `NEXT_PUBLIC_WEB3FORMS_KEY` on Netlify + `.env.local`, redeploy.
+- [ ] Web3Forms account → Mirjana (3b). **SMS her first** (she asked 4. 10.), then send the request; she confirms. No meeting needed: Aleksandar requests a new access key for mirjana@akilea.si, she forwards the Web3Forms email with the key; then set `NEXT_PUBLIC_WEB3FORMS_KEY` on Netlify + `.env.local`, redeploy.
 
 ## 0c. Open slots (me, every ~2 weeks)
 
