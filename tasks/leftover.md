@@ -45,7 +45,7 @@ Open:
 
 ## 0c. Open slots (me, every ~2 weeks)
 
-- [ ] When Mirjana sends new free slots, replace `OPEN_SLOTS` in `src/config/booking.ts` and deploy. Current list ends 16.10.2026 (14.10 18:00 removed 2026-10-05, she filled it by phone); after that the calendar shows no free day.
+- [ ] When Mirjana sends new free slots, replace `OPEN_SLOTS` in `src/config/booking.ts` and deploy. Current list ends 22.10.2026 (2026-10-06: added 20.–22. 10., closed 8. and 10. 10. at her request); after that the calendar shows no free day.
 - Until B7 (Google) is live, a booked slot stays bookable. Aleksandar decided 2026-10-01 this is fine: Mirjana confirms every booking herself.
 
 ## 1. Verify the 2026-09-30 production deploy (me, first thing)

@@ -6,10 +6,10 @@ export const TIME_ZONE = "Europe/Ljubljana";
 // slots for the next two weeks; every other date and time is closed.
 // Past dates are ignored, so old entries can stay until the next update.
 export const OPEN_SLOTS: Readonly<Record<string, readonly string[]>> = {
-  "2026-10-05": ["18:00"],
-  "2026-10-08": ["18:00"],
-  "2026-10-10": ["08:00"],
   "2026-10-16": ["09:00", "12:00", "15:00"],
+  "2026-10-20": ["09:00", "12:00"],
+  "2026-10-21": ["09:00", "12:00", "15:00"],
+  "2026-10-22": ["09:00", "12:00", "15:00", "18:00"],
 };
 
 // Minutes per service, in the order of servicesPage.items (service id = index + 1).
