@@ -86,9 +86,20 @@ export default function Footer() {
         <div>
           &copy; {new Date().getFullYear()} {t.footer.rightsReserved}
         </div>
-        <div className="flex gap-6">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
           <Link href="/pravilnik-o-zasebnosti" className="hover:text-white transition-colors">{t.footer.privacyPolicy}</Link>
           <Link href="/pogoji-poslovanja" className="hover:text-white transition-colors">{t.footer.terms}</Link>
+          <span>
+            Built by{" "}
+            <a
+              href="https://amssolutions.biz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-white border-b border-white/30 hover:border-white transition-colors pb-0.5"
+            >
+              AMS Studio
+            </a>
+          </span>
         </div>
       </div>
     </footer>
