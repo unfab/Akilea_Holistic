@@ -100,4 +100,4 @@ Then **me** (B7):
 
 See `debt.md`. Highest value first:
 - [ ] Booking calendar hydration mismatch (render calendar after mount).
-- [ ] Before re-enabling Stripe: server-side price lookup, webhook, real success check, reserve calendar slot on the card path.
+- [ ] Before re-enabling Stripe: server-side price lookup, webhook, real success check, reserve calendar slot on the card path. **2026-10-16:** Aleksandar has Stripe access. Branch `feature/stripe-checkout` holds two plans: `tasks/plan-stripe-checkout.md` (code; webhook and slot lock dropped by decision) and `tasks/plan-stripe-netlify-env.md` (keys, Netlify contexts, verification, go-live). Start with the order table in the env plan.
