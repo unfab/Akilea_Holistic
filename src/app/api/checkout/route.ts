@@ -1,61 +1,42 @@
-import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
-import { isOnlinePaymentEnabled } from '@/config/site';
+import { isOnlinePaymentEnabled } from "@/config/site";
+import { NO_STORE, services } from "@/lib/booking-deps";
+import { buildCheckoutSession } from "@/lib/checkout";
+import { stripeClient } from "@/lib/stripe";
 
-export async function POST(req: Request) {
+export const dynamic = "force-dynamic";
+
+// POST /api/checkout { serviceId, date, time, name, email, phone, honeypot }
+// 200 { url }, 400 invalid, 404 payments off, 503 Stripe missing or failing.
+export async function POST(request: Request) {
   if (!isOnlinePaymentEnabled()) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    return Response.json({ error: "not_found" }, { status: 404, headers: NO_STORE });
+  }
+  const stripe = stripeClient();
+  if (!stripe) {
+    console.error("checkout: STRIPE_SECRET_KEY is not set");
+    return Response.json({ error: "unavailable" }, { status: 503, headers: NO_STORE });
   }
 
-  if (!process.env.STRIPE_SECRET_KEY) {
-    return NextResponse.json(
-      { error: 'Stripe ni konfiguriran (manjka STRIPE_SECRET_KEY v .env)' },
-      { status: 500 }
-    );
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json({ error: "invalid" }, { status: 400, headers: NO_STORE });
   }
 
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2026-07-29.dahlia",
-});
+  const params = buildCheckoutSession(body, {
+    services,
+    now: new Date(),
+    siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  });
+  if (!params) return Response.json({ error: "invalid" }, { status: 400, headers: NO_STORE });
 
   try {
-    const body = await req.json();
-    const { serviceName, price, date, time, customerEmail } = body;
-
-    // Podrobnosti o storitvi za prikaz na Stripe Checkout strani
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price_data: {
-            currency: 'eur',
-            product_data: {
-              name: serviceName,
-              description: `Termin: ${date} ob ${time}`,
-            },
-            unit_amount: Math.round(price * 100), // Stripe zahteva cene v centih
-          },
-          quantity: 1,
-        },
-      ],
-      customer_email: customerEmail,
-      mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/uspesno?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/`,
-      metadata: {
-        date,
-        time,
-        service: serviceName,
-      },
-    });
-
-    return NextResponse.json({ url: session.url });
-  } catch (error: unknown) {
-    console.error('Stripe API napaka:', error);
-    const message = error instanceof Error ? error.message : '';
-    return NextResponse.json(
-      { error: message || 'Prišlo je do napake pri obdelavi plačila.' },
-      { status: 500 }
-    );
+    const session = await stripe.checkout.sessions.create(params);
+    if (!session.url) throw new Error("Checkout session without url");
+    return Response.json({ url: session.url }, { headers: NO_STORE });
+  } catch (err) {
+    console.error("checkout: Stripe error", err);
+    return Response.json({ error: "unavailable" }, { status: 503, headers: NO_STORE });
   }
 }
