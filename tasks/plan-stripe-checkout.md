@@ -16,6 +16,7 @@
 5. Terms and privacy policy get updated.
 6. Refund rule is written in the terms.
 7. Invoices: Mirjana forwards the Stripe statement to her accountant, who issues the invoice. Nothing to build.
+8. (2026-10-18, changed during Task 3 test) The card-path booking email goes out **only after payment**: `/uspesno` sends it once Stripe reports `paid`, with details from the session metadata. Before, it went out before payment and an abandoned checkout looked like a booking.
 
 ## Global Constraints
 
@@ -34,7 +35,7 @@
 2. **`/uspesno` opened directly or with a fake/foreign `session_id`** → "Plačilo ni bilo zaključeno", never "Plačilo prejeto". Pinned in Task 1 (`paymentState`) tests.
 3. **Stripe unreachable while the customer did pay** → "ne moremo preveriti, ne plačajte ponovno", not "not paid" (avoids double payment). Pinned in Task 1 tests.
 4. **Customer without email (phone only)** → checkout still works; Stripe asks for email on its page. Pinned in Task 1 tests.
-5. **Web3Forms email fails on the card path** → customer still goes to Stripe; details are in the Stripe payment metadata. Checked manually in Task 3 (block `api.web3forms.com` in DevTools).
+5. **Card email only for paid sessions** (decision 8): no email when the customer leaves Stripe without paying; one email on `/uspesno` when paid, none on reload. If the customer closes the tab before `/uspesno` loads, Mirjana relies on the Stripe payment notification + metadata.
 
 ---
 
@@ -59,18 +60,18 @@
 
 ### Task 0: Branch and test-mode setup
 
-- [ ] **Step 1: Branch** (exists since 2026-10-16)
+- [x] **Step 1: Branch** (exists since 2026-10-16)
 
 ```bash
 cd "/Users/aleksandarbojic/Desktop/teta mirjana/Akilea_Holistic"
 git checkout feature/stripe-checkout && git merge main
 ```
 
-- [ ] **Step 2: Sandbox key in `.env.local`**
+- [x] **Step 2: Sandbox key in `.env.local`**
 
 Do Task 1 of `tasks/plan-stripe-netlify-env.md` (restricted sandbox key, `.env.local`, verification without printing the key). Never put a key value in chat or git.
 
-- [ ] **Step 3: Baseline**
+- [x] **Step 3: Baseline**
 
 Run: `npm test && npm run lint && npx tsc --noEmit`
 Expected: all 51 tests pass, lint and tsc clean. If not, stop and fix/record before starting.
@@ -94,11 +95,11 @@ Expected: all 51 tests pass, lint and tsc clean. If not, stop and fix/record bef
   - `paymentState(id: unknown, retrieve: RetrieveSession | null): Promise<PaymentState>`
   - `type RetrieveSession = (id: string) => Promise<{ payment_status: string }>`
 
-- [ ] **Step 1: Export the parser**
+- [x] **Step 1: Export the parser**
 
 In `src/lib/booking-service.ts` add `export` in front of `interface BookingRequest` and `function parseBooking`. No other change.
 
-- [ ] **Step 2: Write the failing tests** — `src/lib/checkout.test.ts`
+- [x] **Step 2: Write the failing tests** — `src/lib/checkout.test.ts`
 
 ```ts
 import { test } from "node:test";
@@ -217,12 +218,12 @@ test("paymentState: unknown session id is unpaid, outage is unknown", async () =
 });
 ```
 
-- [ ] **Step 3: Run to verify it fails**
+- [x] **Step 3: Run to verify it fails**
 
 Run: `node --test src/lib/checkout.test.ts`
 Expected: FAIL, `Cannot find module .../checkout.ts`.
 
-- [ ] **Step 4: Implement** — `src/lib/checkout.ts`
+- [x] **Step 4: Implement** — `src/lib/checkout.ts`
 
 ```ts
 // Stripe Checkout for card bookings. Framework-free so it runs under
@@ -302,12 +303,12 @@ export async function paymentState(id: unknown, retrieve: RetrieveSession | null
 }
 ```
 
-- [ ] **Step 5: Run tests**
+- [x] **Step 5: Run tests**
 
 Run: `npm test`
 Expected: all pass (47 old + 10 new). If `import type Stripe` fails under node, check that `stripe` is installed (`npm ci`).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/lib/booking-service.ts src/lib/checkout.ts src/lib/checkout.test.ts
@@ -327,14 +328,14 @@ git commit -m "feat(checkout): server-side price and payment state for Stripe se
 - Consumes: `buildCheckoutSession`, `CheckoutDeps` (Task 1); `services`, `NO_STORE` from `booking-deps.ts`.
 - Produces: `stripeClient(): Stripe | null`. Route contract: `POST /api/checkout { serviceId, date, time, name, email, phone, honeypot }` → `200 { url }`, `400 { error: "invalid" }`, `404` (flag off), `503 { error: "unavailable" }`.
 
-- [ ] **Step 1: Export the service list** — `src/lib/booking-deps.ts`
+- [x] **Step 1: Export the service list** — `src/lib/booking-deps.ts`
 
 ```ts
 // Service names and prices as written in the calendar event and charged by Stripe (Slovenian).
 export const services = sl.servicesPage.items.map((item) => ({ name: item.name, price: item.price }));
 ```
 
-- [ ] **Step 2: Shared client** — `src/lib/stripe.ts`
+- [x] **Step 2: Shared client** — `src/lib/stripe.ts`
 
 ```ts
 import Stripe from "stripe";
@@ -348,7 +349,7 @@ export function stripeClient(): Stripe | null {
 }
 ```
 
-- [ ] **Step 3: Route** — replace all of `src/app/api/checkout/route.ts`
+- [x] **Step 3: Route** — replace all of `src/app/api/checkout/route.ts`
 
 ```ts
 import { isOnlinePaymentEnabled } from "@/config/site";
@@ -395,7 +396,7 @@ export async function POST(request: Request) {
 }
 ```
 
-- [ ] **Step 4: Verify with curl** (`npm run dev` in another terminal, `.env.local` from Task 0; pick a real future date/time from `OPEN_SLOTS` in `src/config/booking.ts`)
+- [x] **Step 4: Verify with curl** (`npm run dev` in another terminal, `.env.local` from Task 0; pick a real future date/time from `OPEN_SLOTS` in `src/config/booking.ts`)
 
 ```bash
 # valid → 200 {"url":"https://checkout.stripe.com/..."}; open it, amount must be 85,00 €
@@ -410,7 +411,7 @@ curl -s -X POST localhost:3000/api/checkout -H 'Content-Type: application/json' 
 
 Then set `STRIPE_SECRET_KEY=` empty, restart dev → valid request returns `503 {"error":"unavailable"}` (no key name in the response). Restore the key.
 
-- [ ] **Step 5: Checks + commit**
+- [x] **Step 5: Checks + commit**
 
 ```bash
 npm test && npm run lint && npx tsc --noEmit
@@ -429,9 +430,9 @@ git commit -m "fix(checkout): validate booking and charge server-side price"
 - Consumes: `POST /api/checkout` contract (Task 2). Same body shape as `reserveSlot()` already sends to `/api/bookings`.
 - Produces: nothing used by later tasks.
 
-Behaviour: card path = create Stripe session (server validates) → send the Web3Forms email with `Nacin_Placila: "Kartica (Stripe) – preveri plačilo v Stripeu"` → redirect. No calendar call on the card path. The email is sent only after the server accepted the booking, so invalid attempts produce no email. If the email fails, the redirect still happens (the Stripe metadata has the same details).
+Behaviour (as built, decision 8): card path = create Stripe session (server validates) → redirect. No email here; `/uspesno` sends it after payment with `Nacin_Placila: "Kartica (Stripe) – plačano"` (`src/app/uspesno/PaidBookingEmail.tsx`, shared sender `src/lib/booking-email.ts`). Superseded original: No calendar call on the card path. The email is sent only after the server accepted the booking, so invalid attempts produce no email. If the email fails, the redirect still happens (the Stripe metadata has the same details).
 
-- [ ] **Step 1: Constants** next to `SLOT_TAKEN_MESSAGE` (top of file)
+- [x] **Step 1: Constants** next to `SLOT_TAKEN_MESSAGE` (top of file)
 
 ```ts
 const CARD_PAYMENT_LABEL = "Kartica (Stripe) – preveri plačilo v Stripeu";
@@ -441,7 +442,7 @@ const CARD_PAYMENT_ERROR = "Plačila s kartico trenutno ni mogoče začeti. Posk
 type EmailResult = "sent" | "failed" | "offline";
 ```
 
-- [ ] **Step 2: Replace `handleSubmit`** (from `const handleSubmit = async` down to the closing `};` before `const isContactValid`) with:
+- [x] **Step 2: Replace `handleSubmit`** (from `const handleSubmit = async` down to the closing `};` before `const isContactValid`) with:
 
 ```tsx
   type Service = (typeof services)[number];
@@ -562,16 +563,16 @@ type EmailResult = "sent" | "failed" | "offline";
   };
 ```
 
-- [ ] **Step 3: Make `reserveSlot` reuse `bookingBody`**
+- [x] **Step 3: Make `reserveSlot` reuse `bookingBody`**
 
 In `reserveSlot`, replace the inline `body: JSON.stringify({ serviceId, date: selectedDate, ... honeypot: formData.honeypot })` with `body: JSON.stringify(bookingBody(serviceId))`. Move the `bookingBody` declaration above `reserveSlot` so it is defined first.
 
-- [ ] **Step 4: Checks**
+- [x] **Step 4: Checks**
 
 Run: `npm run lint && npx tsc --noEmit`
 Expected: clean. (`type Service` inside the component is fine; if lint objects, move it out as `type Service = { id: number; name: string; price: number }`.)
 
-- [ ] **Step 5: Manual test in the browser** (`npm run dev`, flag on, test key)
+- [x] **Step 5: Manual test in the browser** (`npm run dev`, flag on, test key)
 
 | # | Action | Expected |
 |---|---|---|
@@ -582,7 +583,7 @@ Expected: clean. (`type Service` inside the component is fine; if lint objects, 
 | e | DevTools → block `api.web3forms.com`, book by card | Still redirected to Stripe |
 | f | Stop dev, empty `STRIPE_SECRET_KEY`, restart, book by card | Alert `CARD_PAYMENT_ERROR`, no email, button usable again |
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/components/BookingWidget.tsx
@@ -599,7 +600,7 @@ git commit -m "feat(booking): card path sends booking email and uses validated c
 **Interfaces:**
 - Consumes: `paymentState`, `PaymentState` (Task 1); `stripeClient` (Task 2).
 
-- [ ] **Step 1: Replace the page**
+- [x] **Step 1: Replace the page**
 
 First confirm the `searchParams` API in this Next version (`AGENTS.md`: read `node_modules/next/dist/docs/`, search for `searchParams`). The code below assumes it is a `Promise`, as in Next 15+.
 
@@ -675,7 +676,7 @@ export default async function UspesnoPlacilo({ searchParams }: PageProps) {
 
 Before replacing, copy the exact classes of the current check-mark circle and primary button from the old file if they differ from the above (the old file's first ~40 lines are the reference). The "Moje rezervacije" button is removed on purpose.
 
-- [ ] **Step 2: Manual test** (`npm run dev`, flag on)
+- [x] **Step 2: Manual test** (`npm run dev`, flag on)
 
 | URL | Expected |
 |---|---|
@@ -689,7 +690,7 @@ Before replacing, copy the exact classes of the current check-mark circle and pr
 
 Card `4000 0000 0000 0002` (declined) never reaches `/uspesno`; Stripe shows the error itself.
 
-- [ ] **Step 3: Checks + commit**
+- [x] **Step 3: Checks + commit**
 
 ```bash
 npm test && npm run lint && npx tsc --noEmit
@@ -792,7 +793,7 @@ git commit -m "feat(legal): card payment terms and Stripe processor behind payme
 
 ## Risks and accepted trade-offs
 
-- **Abandoned payment**: the email goes out before the customer pays. Mirjana gets an email with "Kartica (Stripe)" but no Stripe notification → she treats it as an unpaid request (contact or ignore). Accepted.
+- **Paid but tab closed before `/uspesno`**: no Web3Forms email for that booking. Mirjana sees it via the Stripe payment notification (Task 6 checklist) and the payment metadata. Accepted (decision 8 replaced the old "email before payment" trade-off).
 - **No webhook**: payment truth is the Stripe notification / dashboard. Accepted (decision 4).
 - **No slot lock**: two customers can pay for the same slot; Mirjana offers another time or refunds. Accepted (decision 2). If Google Calendar (Phase B) is configured later, revisit whether the card path should call `/api/bookings` too.
 - **Prices live in the locale files**: the server charges the `sl.ts` price. If a price changes, change it in all 5 locale files (the widget shows the visitor's locale, Stripe charges `sl`).

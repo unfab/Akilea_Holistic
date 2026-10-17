@@ -87,13 +87,13 @@ No source files change in this plan.
 
 Replaces code plan Task 0 Step 2.
 
-- [ ] **Step 1 (Aleksandar, Stripe): open a sandbox**
+- [x] **Step 1 (Aleksandar, Stripe): open a sandbox**
 
 In Mirjana's Stripe account: account menu top left → **Sandboxes** → create one named `akilea-dev` (or open an existing one). The dashboard shows a sandbox banner.
 
 If his role can't create a sandbox, use a sandbox in his own Stripe account. Behaviour is identical, and only Task 5 needs her account.
 
-- [ ] **Step 2 (Aleksandar, Stripe): create the restricted key**
+- [x] **Step 2 (Aleksandar, Stripe): create the restricted key**
 
 In the sandbox: **Developers → API keys → Create restricted key**.
 - Intended use: the option for your own integration/website backend. Not "agent access" and not "provide to another website".
@@ -103,7 +103,7 @@ In the sandbox: **Developers → API keys → Create restricted key**.
 
 Fallback: if restricted keys are not offered in the sandbox, use the sandbox **Secret key** (`sk_test_…`). This is acceptable for the sandbox only, never for live.
 
-- [ ] **Step 3 (agent): add the non-secret lines**
+- [x] **Step 3 (agent): add the non-secret lines**
 
 Check what is there without printing values:
 
@@ -118,11 +118,11 @@ Expected: only `NEXT_PUBLIC_WEB3FORMS_KEY=<set>`. Append:
 printf '\nNEXT_PUBLIC_ENABLE_ONLINE_PAYMENT=true\nNEXT_PUBLIC_SITE_URL=http://localhost:3000\nSTRIPE_SECRET_KEY=\n' >> .env.local
 ```
 
-- [ ] **Step 4 (Aleksandar): paste the key**
+- [x] **Step 4 (Aleksandar): paste the key**
 
 Open `.env.local` in the editor and paste the key after `STRIPE_SECRET_KEY=` (no quotes, no spaces). Save.
 
-- [ ] **Step 5 (agent): verify without seeing the key**
+- [x] **Step 5 (agent): verify without seeing the key**
 
 ```bash
 grep -cE '^STRIPE_SECRET_KEY=(rk|sk)_test_[A-Za-z0-9]+$' .env.local   # expected: 1
@@ -133,7 +133,7 @@ git status --porcelain | grep -c env                                 # expected:
 
 If the first count is 0: the paste has quotes, spaces or a wrong prefix. Ask Aleksandar to fix it without pasting the value into chat.
 
-- [ ] **Step 6 (agent): prove the key talks to Stripe**
+- [x] **Step 6 (agent): prove the key talks to Stripe**
 
 ```bash
 node --env-file=.env.local -e '
