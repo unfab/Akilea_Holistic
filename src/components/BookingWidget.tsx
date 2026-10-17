@@ -2,14 +2,18 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { WEB3FORMS_KEY, isOnlinePaymentEnabled } from "@/config/site";
+import { isOnlinePaymentEnabled } from "@/config/site";
 import { toLocalDateString } from "@/lib/date";
 import { BOOKING_HORIZON_DAYS, SERVICE_DURATIONS_MIN } from "@/config/booking";
 import { freeTimesForDay, serviceDuration } from "@/lib/slots";
+import { sendBookingEmail } from "@/lib/booking-email";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 const SLOT_TAKEN_MESSAGE = "Ta termin je zaseden. Prosimo, izberite drug termin.";
+
+const LOCATION_PAYMENT_LABEL = "Plačilo na lokaciji";
+const CARD_PAYMENT_ERROR = "Plačila s kartico trenutno ni mogoče začeti. Poskusite znova ali izberite plačilo na lokaciji.";
 
 type ReserveResult = "ok" | "taken" | "rejected" | "fallback";
 
@@ -112,20 +116,24 @@ export default function BookingWidget() {
     setSelectedTime(null);
   };
 
+  type Service = (typeof services)[number];
+
+  const bookingBody = (serviceId: number) => ({
+    serviceId,
+    date: selectedDate,
+    time: selectedTime,
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    honeypot: formData.honeypot,
+  });
+
   const reserveSlot = async (serviceId: number): Promise<ReserveResult> => {
     try {
       const res = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          serviceId,
-          date: selectedDate,
-          time: selectedTime,
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          honeypot: formData.honeypot,
-        }),
+        body: JSON.stringify(bookingBody(serviceId)),
       });
       await res.json().catch(() => null);
       if (res.ok) return "ok";
@@ -137,119 +145,87 @@ export default function BookingWidget() {
     }
   };
 
+  const finishBooking = () => {
+    setIsSubmitting(false);
+    setIsSuccess(true);
+    setSelectedService(null);
+    setSelectedDate(null);
+    setSelectedTime(null);
+    setFormData({ name: "", email: "", phone: "", honeypot: "" });
+  };
+
+  const payByCard = async (svc: Service) => {
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingBody(svc.id)),
+      });
+      const data = (await response.json().catch(() => null)) as { url?: string } | null;
+      if (!response.ok || !data?.url) {
+        alert(CARD_PAYMENT_ERROR);
+        setIsSubmitting(false);
+        return;
+      }
+      // Mirjana's email is sent from /uspesno once Stripe reports the payment.
+      window.location.assign(data.url);
+    } catch (err) {
+      console.error(err);
+      alert(CARD_PAYMENT_ERROR);
+      setIsSubmitting(false);
+    }
+  };
+
+  const payOnLocation = async (svc: Service) => {
+    // Reserve the slot in Google Calendar first. If the calendar is not
+    // reachable the booking still goes out by email (no lost bookings).
+    const reservation = await reserveSlot(svc.id);
+    if (reservation === "taken") {
+      alert(SLOT_TAKEN_MESSAGE);
+      setSelectedTime(null);
+      setRefreshCount((n) => n + 1);
+      setIsSubmitting(false);
+      return;
+    }
+    if (reservation === "rejected") {
+      alert("Napaka pri pošiljanju rezervacije. Prosimo, poskusite kasneje.");
+      setIsSubmitting(false);
+      return;
+    }
+    // Once the event is in the calendar the booking is recorded, even if the email fails.
+    const email = await sendBookingEmail({
+      service: svc.name,
+      price: svc.price,
+      date: selectedDate ?? "",
+      time: selectedTime ?? "",
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      paymentLabel: LOCATION_PAYMENT_LABEL,
+    });
+    if (email === "sent" || reservation === "ok") {
+      finishBooking();
+      return;
+    }
+    alert(
+      email === "offline"
+        ? "Napaka na omrežju. Prosimo, preverite povezavo in poskusite znova."
+        : "Napaka pri pošiljanju rezervacije. Prosimo, poskusite kasneje.",
+    );
+    setIsSubmitting(false);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.honeypot) return; // Spam prevention (bot caught)
-    
     if (!selectedService || !selectedDate || !selectedTime) return;
 
-    const svc = services.find(s => s.id === selectedService);
+    const svc = services.find((s) => s.id === selectedService);
     if (!svc) return;
 
     setIsSubmitting(true);
-
-    if (paymentMethod === 'stripe') {
-      try {
-        const response = await fetch('/api/checkout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            serviceId: svc.id,
-            serviceName: svc.name,
-            price: svc.price,
-            date: selectedDate,
-            time: selectedTime,
-            customerName: formData.name,
-            customerEmail: formData.email
-          }),
-        });
-        
-        const data = await response.json();
-        if (data.url) {
-          window.location.assign(data.url); // Redirect to Stripe Checkout
-        } else {
-          console.error("Stripe error:", data.error);
-          alert("Napaka pri povezavi s plačilnim sistemom. Preverite .env ključe.");
-          setIsSubmitting(false);
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Nekaj je šlo narobe. Poskusite ponovno.");
-        setIsSubmitting(false);
-      }
-    } else {
-      // Reserve the slot in Google Calendar first. If the calendar is not
-      // reachable the booking still goes out by email (no lost bookings).
-      const reservation = await reserveSlot(svc.id);
-      if (reservation === "taken") {
-        alert(SLOT_TAKEN_MESSAGE);
-        setSelectedTime(null);
-        setRefreshCount((n) => n + 1);
-        setIsSubmitting(false);
-        return;
-      }
-      if (reservation === "rejected") {
-        alert("Napaka pri pošiljanju rezervacije. Prosimo, poskusite kasneje.");
-        setIsSubmitting(false);
-        return;
-      }
-      const isInCalendar = reservation === "ok";
-
-      try {
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            subject: `Nova rezervacija: ${svc.name}`,
-            from_name: "Akilea Holistic - Sistem rezervacij",
-            Ime_Priimek: formData.name,
-            Email: formData.email || "Ni vpisan",
-            Telefon: formData.phone || "Ni vpisana",
-            Storitev: svc.name,
-            Cena: `${svc.price}€`,
-            Datum: selectedDate,
-            Ura: selectedTime,
-            Nacin_Placila: "Plačilo na lokaciji",
-          }),
-        });
-        
-        const result = await res.json();
-        
-        // Once the event is in the calendar the booking is recorded, even if the email fails.
-        if (result.success || isInCalendar) {
-          setIsSubmitting(false);
-          setIsSuccess(true);
-          // Reset form
-          setSelectedService(null);
-          setSelectedDate(null);
-          setSelectedTime(null);
-          setFormData({ name: "", email: "", phone: "", honeypot: "" });
-        } else {
-          console.error("Web3Forms error:", result);
-          alert("Napaka pri pošiljanju rezervacije. Prosimo, poskusite kasneje.");
-          setIsSubmitting(false);
-        }
-      } catch (err) {
-        console.error(err);
-        if (isInCalendar) {
-          setIsSubmitting(false);
-          setIsSuccess(true);
-          setSelectedService(null);
-          setSelectedDate(null);
-          setSelectedTime(null);
-          setFormData({ name: "", email: "", phone: "", honeypot: "" });
-          return;
-        }
-        alert("Napaka na omrežju. Prosimo, preverite povezavo in poskusite znova.");
-        setIsSubmitting(false);
-      }
-    }
+    if (paymentMethod === "stripe") await payByCard(svc);
+    else await payOnLocation(svc);
   };
 
   const isContactValid = formData.name.trim().length > 0 && (formData.email.trim().length > 0 || formData.phone.trim().length > 0);
