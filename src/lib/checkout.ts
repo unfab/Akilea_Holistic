@@ -15,7 +15,30 @@ export interface CheckoutDeps {
 }
 
 export type PaymentState = "paid" | "unpaid" | "unknown";
-export type RetrieveSession = (id: string) => Promise<{ payment_status: string }>;
+
+// What Mirjana needs to confirm a paid booking, read back from the Stripe session.
+export interface PaidBooking {
+  service: string;
+  date: string;
+  time: string;
+  name: string;
+  email: string;
+  phone: string;
+  price: number;
+}
+
+export interface PaymentResult {
+  state: PaymentState;
+  booking?: PaidBooking;
+}
+
+interface SessionSummary {
+  payment_status: string;
+  amount_total?: number | null;
+  metadata?: Record<string, string> | null;
+}
+
+export type RetrieveSession = (id: string) => Promise<SessionSummary>;
 
 const SESSION_ID_RE = /^cs_(test|live)_[A-Za-z0-9]{16,255}$/;
 
@@ -59,17 +82,33 @@ export function isValidSessionId(value: unknown): value is string {
   return typeof value === "string" && SESSION_ID_RE.test(value);
 }
 
+function paidBooking(session: SessionSummary): PaidBooking | undefined {
+  const m = session.metadata ?? {};
+  if (!m.service || !m.date || !m.time || !m.name || typeof session.amount_total !== "number") return undefined;
+  return {
+    service: m.service,
+    date: m.date,
+    time: m.time,
+    name: m.name,
+    email: m.email ?? "",
+    phone: m.phone ?? "",
+    price: session.amount_total / 100,
+  };
+}
+
 // "unknown" when Stripe can't be asked: the customer may have paid, so the
 // page must not tell them to pay again.
-export async function paymentState(id: unknown, retrieve: RetrieveSession | null): Promise<PaymentState> {
-  if (!isValidSessionId(id)) return "unpaid";
-  if (!retrieve) return "unknown";
+export async function paymentState(id: unknown, retrieve: RetrieveSession | null): Promise<PaymentResult> {
+  if (!isValidSessionId(id)) return { state: "unpaid" };
+  if (!retrieve) return { state: "unknown" };
   try {
     const session = await retrieve(id);
-    return session.payment_status === "paid" ? "paid" : "unpaid";
+    if (session.payment_status !== "paid") return { state: "unpaid" };
+    const booking = paidBooking(session);
+    return booking ? { state: "paid", booking } : { state: "paid" };
   } catch (err) {
-    if ((err as { code?: string }).code === "resource_missing") return "unpaid";
+    if ((err as { code?: string }).code === "resource_missing") return { state: "unpaid" };
     console.error("checkout: session lookup failed", err);
-    return "unknown";
+    return { state: "unknown" };
   }
 }

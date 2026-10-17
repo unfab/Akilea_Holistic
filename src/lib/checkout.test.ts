@@ -88,27 +88,65 @@ test("isValidSessionId accepts Stripe ids only", () => {
   assert.equal(isValidSessionId(["cs_test_a1B2c3D4e5F6g7H8"]), false);
 });
 
+const SESSION = "cs_test_a1B2c3D4e5F6g7H8";
+
+const paidSession = {
+  payment_status: "paid",
+  amount_total: 8500,
+  metadata: {
+    service: "Intuitivna masaža telesa",
+    date: "2026-10-20",
+    time: "09:00",
+    name: "Ana Novak",
+    email: "ana@example.com",
+    phone: "040 123 456",
+  },
+};
+
 test("paymentState: paid only when Stripe says paid", async () => {
-  const id = "cs_test_a1B2c3D4e5F6g7H8";
-  assert.equal(await paymentState(id, async () => ({ payment_status: "paid" })), "paid");
-  assert.equal(await paymentState(id, async () => ({ payment_status: "unpaid" })), "unpaid");
+  assert.equal((await paymentState(SESSION, async () => paidSession)).state, "paid");
+  assert.deepEqual(await paymentState(SESSION, async () => ({ ...paidSession, payment_status: "unpaid" })), { state: "unpaid" });
+});
+
+test("paymentState: paid session carries the booking from Stripe metadata", async () => {
+  assert.deepEqual((await paymentState(SESSION, async () => paidSession)).booking, {
+    service: "Intuitivna masaža telesa",
+    date: "2026-10-20",
+    time: "09:00",
+    name: "Ana Novak",
+    email: "ana@example.com",
+    phone: "040 123 456",
+    price: 85,
+  });
+});
+
+test("paymentState: phone-only booking has empty email; missing metadata means no booking", async () => {
+  const phoneOnly: Record<string, string> = { ...paidSession.metadata };
+  delete phoneOnly.email;
+  const result = await paymentState(SESSION, async () => ({ ...paidSession, metadata: phoneOnly }));
+  assert.equal(result.booking!.email, "");
+  assert.equal(result.booking!.phone, "040 123 456");
+
+  const bare = await paymentState(SESSION, async () => ({ payment_status: "paid", amount_total: 8500, metadata: {} }));
+  assert.deepEqual(bare, { state: "paid" });
+  const noAmount = await paymentState(SESSION, async () => ({ ...paidSession, amount_total: null }));
+  assert.deepEqual(noAmount, { state: "paid" });
 });
 
 test("paymentState: missing or fake id is unpaid without calling Stripe", async () => {
   let called = false;
   const retrieve = async () => {
     called = true;
-    return { payment_status: "paid" };
+    return paidSession;
   };
-  assert.equal(await paymentState(undefined, retrieve), "unpaid");
-  assert.equal(await paymentState("hello", retrieve), "unpaid");
+  assert.deepEqual(await paymentState(undefined, retrieve), { state: "unpaid" });
+  assert.deepEqual(await paymentState("hello", retrieve), { state: "unpaid" });
   assert.equal(called, false);
 });
 
 test("paymentState: unknown session id is unpaid, outage is unknown", async () => {
-  const id = "cs_test_a1B2c3D4e5F6g7H8";
   const missing = Object.assign(new Error("No such checkout.session"), { code: "resource_missing" });
-  assert.equal(await paymentState(id, async () => { throw missing; }), "unpaid");
-  assert.equal(await paymentState(id, async () => { throw new Error("ECONNRESET"); }), "unknown");
-  assert.equal(await paymentState(id, null), "unknown");
+  assert.deepEqual(await paymentState(SESSION, async () => { throw missing; }), { state: "unpaid" });
+  assert.deepEqual(await paymentState(SESSION, async () => { throw new Error("ECONNRESET"); }), { state: "unknown" });
+  assert.deepEqual(await paymentState(SESSION, null), { state: "unknown" });
 });
