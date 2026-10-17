@@ -90,7 +90,7 @@ export async function getAvailability(
 
 // ---------- bookings ----------
 
-interface BookingRequest {
+export interface BookingRequest {
   serviceId: number;
   date: string;
   time: string;
@@ -104,7 +104,7 @@ function str(value: unknown): string {
   return typeof value === "string" ? value.trim() : "";
 }
 
-function parseBooking(input: unknown): BookingRequest | null {
+export function parseBooking(input: unknown): BookingRequest | null {
   if (!input || typeof input !== "object") return null;
   const o = input as Record<string, unknown>;
   const req: BookingRequest = {
