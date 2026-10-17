@@ -150,7 +150,6 @@ export interface TranslationDictionary {
     detailsBtn: string;
     closeDetailsBtn: string;
     bookBtn: string;
-    payOnlineBtn: string;
     items: ServiceItem[];
   };
   blogPage: {
