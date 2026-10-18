@@ -10,6 +10,11 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    // The Turbopack build cache stores env values (incl. STRIPE_SECRET_KEY) on
+    // disk, which Netlify's secrets scan rejects. Builds take ~10 s without it.
+    turbopackFileSystemCacheForBuild: false,
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
