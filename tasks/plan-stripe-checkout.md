@@ -16,6 +16,7 @@
 5. Terms and privacy policy get updated.
 6. Refund rule is written in the terms.
 7. Invoices: Mirjana forwards the Stripe statement to her accountant, who issues the invoice. Nothing to build.
+9. (2026-10-18, after go-live) Mirjana: **no card payment for bookings for now**, pay on location; Stripe for the e-book and other products later. Flag switched off in Production; code and keys kept.
 8. (2026-10-18, changed during Task 3 test) The card-path booking email goes out **only after payment**: `/uspesno` sends it once Stripe reports `paid`, with details from the session metadata. Before, it went out before payment and an abandoned checkout looked like a booking.
 
 ## Global Constraints
