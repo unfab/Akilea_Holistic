@@ -17,7 +17,7 @@ export default function PogojiPoslovanjaPage() {
         <h1 className="text-4xl lg:text-5xl font-serif text-[var(--color-primary)] mb-8">Pogoji poslovanja</h1>
         
         <div className="prose prose-sm md:prose-base max-w-none text-[var(--color-muted)] font-light leading-relaxed [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mb-2 [&_a]:text-[var(--color-primary)] [&_a]:underline">
-          <p className="font-bold mb-4">Veljavnost od: 18. oktober 2026</p>
+          <p className="font-bold mb-4">Veljavnost od: 5. oktober 2026</p>
           
           <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">1. Splošne določbe</h2>
           <p>
