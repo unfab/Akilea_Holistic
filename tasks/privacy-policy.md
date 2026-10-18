@@ -20,14 +20,14 @@
 | E-book / newsletter | whatever the MailerLite form asks | MailerLite hosted form | `page.tsx`, `e-knjiga`, `Footer.tsx` |
 | Hosting | IP, user agent in server logs | Netlify | — |
 | Browser storage | cookie `app_lang` (1 year), localStorage `akilea_lang`, `cookieConsent` | visitor's browser only | `LanguageContext.tsx`, `CookieBanner.tsx` |
-| Online payment | OFF. Would add Stripe | — | `api/checkout` |
+| Online payment | OFF in production. Stripe processor `<li>` and card terms paragraph render only when the flag is on | Stripe Payments Europe (IE) | `api/checkout`, `pravilnik-o-zasebnosti`, `pogoji-poslovanja` §5 |
 
 No analytics, no tracking pixels, no third-party fonts or images (all self-hosted since 2026-09-30).
 
 ## Update the policy when any of these change
 
 - **Google Calendar goes live (B7):** the policy already says appointments are written to the calendar — true only after B7.
-- **Stripe re-enabled:** add Stripe as processor + card data note, and restore the payment sentence in the terms.
+- **Stripe re-enabled:** done in code behind the flag (2026-10-18, text approved by Mirjana). At go-live update the dates in both legal pages.
 - **Web3Forms recipient / other email tools change**, analytics added, new form, new embed, new third-party script.
 - Update the date at the top of both pages.
 
