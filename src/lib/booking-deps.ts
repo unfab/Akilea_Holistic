@@ -4,8 +4,8 @@ import type { BookingDeps } from "./booking-service.ts";
 
 export const NO_STORE = { "Cache-Control": "no-store" };
 
-// Service names and prices as written in the calendar event (Slovenian).
-const services = sl.servicesPage.items.map((item) => ({ name: item.name, price: item.price }));
+// Service names and prices as written in the calendar event and charged by Stripe (Slovenian).
+export const services = sl.servicesPage.items.map((item) => ({ name: item.name, price: item.price }));
 
 let cachedClient: CalendarClient | null | undefined;
 let otherBusyCalendarIds: string[] = [];

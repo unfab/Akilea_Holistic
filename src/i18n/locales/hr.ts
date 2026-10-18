@@ -168,7 +168,6 @@ export const hr: TranslationDictionary = {
     detailsBtn: "Prikaži detalje",
     closeDetailsBtn: "Sakrij detalje",
     bookBtn: "Rezerviraj termin",
-    payOnlineBtn: "Plati online",
     items: [
       {
         id: "telo",

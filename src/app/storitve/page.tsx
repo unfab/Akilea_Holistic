@@ -82,7 +82,6 @@ export default function StoritvePage() {
       duration: t.servicesPage.items[0]?.duration || "1 h 45 min",
       price: `${t.servicesPage.items[0]?.price || 85} €`,
       image: "/images/storitve/masaza-nog.jpg",
-      stripeLink: "https://buy.stripe.com/14AdRag2k9ts9HB46ycQU02",
       description: t.servicesPage.items[0] ? (
         <ServiceContent item={t.servicesPage.items[0]} />
       ) : null,
@@ -93,7 +92,6 @@ export default function StoritvePage() {
       duration: t.servicesPage.items[2]?.duration || "50 min",
       price: `${t.servicesPage.items[2]?.price || 50} €`,
       image: "/images/storitve/masaza-trebuha.png",
-      stripeLink: "https://buy.stripe.com/00w6oI3fyeNM1b59qScQU01",
       description: t.servicesPage.items[2] ? (
         <ServiceContent item={t.servicesPage.items[2]} />
       ) : null,
@@ -104,7 +102,6 @@ export default function StoritvePage() {
       duration: t.servicesPage.items[1]?.duration || "50 min",
       price: `${t.servicesPage.items[1]?.price || 50} €`,
       image: "/images/storitve/masaza-hrbta.jpg",
-      stripeLink: "https://buy.stripe.com/28E00k7vOcFE1b5dH8cQU00",
       description: t.servicesPage.items[1] ? (
         <ServiceContent item={t.servicesPage.items[1]} />
       ) : null,

@@ -25,7 +25,7 @@ Replaces her old Wix site.
 - **Phase B (no double-booking): code done (B1–B6), B7 blocked** on the Google Cloud setup (see `leftover.md`).
   Until `GOOGLE_*` env vars exist, the booking APIs answer 503 and the widget uses the old email-only flow.
 - Homepage "latest blog" card now reads `BLOG_POSTS[0]` (newest post first in `src/data/blogs.ts`).
-- Online payment (Stripe) is **off** behind `NEXT_PUBLIC_ENABLE_ONLINE_PAYMENT`.
+- Online payment (Stripe) is **off** in production behind `NEXT_PUBLIC_ENABLE_ONLINE_PAYMENT`. Code is ready (D2 done, `tasks/plan-stripe-checkout.md`). 2026-10-18: branch deploy `feature/stripe-checkout` verified against the Stripe sandbox (cs_test_, 85/50 €, 3DS, decline, fake ids, bundle scan clean; Mirjana's email only after payment). Go-live = `tasks/plan-stripe-netlify-env.md` Task 5 (live restricted key in Netlify Production + flag). Rollback: unset the flag in Production and redeploy.
 - **2026-10-01, deployed (commit `53ab16f`, pushed to `main` 2026-10-01 ~20:10, verified live):** nine blog posts restored to Mirjana's full original Wix text (the earlier versions were shortened summaries). Verified by a word-level diff against the Wix pages. Post 8 (notranji otrok) deliberately omits the paragraphs announcing the 19.03.2026 tea party (past event). Inline photos restored (`dermatitis/`, new `moja-izkusnja-z-bolecinami-v-krizu/`). Blog text supports `**bold**` and `__italic__`, and a new `image` block type exists (`BlogPostView.tsx`). Čajanka 15.10 page now shows the poster (`public/images/delavnice/cajanka-balon-med-kaktusi.png`).
 - **2026-10-01, same deploy:** Mirjana now sends her free slots for the next two weeks and everything else is closed. The daily grid `SLOT_TIMES` is replaced by `OPEN_SLOTS` (date → times) in `src/config/booking.ts`; the widget greys out every other day and `/api/bookings` rejects any other date/time. Poster also on the homepage Delavnice card and the `/delavnice` list card.
 - **2026-10-01 evening, branch `fix/testimonials-layout-shift` → `main`:** homepage reviews carousel no longer moves the page on mobile. The slides differed in height (e.g. 1080/1095/1052 px at 375 px wide), so every 2 s rotation pushed everything below (booking calendar) up and down by 15–60 px. All slides now share one grid cell (`TestimonialsCarousel.tsx`), so the section keeps the tallest slide's height; inactive slides are `opacity-0`, `aria-hidden`, `inert`. Verified at 320–1280 px: booking widget position constant while slides rotate.
@@ -150,7 +150,7 @@ Only the dates and times in `OPEN_SLOTS` (`src/config/booking.ts`) are bookable.
 |---|---|---|
 | `NEXT_PUBLIC_WEB3FORMS_KEY` | yes (2026-09-30) | Required. Build-time inlined. Public by design (client-side form key) |
 | `NEXT_PUBLIC_ENABLE_ONLINE_PAYMENT` | no (defaults off) | `"true"` re-enables Stripe UI; needs redeploy |
-| `NEXT_PUBLIC_SITE_URL`, `STRIPE_SECRET_KEY` | no | Only when payments are re-enabled |
+| `NEXT_PUBLIC_SITE_URL`, `STRIPE_SECRET_KEY` | no | Netlify per context: Branch deploys = sandbox restricted key (`rk_test_`, Checkout Sessions: Write) + flag `true`; Production = no key/flag until go-live. `STRIPE_SECRET_KEY` marked secret. Local: `.env.local` |
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY`, `GOOGLE_BOOKING_CALENDAR_ID`, `GOOGLE_BUSY_CALENDAR_IDS` | no | Phase B. See `.env.example` |
 
 Local: `.env.local` (git-ignored) holds the Web3Forms key.

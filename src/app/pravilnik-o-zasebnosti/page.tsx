@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { isOnlinePaymentEnabled } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Pravilnik o zasebnosti | Akilea Center zdravja",
@@ -89,6 +90,12 @@ export default function PravilnikZasebnostiPage() {
             </li>
             <li>Google Workspace (Google LLC) – naš e-poštni predal in koledar, v katerem so zapisani termini;</li>
             <li>Google Obrazci (Google LLC) – prijavni obrazci za delavnice in dogodke;</li>
+            {isOnlinePaymentEnabled() && (
+              <li>
+                Stripe Payments Europe, Ltd. (Irska) – obdelava plačil s plačilno kartico. Podatkov o vaši kartici ne vidimo in jih ne hranimo;
+                Stripe nam posreduje ime, e-pošto, znesek in izbrani termin.
+              </li>
+            )}
             <li>MailerLite – prijava in pošiljanje e-novic.</li>
           </ul>
           <p>

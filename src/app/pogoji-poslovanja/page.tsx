@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { isOnlinePaymentEnabled } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Pogoji poslovanja | Akilea Center zdravja",
@@ -61,7 +62,10 @@ export default function PogojiPoslovanjaPage() {
 
           <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">5. Plačila in cene</h2>
           <p>
-            Cene storitev so navedene v evrih. Storitve so oproščene DDV. Plačilo se opravi na lokaciji.
+            Cene storitev so navedene v evrih. Storitve so oproščene DDV.{" "}
+            {isOnlinePaymentEnabled()
+              ? "Storitev lahko plačate na lokaciji ali ob spletni rezervaciji s plačilno kartico prek ponudnika Stripe. Spletno plačilo še ne pomeni potrjenega termina: v 24 urah vam termin potrdimo ali predlagamo drugega. Če termina ne moremo potrditi in predlaganega termina ne sprejmete, vam celoten znesek vrnemo na kartico, s katero ste plačali, najpozneje v 14 dneh."
+              : "Plačilo se opravi na lokaciji."}
           </p>
 
           <h2 className="text-2xl font-serif text-[var(--color-primary)] mt-8 mb-4">6. Zdravstveno stanje</h2>

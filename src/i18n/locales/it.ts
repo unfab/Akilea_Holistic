@@ -168,7 +168,6 @@ export const it: TranslationDictionary = {
     detailsBtn: "Mostra dettagli",
     closeDetailsBtn: "Nascondi dettagli",
     bookBtn: "Prenota appuntamento",
-    payOnlineBtn: "Paga online",
     items: [
       {
         id: "telo",
