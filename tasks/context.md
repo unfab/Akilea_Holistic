@@ -1,6 +1,6 @@
 # Context — Akilea Holistični center
 
-> Last updated: 2026-10-22. Read this first, then `leftover.md` (0b A1 block, 0d legal answers), then `rules.md`.
+> Last updated: 2026-10-23. Read this first, then `leftover.md` (0b A1 block, 0d legal answers), then `rules.md`.
 > This repo is **public** on GitHub. Never put secrets, keys or customer data in `tasks/`.
 
 ## What this is
@@ -41,6 +41,7 @@ Replaces her old Wix site.
 
 - **2026-10-05, branch `feat/workshop-substitute-booking-note` → `main`:** workshop substitute rule (late canceller who sends someone pays nothing); booking widget shows "V 24 urah boste prejeli potrditev termina oziroma predlog za drug termin" above the calendar (5 languages), section description and success message no longer claim instant confirmation; slot 14.10 18:00 closed.
 - **2026-10-22:** Mirjana requested closing slots at 15:00 on 20.10., 21.10., and 26.10. due to obligations. Closed 21.10. 15:00 and 26.10. 15:00 in `OPEN_SLOTS` (`src/config/booking.ts`); 20.10. had no 15:00 slot (only 12:00, already elapsed).
+- **2026-10-23:** Mirjana requested closing slots at 15:00 and 18:00 on 29.10. Closed 29.10. 15:00 and 18:00 in `OPEN_SLOTS` (`src/config/booking.ts`).
 
 Work history: `git log --oneline` (conventional commits, one per plan task).
 
